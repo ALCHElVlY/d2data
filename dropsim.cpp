@@ -1,14 +1,22 @@
 /**
  * Cross-platform C++17 drop simulator.
- * 
+ *
  * Compiles with:
  *   - Linux: g++ dropsim.cpp -o dropsim -std=c++17 -pthread
  *   - Windows: Visual Studio 2017+ (C++17 support required)
  */
 
-// Disable MSVC security warnings for fopen, strcspn, etc.
+ // Disable MSVC security warnings for fopen, strcspn, etc.
 #ifdef _MSC_VER
 #define _CRT_SECURE_NO_WARNINGS
+#endif
+
+#if defined(_WIN32) || defined(_WIN64)
+#define DIRECTORY_SEPARATOR '\\'
+#define DIRECTORY_SEPARATOR_STRING "\\"
+#else
+#define DIRECTORY_SEPARATOR '/'
+#define DIRECTORY_SEPARATOR_STRING "/"
 #endif
 
 #include <unordered_map>
@@ -24,6 +32,7 @@
 #include <iomanip>
 #include <fstream>
 #include <filesystem>
+#include <cmath>
 
 struct Entry {
     std::string name;
@@ -75,13 +84,13 @@ std::vector<std::string> splitByChar(const std::string& str, char delimiter) {
     return tokens;
 }
 
-void pickAtomic(std::string tcname, std::vector<std::string> &drops) {
+void pickAtomic(std::string tcname, std::vector<std::string>& drops) {
     if (atomic.find(tcname) == atomic.end()) {
         drops.push_back(tcname);
         return;
     }
 
-    AtomicTC &atc = atomic[tcname];
+    AtomicTC& atc = atomic[tcname];
 
     if (atc.total == 0) {
         return;
@@ -101,7 +110,7 @@ void pickAtomic(std::string tcname, std::vector<std::string> &drops) {
 }
 
 long calcNodrop(long e, long nd, long d) {
-    double _e = (double) e, _nd = (double) nd, _d = (double) d;
+    double _e = (double)e, _nd = (double)nd, _d = (double)d;
     if (nd < 1) {
         return 0;
     }
@@ -113,7 +122,7 @@ long calcNodrop(long e, long nd, long d) {
     return (long)(_d / (pow((_nd + _d) / nd, _e) - 1));
 }
 
-void pick(std::string tcname, std::vector<std::string> &drops) {
+void pick(std::string tcname, std::vector<std::string>& drops) {
     if (drops.size() >= 6) {
         return;
     }
@@ -123,7 +132,7 @@ void pick(std::string tcname, std::vector<std::string> &drops) {
         return;
     }
 
-    TC &tc = treasureClasses[tcname];
+    TC& tc = treasureClasses[tcname];
 
     if (tc.picks == 0) {
         return;
@@ -145,7 +154,7 @@ void pick(std::string tcname, std::vector<std::string> &drops) {
             }
 
             long picknum = dis(gen) - nodrop;
-            
+
             if (picknum < 0) {
                 continue;
             }
@@ -156,7 +165,7 @@ void pick(std::string tcname, std::vector<std::string> &drops) {
                         pick(item.name, drops);
                         break;
                     }
-    
+
                     picknum -= item.prob;
                 }
             }
@@ -187,15 +196,17 @@ int main(int argc, char* argv[]) {
         return 1;
     }
 
-    std::vector<std::string> pathParts = splitByChar(argv[0], '/');
+    std::vector<std::string> pathParts = splitByChar(argv[0], DIRECTORY_SEPARATOR);
     pathParts.pop_back();
     std::string path = "";
 
     for (const auto& part : pathParts) {
-        path += part + "/";
+        path += part + DIRECTORY_SEPARATOR_STRING;
     }
 
-    path = realpath(path) + "/";
+    path = realpath(path) + DIRECTORY_SEPARATOR_STRING;
+    std::string txtDir = realpath(path + "txt") + DIRECTORY_SEPARATOR_STRING;
+    std::string simulationsPath = realpath(path + "simulations") + DIRECTORY_SEPARATOR_STRING;
 
     std::string tcname = argv[1];
     int dropcycles = 25000;
@@ -207,20 +218,20 @@ int main(int argc, char* argv[]) {
     playermod = std::max(1, playermod);
     playermod = std::min(8, playermod);
 
-    
+
     if (argc >= 4) {
         dropcycles = atoi(argv[3]);
     }
-    
+
     dropcycles = std::max(1, dropcycles);
     dropcycles = std::min(1000000, dropcycles);
-    
+
     std::cout << "TC: " << tcname << std::endl;
     std::cout << "Player mod: " << playermod << std::endl;
     std::cout << "Drop cycles per set: " << dropcycles << std::endl;
 
     // Open the treasure class file at: txt/treasureclassex.txt
-    FILE* tex = fopen((path + "txt/treasureclassex.txt").c_str(), "r");
+    FILE* tex = fopen((txtDir + "treasureclassex.txt").c_str(), "r");
     if (!tex) {
         std::cout << "Error: Could not open treasure class file\n";
         return 1;
@@ -319,7 +330,7 @@ int main(int argc, char* argv[]) {
             std::string itemName = tokens[i];
             int itemProb = atoi(tokens[i + 1].c_str());
 
-            atomic[tcBaseName].items.push_back({itemName, itemProb});
+            atomic[tcBaseName].items.push_back({ itemName, itemProb });
             atomic[tcBaseName].total += itemProb;
         }
     }
@@ -345,12 +356,12 @@ int main(int argc, char* argv[]) {
     }
 
     std::cout << "Using " << thread_count << " threads\n";
-    std::cout << "Output files periodically written to: " << (path + "simulations/") << std::endl;
+    std::cout << "Output files periodically written to: " << simulationsPath << std::endl;
 
     std::vector<std::thread> threads;
 
     for (int i = 0; i < thread_count; i++) {
-        threads.emplace_back([i, &tcname, dropcycles, &path]() {
+        threads.emplace_back([i, &tcname, dropcycles, &simulationsPath]() {
             long runs = 0;
             long picks = 0;
             std::unordered_map<std::string, long> drops;
@@ -361,12 +372,12 @@ int main(int argc, char* argv[]) {
                 for (int j = 0; j < dropcycles; j++) {
                     std::vector<std::string> rundrops;
                     pick(tcname, rundrops);
-    
+
                     for (const auto& drop : rundrops) {
                         drops[drop]++;
                         picks++;
                     }
-    
+
                     runs++;
                 }
 
@@ -374,9 +385,10 @@ int main(int argc, char* argv[]) {
                 auto elapsedMilliseconds = std::chrono::duration_cast<std::chrono::milliseconds>(elapsed).count();
 
                 // Write results to file as json with name: results-{timestamp}_{i}.json
-                std::string filename = path + "simulations/" + tcname + " [" + std::to_string(playermod) + "][" + std::to_string(i) + "].json";
+                // Each thread has a separate file based on `i` to avoid race conditions or write conflicts.
+                std::string filename = simulationsPath + tcname + " [" + std::to_string(playermod) + "][" + std::to_string(i) + "].json";
                 std::ofstream out(filename);
-    
+
                 out << "{\n";
                 out << "  \"tc\": \"" << tcname << "\",\n";
                 out << "  \"runs\": " << runs << ",\n";
