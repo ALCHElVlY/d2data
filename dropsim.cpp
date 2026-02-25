@@ -1,8 +1,15 @@
 /**
- * Written for linux g++ and c++17 std lib.
- *
- * You probably can compile this with other compilers on other platforms, but I haven't tested it.
+ * Cross-platform C++17 drop simulator.
+ * 
+ * Compiles with:
+ *   - Linux: g++ dropsim.cpp -o dropsim -std=c++17 -pthread
+ *   - Windows: Visual Studio 2017+ (C++17 support required)
  */
+
+// Disable MSVC security warnings for fopen, strcspn, etc.
+#ifdef _MSC_VER
+#define _CRT_SECURE_NO_WARNINGS
+#endif
 
 #include <unordered_map>
 #include <iostream>
@@ -54,8 +61,8 @@ std::mt19937 gen(rd());
 // Helper function to split string by tab delimiter, keeping empty strings between tabs
 std::vector<std::string> splitByChar(const std::string& str, char delimiter) {
     std::vector<std::string> tokens;
-    long start = 0;
-    long end = str.find(delimiter);
+    size_t start = 0;
+    size_t end = str.find(delimiter);
 
     while (end != std::string::npos) {
         tokens.push_back(str.substr(start, end - start));
@@ -170,7 +177,7 @@ void pick(std::string tcname, std::vector<std::string> &drops) {
 }
 
 std::string realpath(std::string path) {
-    return std::filesystem::canonical(std::filesystem::absolute(path));
+    return std::filesystem::canonical(std::filesystem::absolute(path)).string();
 }
 
 // Main takes first parameter as treasure class name
@@ -191,7 +198,7 @@ int main(int argc, char* argv[]) {
     path = realpath(path) + "/";
 
     std::string tcname = argv[1];
-    int dropcycles = 5000;
+    int dropcycles = 25000;
 
     if (argc >= 3) {
         playermod = atoi(argv[2]);
@@ -348,6 +355,8 @@ int main(int argc, char* argv[]) {
             long picks = 0;
             std::unordered_map<std::string, long> drops;
 
+            auto startTime = std::chrono::steady_clock::now();
+
             while (true) {
                 for (int j = 0; j < dropcycles; j++) {
                     std::vector<std::string> rundrops;
@@ -361,6 +370,9 @@ int main(int argc, char* argv[]) {
                     runs++;
                 }
 
+                auto elapsed = std::chrono::steady_clock::now() - startTime;
+                auto elapsedMilliseconds = std::chrono::duration_cast<std::chrono::milliseconds>(elapsed).count();
+
                 // Write results to file as json with name: results-{timestamp}_{i}.json
                 std::string filename = path + "simulations/" + tcname + " [" + std::to_string(playermod) + "][" + std::to_string(i) + "].json";
                 std::ofstream out(filename);
@@ -371,12 +383,13 @@ int main(int argc, char* argv[]) {
                 out << "  \"picks\": " << picks << ",\n";
                 out << "  \"playermod\": " << playermod << ",\n";
                 out << "  \"avgpicks\": " << std::fixed << std::setprecision(6) << (double)picks / runs << ",\n";
+                out << "  \"elapsed\": " << elapsedMilliseconds << ",\n";
                 out << "  \"drops\": {\n";
                 long count = 0;
                 for (const auto& drop : drops) {
                     std::string escapedDrop = drop.first;
                     // Escape backslashes and double quotes in the drop name
-                    long pos = 0;
+                    size_t pos = 0;
                     while ((pos = escapedDrop.find('\\', pos)) != std::string::npos) {
                         escapedDrop.insert(pos, "\\");
                         pos += 2; // Move past the escaped backslash

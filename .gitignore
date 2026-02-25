@@ -3,6 +3,11 @@ tbl/
 .vscode/launch.json
 a.out
 dropsim
+dropsim.exe
+dropsim.pdb
 *.txt
 !atomic.txt
 !atomicbase.txt
+*.user
+.vs
+obj

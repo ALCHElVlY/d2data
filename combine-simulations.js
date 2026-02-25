@@ -28,6 +28,8 @@ fs.readdir(__dirname + '/simulations/', (err, files) => {
         picks: 0,
         avgpicks: 0,
         playermod: data.playermod,
+        elapsed: data.elapsed,
+        simrate: Math.round(data.runs * 1000000 / data.elapsed) / 1000,
         drops: {},
       };
 
@@ -35,7 +37,9 @@ fs.readdir(__dirname + '/simulations/', (err, files) => {
 
       total.runs += data.runs;
       total.picks += data.picks;
+      total.elapsed = Math.max(total.elapsed, data.elapsed);
       total.avgpicks = total.picks / total.runs;
+      total.simrate = Math.round(total.runs * 1000000 / total.elapsed) / 1000;
 
       Object.keys(data.drops).forEach(key => {
         if (!total.drops[key]) {

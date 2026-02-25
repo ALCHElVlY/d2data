@@ -22,5 +22,10 @@
 /json/base/precalctc/.gitkeep
 dropsim.cpp
 dropsim
+dropsim.pdb
+dropsim.exe
 a.out
 *.txt
+*.user
+.vs
+obj
