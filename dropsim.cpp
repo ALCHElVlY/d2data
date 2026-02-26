@@ -23,6 +23,8 @@
 #define BASETC 0
 #endif
 
+// #define DEBUG 1
+
 #include <unordered_map>
 #include <iostream>
 #include <cstdio>
@@ -37,6 +39,14 @@
 #include <fstream>
 #include <filesystem>
 #include <cmath>
+
+#ifdef DEBUG
+
+void wait() {
+    std::this_thread::sleep_for(std::chrono::milliseconds(250));
+}
+
+#endif
 
 struct Entry {
     std::string name;
@@ -115,6 +125,10 @@ std::vector<std::string> splitByChar(const std::string& str, char delimiter) {
 
 void pickAtomic(std::string tcname, int magic, int rare, int set, int unique, std::vector<Drop>& drops) {
     if (atomic.find(tcname) == atomic.end()) {
+        #ifdef DEBUG
+            std::cout << "Added " << tcname << std::endl;
+            wait();
+        #endif
         drops.push_back({tcname, magic, rare, set, unique});
         return;
     }
@@ -122,6 +136,10 @@ void pickAtomic(std::string tcname, int magic, int rare, int set, int unique, st
     AtomicTC& atc = atomic[tcname];
 
     if (atc.total == 0) {
+        #ifdef DEBUG
+            std::cout << tcname << " is empty" << std::endl;
+            wait();
+        #endif
         return;
     }
 
@@ -131,6 +149,10 @@ void pickAtomic(std::string tcname, int magic, int rare, int set, int unique, st
     for (auto item : atc.items) {
         if (picknum < item.prob) {
             drops.push_back({item.name, magic, rare, set, unique});
+            #ifdef DEBUG
+                std::cout << "Added " << item.name << std::endl;
+                wait();
+            #endif
             return;
         }
 
@@ -169,33 +191,58 @@ void pick(std::string tcname, int magic, int rare, int set, int unique, std::vec
     unique = std::max(unique, tc.unique);
 
     if (tc.picks == 0) {
+        #ifdef DEBUG
+            std::cout << tcname << " has 0 picks" << std::endl;
+            wait();
+        #endif
         return;
     }
 
     if (tc.total == 0) {
+        #ifdef DEBUG
+            std::cout << tcname << " is empty" << std::endl;
+            wait();
+        #endif
         return;
     }
 
     int picks = tc.picks > 0 ? tc.picks : -tc.picks;
     long nodrop = calcNodrop(playermod, tc.nodrop, tc.total);
 
+    #ifdef DEBUG
+        std::cout << tc.name << " with " << picks << " " << (tc.picks > 0 ? "random" : "sequential") << " picks " << std::endl;
+        wait();
+    #endif
+
     std::uniform_int_distribution<long> dis(0, nodrop + tc.total - 1);
 
     if (tc.picks > 0) {
         for (int i = 0; i < picks; i++) {
             if (drops.size() >= 6) {
+                #ifdef DEBUG
+                    std::cout << tc.name << " drop cap reached" << std::endl;
+                    wait();
+                #endif
                 return;
             }
 
             long picknum = dis(gen) - nodrop;
 
             if (picknum < 0) {
+                #ifdef DEBUG
+                    std::cout << "No drop" << std::endl;
+                    wait();
+                #endif
                 continue;
             }
 
             for (auto item : tc.items) {
                 if (item.prob) {
                     if (picknum < item.prob) {
+                        #ifdef DEBUG
+                            std::cout << item.name << " picked" << std::endl;
+                            wait();
+                        #endif
                         pick(item.name, magic, rare, set, unique, drops);
                         break;
                     }
@@ -209,9 +256,17 @@ void pick(std::string tcname, int magic, int rare, int set, int unique, std::vec
         for (auto item : tc.items) {
             for (int i = 0; i < item.prob; i++) {
                 if (picks <= 0 || drops.size() >= 6) {
+                    #ifdef DEBUG
+                        std::cout << tc.name << " is out of picks" << std::endl;
+                        wait();
+                    #endif
                     return;
                 }
 
+                #ifdef DEBUG
+                    std::cout << tc.name << " picked" << std::endl;
+                    wait();
+                #endif
                 pick(item.name, magic, rare, set, unique, drops);
                 picks--;
             }
@@ -373,8 +428,13 @@ int main(int argc, char* argv[]) {
         return 1;
     }
 
-    // Get CPU count.
-    int thread_count = std::thread::hardware_concurrency() * 2 / 3; // Use 2/3 of available threads to avoid overloading the system
+    #ifdef DEBUG
+        int thread_count = 1;
+    #else
+        // Get CPU count.
+        int thread_count = std::thread::hardware_concurrency(); // Use 2/3 of available threads to avoid overloading the system
+        thread_count = std::max(1, thread_count - 4);
+    #endif
 
     if (thread_count < 1) {
         thread_count = 1; // Fallback to 1 if hardware_concurrency cannot determine.
@@ -408,6 +468,10 @@ int main(int argc, char* argv[]) {
                 std::unordered_map<Drop, long> drops;
 
                 for (int j = 0; j < dropcycles; j++) {
+                    #ifdef DEBUG
+                        std::cout << "Cycle start" << std::endl;
+                        wait();
+                    #endif
                     std::vector<Drop> rundrops;
                     pick(tcname, 0, 0, 0, 0, rundrops);
 

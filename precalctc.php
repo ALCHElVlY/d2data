@@ -9,6 +9,13 @@ declare(strict_types=1);
 
 chdir(realpath(__DIR__));
 
+// enable immediate flush
+while (ob_get_level()) {
+  ob_end_flush();
+}
+
+ob_implicit_flush(true);
+
 define('TREASURECLASSEX', json_decode(file_get_contents('json/treasureclassex.json'), TRUE));
 define('TREASURECLASSEXBASE', json_decode(file_get_contents('json/base/treasureclassex.json'), TRUE));
 
@@ -18,18 +25,25 @@ foreach ([
 ] as $basepath => [$simulationpath, $treasureclassex, $simulator]) {
   print("Generating $basepath\n");
 
-  foreach (glob($basepath . '*.{json,mjs}', GLOB_BRACE) as $file) {
-    if (is_file($file) && $file[0] !== '.') {
-      unlink($file);
-    }
-  }
+  $allsimuglob = $simulationpath . '*.json';
 
   $index = [];
 
   foreach ($treasureclassex as $tc_name => $tc) {
+    $filename = preg_replace('/[^a-z0-9() -_]\+/i', '_', $tc_name);
+    $filename = trim($filename, '_- ');
+    $index[$tc_name] = $filename . ".json";
+    $filepath = $basepath . $filename . ".json";
+
+    if (file_exists($filepath)) {
+      continue;
+    }
+
     $precalc = [];
 
-    foreach (glob($simulationpath . '*.json') as $file) {
+    $simuglob = $simulationpath . $tc_name . '*.json';
+
+    foreach (glob($allsimuglob) as $file) {
       if (is_file($file) && $file[0] !== '.') {
         unlink($file);
       }
@@ -42,7 +56,7 @@ foreach ([
 
     $totalruns = 0;
 
-    foreach (glob($simulationpath . '*.json') as $file) {
+    foreach (glob($simuglob) as $file) {
       $data = json_decode(file_get_contents($file), TRUE);
       if ($data['tc'] !== $tc_name) {
         throw new Exception("Expected TC $tc_name but got " . $data['tc']);
@@ -94,16 +108,7 @@ foreach ([
           return $ret > 0 ? 1 : ($ret < 0 ? -1 : 0);
         });
       }
-
-      $filename = preg_replace('/[^a-z0-9() -_]\+/i', '_', $tc_name);
-      $filename = trim($filename, '_- ');
-      $index[$tc_name] = $filename . ".json";
-      $filepath = $basepath . $filename . ".json";
-  
-      if (file_exists($filepath)) {
-        throw new Exception("File $filepath already exists");
-      }
-  
+    
       file_put_contents($filepath, json_encode($precalc, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE));
     }
   }
