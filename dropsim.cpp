@@ -259,18 +259,7 @@ int main(int argc, char* argv[]) {
     dropcycles = std::max(1, dropcycles);
     dropcycles = std::min(1000000, dropcycles);
 
-    int mindropcount = 30;
-
-    if (argc >= 5) {
-        mindropcount = atoi(argv[4]);
-    }
-
-    mindropcount = std::max(1, mindropcount);
-
-    std::cout << "TC: " << tcname << std::endl;
-    std::cout << "Player mod: " << playermod << std::endl;
-    std::cout << "Drop cycles per set: " << dropcycles << std::endl;
-    std::cout << "Minimum drop count per thread: " << mindropcount << std::endl;
+    std::cout << tcname << " [" << playermod << "]" << std::endl;
 
     // Open the treasure class file at: txt/treasureclassex.txt
     FILE* tex = fopen((txtDir + (BASETC ? "base/treasureclassex.txt" : "treasureclassex.txt")).c_str(), "r");
@@ -385,9 +374,9 @@ int main(int argc, char* argv[]) {
     }
 
     // Get CPU count.
-    int thread_count = std::thread::hardware_concurrency();
+    int thread_count = std::thread::hardware_concurrency() * 2 / 3; // Use 2/3 of available threads to avoid overloading the system
 
-    if (thread_count == 0) {
+    if (thread_count < 1) {
         thread_count = 1; // Fallback to 1 if hardware_concurrency cannot determine.
     }
     else {
@@ -397,8 +386,13 @@ int main(int argc, char* argv[]) {
         }
     }
 
-    std::cout << "Using " << thread_count << " threads\n";
-    std::cout << "Output files periodically written to: " << simulationsPath << std::endl;
+    long mindropcount = thread_count;
+
+    if (argc >= 5) {
+        mindropcount = atoi(argv[4]);
+    }
+
+    mindropcount = std::max(1L, mindropcount);
 
     std::vector<std::thread> threads;
 
@@ -472,6 +466,7 @@ int main(int argc, char* argv[]) {
                     for (const auto& drop : totaldrops) {
                         if (drop.second < mindropcount) {
                             allAboveMin = false;
+                            printf("Thread %d: Item \'%s\' has %ld drops left...\n", i, drop.first.name.c_str(), mindropcount - drop.second);
                             break;
                         }
                     }

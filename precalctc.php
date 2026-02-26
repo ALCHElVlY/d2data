@@ -18,7 +18,7 @@ foreach ([
 ] as $basepath => [$simulationpath, $treasureclassex, $simulator]) {
   print("Generating $basepath\n");
 
-  foreach (glob($basepath . '*.json') as $file) {
+  foreach (glob($basepath . '*.{json,mjs}', GLOB_BRACE) as $file) {
     if (is_file($file) && $file[0] !== '.') {
       unlink($file);
     }
@@ -36,9 +36,8 @@ foreach ([
     }
 
     foreach ([1, 2, 3, 4, 5, 6, 7, 8] as $dropmodifier) {
-      print("Simulating $tc_name with drop modifier $dropmodifier\n");
       $tc_name_escaped = escapeshellarg($tc_name);
-      exec("./$simulator $tc_name_escaped $dropmodifier");
+      passthru("./$simulator $tc_name_escaped $dropmodifier");
     }
 
     $totalruns = 0;
