@@ -3,6 +3,7 @@ tbl/
 .vscode/launch.json
 a.out
 dropsim
+dropsimbase
 dropsim.exe
 dropsim.pdb
 *.txt

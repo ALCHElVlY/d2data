@@ -3,5 +3,11 @@
   "version": "3.1.91743",
   "description": "",
   "author": "nishimura-katsuo",
-  "license": "MIT"
+  "license": "MIT",
+  "files": [
+    "*.csv",
+    "json/*",
+    "docs/Avquest.ttf",
+    "docs/css"
+  ]
 }
