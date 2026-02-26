@@ -19,6 +19,10 @@
 #define DIRECTORY_SEPARATOR_STRING "/"
 #endif
 
+#ifndef BASETC
+#define BASETC 0
+#endif
+
 #include <unordered_map>
 #include <iostream>
 #include <cstdio>
@@ -61,6 +65,31 @@ struct AtomicTC {
     int total = 0;
 };
 
+struct Drop {
+    std::string name;
+    int magic;
+    int rare;
+    int set;
+    int unique;
+
+    bool operator==(const Drop& other) const {
+        return name == other.name && magic == other.magic && rare == other.rare && set == other.set && unique == other.unique;
+    }
+};
+
+namespace std {
+    template <>
+    struct hash<Drop> {
+        std::size_t operator()(const Drop& d) const {
+            return ((std::hash<std::string>()(d.name)
+                    ^ (std::hash<int>()(d.magic) << 1)) >> 1)
+                    ^ (std::hash<int>()(d.rare) << 1)
+                    ^ (std::hash<int>()(d.set) << 1)
+                    ^ (std::hash<int>()(d.unique) << 1);
+        }
+    };
+}
+
 std::unordered_map<std::string, AtomicTC> atomic;
 std::unordered_map<std::string, TC> treasureClasses;
 int playermod = 1;
@@ -84,9 +113,9 @@ std::vector<std::string> splitByChar(const std::string& str, char delimiter) {
     return tokens;
 }
 
-void pickAtomic(std::string tcname, std::vector<std::string>& drops) {
+void pickAtomic(std::string tcname, int magic, int rare, int set, int unique, std::vector<Drop>& drops) {
     if (atomic.find(tcname) == atomic.end()) {
-        drops.push_back(tcname);
+        drops.push_back({tcname, magic, rare, set, unique});
         return;
     }
 
@@ -101,7 +130,7 @@ void pickAtomic(std::string tcname, std::vector<std::string>& drops) {
 
     for (auto item : atc.items) {
         if (picknum < item.prob) {
-            drops.push_back(item.name);
+            drops.push_back({item.name, magic, rare, set, unique});
             return;
         }
 
@@ -122,17 +151,22 @@ long calcNodrop(long e, long nd, long d) {
     return (long)(_d / (pow((_nd + _d) / nd, _e) - 1));
 }
 
-void pick(std::string tcname, std::vector<std::string>& drops) {
+void pick(std::string tcname, int magic, int rare, int set, int unique, std::vector<Drop>& drops) {
     if (drops.size() >= 6) {
         return;
     }
 
     if (treasureClasses.find(tcname) == treasureClasses.end()) {
-        pickAtomic(tcname, drops);
+        pickAtomic(tcname, magic, rare, set, unique, drops);
         return;
     }
-
+    
     TC& tc = treasureClasses[tcname];
+
+    magic = std::max(magic, tc.magic);
+    rare = std::max(rare, tc.rare);
+    set = std::max(set, tc.set);
+    unique = std::max(unique, tc.unique);
 
     if (tc.picks == 0) {
         return;
@@ -162,7 +196,7 @@ void pick(std::string tcname, std::vector<std::string>& drops) {
             for (auto item : tc.items) {
                 if (item.prob) {
                     if (picknum < item.prob) {
-                        pick(item.name, drops);
+                        pick(item.name, magic, rare, set, unique, drops);
                         break;
                     }
 
@@ -178,7 +212,7 @@ void pick(std::string tcname, std::vector<std::string>& drops) {
                     return;
                 }
 
-                pick(item.name, drops);
+                pick(item.name, magic, rare, set, unique, drops);
                 picks--;
             }
         }
@@ -209,7 +243,7 @@ int main(int argc, char* argv[]) {
     std::string simulationsPath = realpath(path + "simulations") + DIRECTORY_SEPARATOR_STRING;
 
     std::string tcname = argv[1];
-    int dropcycles = 25000;
+    int dropcycles = 100000;
 
     if (argc >= 3) {
         playermod = atoi(argv[2]);
@@ -218,7 +252,6 @@ int main(int argc, char* argv[]) {
     playermod = std::max(1, playermod);
     playermod = std::min(8, playermod);
 
-
     if (argc >= 4) {
         dropcycles = atoi(argv[3]);
     }
@@ -226,12 +259,21 @@ int main(int argc, char* argv[]) {
     dropcycles = std::max(1, dropcycles);
     dropcycles = std::min(1000000, dropcycles);
 
+    int mindropcount = 30;
+
+    if (argc >= 5) {
+        mindropcount = atoi(argv[4]);
+    }
+
+    mindropcount = std::max(1, mindropcount);
+
     std::cout << "TC: " << tcname << std::endl;
     std::cout << "Player mod: " << playermod << std::endl;
     std::cout << "Drop cycles per set: " << dropcycles << std::endl;
+    std::cout << "Minimum drop count per thread: " << mindropcount << std::endl;
 
     // Open the treasure class file at: txt/treasureclassex.txt
-    FILE* tex = fopen((txtDir + "treasureclassex.txt").c_str(), "r");
+    FILE* tex = fopen((txtDir + (BASETC ? "base/treasureclassex.txt" : "treasureclassex.txt")).c_str(), "r");
     if (!tex) {
         std::cout << "Error: Could not open treasure class file\n";
         return 1;
@@ -305,7 +347,7 @@ int main(int argc, char* argv[]) {
     fclose(tex);
 
     // Open the file at: atomic.txt
-    FILE* atomicbase = fopen((path + "atomic.txt").c_str(), "r");
+    FILE* atomicbase = fopen((path + (BASETC ? "atomicbase.txt" : "atomic.txt")).c_str(), "r");
 
     if (!atomicbase) {
         std::cerr << "Error: Could not open atomic file\n";
@@ -361,45 +403,49 @@ int main(int argc, char* argv[]) {
     std::vector<std::thread> threads;
 
     for (int i = 0; i < thread_count; i++) {
-        threads.emplace_back([i, &tcname, dropcycles, &simulationsPath]() {
-            long runs = 0;
-            long picks = 0;
-            std::unordered_map<std::string, long> drops;
+        threads.emplace_back([i, thread_count, &tcname, dropcycles, mindropcount, &simulationsPath]() {
+            long totalruns = 0;
+            long totalpicks = 0;
+            std::unordered_map<Drop, long> totaldrops;
+                        
+            for (size_t seq = 0; true; seq++) {
+                long runs = 0;
+                long picks = 0;
+                std::unordered_map<Drop, long> drops;
 
-            auto startTime = std::chrono::steady_clock::now();
-
-            while (true) {
                 for (int j = 0; j < dropcycles; j++) {
-                    std::vector<std::string> rundrops;
-                    pick(tcname, rundrops);
+                    std::vector<Drop> rundrops;
+                    pick(tcname, 0, 0, 0, 0, rundrops);
 
                     for (const auto& drop : rundrops) {
                         drops[drop]++;
+                        totaldrops[drop]++;
+                        totalpicks++;
                         picks++;
                     }
 
+                    totalruns++;
                     runs++;
                 }
 
-                auto elapsed = std::chrono::steady_clock::now() - startTime;
-                auto elapsedMilliseconds = std::chrono::duration_cast<std::chrono::milliseconds>(elapsed).count();
+                size_t fullseq = seq * thread_count + i;
 
                 // Write results to file as json with name: results-{timestamp}_{i}.json
                 // Each thread has a separate file based on `i` to avoid race conditions or write conflicts.
-                std::string filename = simulationsPath + tcname + " [" + std::to_string(playermod) + "][" + std::to_string(i) + "].json";
+                std::string filename = (BASETC ? simulationsPath + "base/" : simulationsPath) + tcname + " [" + std::to_string(playermod) + "][" + std::to_string(fullseq) + "].json";
                 std::ofstream out(filename);
 
                 out << "{\n";
                 out << "  \"tc\": \"" << tcname << "\",\n";
+                out << "  \"playermod\": " << playermod << ",\n";
+                out << "  \"seq\": " << fullseq << ",\n";
                 out << "  \"runs\": " << runs << ",\n";
                 out << "  \"picks\": " << picks << ",\n";
-                out << "  \"playermod\": " << playermod << ",\n";
-                out << "  \"avgpicks\": " << std::fixed << std::setprecision(6) << (double)picks / runs << ",\n";
-                out << "  \"elapsed\": " << elapsedMilliseconds << ",\n";
-                out << "  \"drops\": {\n";
+                out << "  \"avgpicks\": " << std::fixed << std::setprecision(6) << (double)totalpicks / totalruns << ",\n";
+                out << "  \"drops\": [\n";
                 long count = 0;
                 for (const auto& drop : drops) {
-                    std::string escapedDrop = drop.first;
+                    std::string escapedDrop = drop.first.name;
                     // Escape backslashes and double quotes in the drop name
                     size_t pos = 0;
                     while ((pos = escapedDrop.find('\\', pos)) != std::string::npos) {
@@ -411,14 +457,29 @@ int main(int argc, char* argv[]) {
                         escapedDrop.insert(pos, "\\");
                         pos += 2; // Move past the escaped quote
                     }
-                    out << "    \"" << escapedDrop << "\": " << drop.second;
+                    out << "    [\"" + escapedDrop + "\", " << drop.second << ", " << drop.first.magic << ", " << drop.first.rare << ", " << drop.first.set << ", " << drop.first.unique << "]";
                     if (++count < drops.size()) {
                         out << ",";
                     }
                     out << "\n";
                 }
-                out << "  }\n";
+                out << "  ]\n";
                 out << "}\n";
+
+                if (seq * dropcycles >= 400000) {
+                    // Check if all items have at least mindropcount drops, and if so, break the loop to finish this thread's execution.
+                    bool allAboveMin = true;
+                    for (const auto& drop : totaldrops) {
+                        if (drop.second < mindropcount) {
+                            allAboveMin = false;
+                            break;
+                        }
+                    }
+    
+                    if (allAboveMin) {
+                        break;
+                    }
+                }
             }
         });
     }
