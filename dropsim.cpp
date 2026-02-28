@@ -538,7 +538,6 @@ int main(int argc, char* argv[]) {
         thread_count = 1; // Fallback to 1 if hardware_concurrency cannot determine.
     }
     else {
-        thread_count -= 2; // Leave 2 cores free to avoid system overload
         if (thread_count < 1) {
             thread_count = 1; // Ensure at least one thread is used
         }
@@ -581,13 +580,13 @@ int main(int argc, char* argv[]) {
                 threadStorage[i].totalsims++;
 
                 // Check if all items have at least mindropcount drops, and if so, break the loop to finish this thread's execution.
-                if (threadStorage[i].totalsims > 100000 && threadStorage[i].totalsims % 1000 == 0) {
+                if (threadStorage[i].totalsims >= 100000 && threadStorage[i].totalsims % 1000 == 0) {
                     allAboveMin = true;
 
                     for (const auto& drop : threadStorage[i].totaldrops) {
                         long dropsLeft = mindropcount - drop.second;
 
-                        if (dropsLeft > 0 && drop.second > 0) {
+                        if (dropsLeft > 0 && drop.second > 0 || drop.second == 0 && threadStorage[i].totalsims < 1000000) {
                             allAboveMin = false;
                             break;
                         }
