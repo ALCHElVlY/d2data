@@ -20,14 +20,12 @@ define('TREASURECLASSEX', json_decode(file_get_contents('json/treasureclassex.js
 define('TREASURECLASSEXBASE', json_decode(file_get_contents('json/base/treasureclassex.json'), TRUE));
 
 foreach ([
-  'json/precalctc/' => ['simulations/', TREASURECLASSEX, 'dropsim'],
-  'json/base/precalctc/' => ['simulations/base/', TREASURECLASSEXBASE, 'dropsimbase'],
-] as $basepath => [$simulationpath, $treasureclassex, $simulator]) {
+  'json/precalctc/' => [TREASURECLASSEX, 'dropsim'],
+  'json/base/precalctc/' => [TREASURECLASSEXBASE, 'dropsimbase'],
+] as $basepath => [$treasureclassex, $simulator]) {
   print("Generating $basepath\n");
   $statsfile = $basepath . '_stats.json';
   $stats = file_exists($statsfile) ? json_decode(file_get_contents($statsfile), TRUE) : [];
-
-  $allsimuglob = $simulationpath . '*.json';
 
   $index = [];
 
@@ -47,100 +45,47 @@ foreach ([
 
     $precalc = [];
 
-    $simuglob = $simulationpath . $tc_name . '*.json';
-
-    foreach (glob($allsimuglob) as $file) {
-      if (is_file($file) && $file[0] !== '.') {
-        unlink($file);
-      }
-    }
-
     foreach ([1, 2, 3, 4, 5, 6, 7, 8] as $dropmodifier) {
       $tcindex = $tccount++;
       $tc_name_escaped = escapeshellarg($tc_name);
       $tcpercent = number_format($tcindex / $tcmax * 100, 2);
       print("[$tcpercent%] $tc_name [$dropmodifier]: ");
       $start = microtime(true);
-      $result = exec("./$simulator $tc_name_escaped $dropmodifier");
+      $result = `./$simulator $tc_name_escaped $dropmodifier`;
       $elapsed = (microtime(true) - $start);
 
-      if ($result) {
-        $result = json_decode($result, TRUE);
-
-        if (isset($result['total'])) {
-          $stats["$tc_name [$dropmodifier]"] = [
-            'total' => $result['total'],
-            'elapsed' => $elapsed,
-          ];
-
-          print($result['total'] . " in " . number_format($elapsed, 3) . " seconds" . PHP_EOL);
-        }
+      if (!$result) {
+        throw new Exception("Simulation failed for $tc_name with drop modifier $dropmodifier");
       }
-    }
 
-    $stats = [
-      'total' => array_sum(array_column($stats, 'total')),
-      'elapsed' => array_sum(array_column($stats, 'elapsed')),
-    ] + $stats;
-
-    file_put_contents($statsfile, json_encode((object) $stats, JSON_PRETTY_PRINT));
-
-    $totalruns = 0;
-
-    foreach (glob($simuglob) as $file) {
-      $data = json_decode(file_get_contents($file), TRUE);
+      $data = json_decode($result, TRUE);
 
       if ($data['tc'] !== $tc_name) {
         throw new Exception("Expected TC $tc_name but got " . $data['tc']);
       }
 
-      if (
-        !($data['runs'] ?? 0) ||
-        !($data['drops'] ?? []) ||
-        !($data['playermod'] ?? 0)
-      ) {
-        continue;
-      }
-
       $playermod = $data['playermod'] - 1;
-      $drops = $data['drops'];
-      $precalc[$playermod] ??= [];
-      $totalruns += $data['runs'];
 
-      if ($drops) {
-        foreach ($drops as $entry) {
-          [$item, $count, $unique, $set, $rare, $magic] = $entry;
-          $key = "$item|$magic|$rare|$set|$unique";
+      $precalc[$playermod] = array_map(function ($entry) use ($data) {
+        $entry[1] /= $data['runs'];
+        return $entry;
+      }, $data['drops']);
 
-          $precalc[$playermod][$key] ??= [
-            $item,
-            0,
-            0,
-            0,
-            0,
-            0,
-          ];
+      usort($precalc[$playermod], fn ($a, $b) => $b[1] <=> $a[1]);
 
-          $precalc[$playermod][$key][1] += $count;
-        }
+      if (isset($data['runs'])) {
+        $stats["$tc_name [$dropmodifier]"] = [
+          'total' => $data['runs'],
+          'elapsed' => $elapsed,
+        ];
+
+        print($data['runs'] . " in " . number_format($elapsed, 3) . " seconds" . PHP_EOL);
       }
     }
 
+    file_put_contents($statsfile, json_encode((object) $stats, JSON_PRETTY_PRINT));
+
     if ($precalc) {
-      foreach ($precalc as $playermod => $entries) {
-        $precalc[$playermod] = array_values($precalc[$playermod]);
-
-        foreach ($precalc[$playermod] as $i => $entry) {
-          $precalc[$playermod][$i][1] /= $totalruns;
-        }
-
-        usort($precalc[$playermod], function ($a, $b) {
-          $ret = $b[1] - $a[1];
-          // $b[1] - $a[1] wasn't sorting correctly?
-          return $ret > 0 ? 1 : ($ret < 0 ? -1 : 0);
-        });
-      }
-
       file_put_contents($filepath, json_encode($precalc, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE));
     }
   }
