@@ -39,6 +39,7 @@
 #include <fstream>
 #include <filesystem>
 #include <cmath>
+#include <functional>
 
 #ifdef DEBUG
 
@@ -66,6 +67,8 @@ struct TC {
 
     Entry items[10];
 
+    std::string condition = "";
+
     int total = 0;
 };
 
@@ -91,11 +94,13 @@ namespace std {
     template <>
     struct hash<Drop> {
         std::size_t operator()(const Drop& d) const {
-            return ((std::hash<std::string>()(d.name)
-                    ^ (std::hash<int>()(d.magic) << 1)) >> 1)
-                    ^ (std::hash<int>()(d.rare) << 1)
-                    ^ (std::hash<int>()(d.set) << 1)
-                    ^ (std::hash<int>()(d.unique) << 1);
+            std::size_t h1 = std::hash<std::string>()(d.name);
+            std::size_t h2 = std::hash<int>()(d.magic);
+            std::size_t h3 = std::hash<int>()(d.rare);
+            std::size_t h4 = std::hash<int>()(d.set);
+            std::size_t h5 = std::hash<int>()(d.unique);
+            
+            return h1 ^ (h2 << 1) ^ (h3 << 2) ^ (h4 << 3) ^ (h5 << 4);
         }
     };
 }
@@ -111,6 +116,17 @@ std::unordered_map<std::string, TC> treasureClasses;
 
 long playermod = 1;
 int finditem = 0;
+int heraldtier = 1;
+int difficulty = 0;
+
+std::unordered_map<std::string, std::function<bool()>> conditionFunctions = {
+    {"\"cond('Difficulty', normal)\"", []() { return difficulty == 0; }},
+    {"\"cond('Difficulty', nightmare)\"", []() { return difficulty == 1; }},
+    {"\"cond('Difficulty', hell)\"", []() { return difficulty == 2; }},
+    {"\"cond('MonsterTestElite', herald)*(stat('heraldtier'.accr) >3) \"", []() { return heraldtier > 3; }},
+    {"(stat('heraldtier'.accr)>1) * (stat('heraldtier'.accr) < 4)", []() { return heraldtier > 1 && heraldtier < 4; }},
+    {"(stat('heraldtier'.accr) >=4) ", []() { return heraldtier >= 4; }},
+};
 
 // Helper function to split string by tab delimiter, keeping empty strings between tabs
 std::vector<std::string> splitByChar(const std::string& str, char delimiter) {
@@ -184,10 +200,6 @@ long calcNodrop(long e, long nd, long d) {
 }
 
 void pick(std::mt19937& gen, std::string tcname, int magic, int rare, int set, int unique, std::vector<Drop>& drops, int depth = 0) {
-    if (drops.size() >= 6) {
-        return;
-    }
-
     if (treasureClasses.find(tcname) == treasureClasses.end()) {
         pickAtomic(gen, tcname, magic, rare, set, unique, drops);
         return;
@@ -247,14 +259,6 @@ void pick(std::mt19937& gen, std::string tcname, int magic, int rare, int set, i
 
     if (tc.picks > 0) {
         for (int i = 0; i < picks; i++) {
-            if (drops.size() >= 6) {
-                #ifdef DEBUG
-                    std::cout << tc.name << " drop cap reached" << std::endl;
-                    wait();
-                #endif
-                return;
-            }
-
             long picknum = dis(gen) - nodrop;
 
             if (picknum < 0) {
@@ -273,6 +277,12 @@ void pick(std::mt19937& gen, std::string tcname, int magic, int rare, int set, i
                             wait();
                         #endif
                         pick(gen, item.name, magic, rare, set, unique, drops, depth + 1);
+
+                        if (drops.size() >= 6) {
+                            // Game can only drop 6, so stop recursion early if we hit that limit to save time.
+                            return;
+                        }
+
                         break;
                     }
 
@@ -284,7 +294,7 @@ void pick(std::mt19937& gen, std::string tcname, int magic, int rare, int set, i
     else {
         for (auto item : tc.items) {
             for (int i = 0; i < item.prob; i++) {
-                if (picks <= 0 || drops.size() >= 6) {
+                if (picks <= 0) {
                     #ifdef DEBUG
                         std::cout << tc.name << " is out of picks" << std::endl;
                         wait();
@@ -297,6 +307,11 @@ void pick(std::mt19937& gen, std::string tcname, int magic, int rare, int set, i
                     wait();
                 #endif
                 pick(gen, item.name, magic, rare, set, unique, drops, depth + 1);
+                if (drops.size() >= 6) {
+                    // Game can only drop 6, so stop recursion early if we hit that limit to save time.
+                    return;
+                }
+
                 picks--;
             }
         }
@@ -386,7 +401,7 @@ std::string trim(const std::string& str) {
 // Main takes first parameter as treasure class name
 int main(int argc, char* argv[]) {
     if (argc < 2) {
-        std::cerr << "Usage: " << argv[0] << " <treasure_class_name> <player_mod> <find_item_percent>\n";
+        std::cerr << "Usage: " << argv[0] << " <treasure_class_name> <player_mod> <find_item_percent> <difficulty> <herald_tier>\n";
         return 1;
     }
 
@@ -412,6 +427,14 @@ int main(int argc, char* argv[]) {
 
     if (argc >= 4) {
         finditem = atoi(argv[3]);
+    }
+
+    if (argc >= 5) {
+        difficulty = atoi(argv[4]);
+    }
+
+    if (argc >= 6) {
+        heraldtier = atoi(argv[5]);
     }
 
     // Open the treasure class file at: txt/treasureclassex.txt
@@ -483,10 +506,51 @@ int main(int argc, char* argv[]) {
 
         }
 
+        if (tokens.size() > 32) {
+            tc.condition = tokens[32];
+        }
+
         treasureClasses[tc.name] = tc;
     }
 
     fclose(tex);
+
+    for (auto &[name, tc] : treasureClasses) {
+        if (!tc.condition.empty()) {
+            if (conditionFunctions.find(tc.condition) == conditionFunctions.end()) {
+                std::cerr << "Error: No function found for condition on treasure class: " << name << ".\n";
+                return 1;
+            }
+
+            if (!conditionFunctions[tc.condition]()) {
+                std::cerr << "Condition not met for treasure class: " << name << ", disabling it.\n";
+                tc.total = 0; // Effectively disable this treasure class by setting total to 0
+                for (auto &item : tc.items) {
+                    item.prob = 0; // Set all item probabilities to 0 as well
+                }
+            }
+        }
+
+        for (auto &[itemName, itemProb] : tc.items) {
+            auto targetName = itemName;
+            // Check if itemName is a treasure class.
+            if (treasureClasses.find(itemName) != treasureClasses.end()) {
+                // If so, we need to check if that treasure class has a condition that would disable it, and if so, disable this item as well by setting its probability to 0.
+                TC& targetTC = treasureClasses[itemName];
+                if (!targetTC.condition.empty()) {
+                    if(conditionFunctions.find(targetTC.condition) == conditionFunctions.end()) {
+                        std::cerr << "Error: No function found for condition on nested treasure class: " << itemName << ".\n";
+                        return 1;
+                    }
+
+                    if (!conditionFunctions[targetTC.condition]()) {
+                        tc.total -= itemProb; // Remove this item's probability from the total
+                        itemProb = 0;
+                    }
+                }
+            }
+        }
+    }
 
     // Open the file at: atomic.txt
     FILE* atomicbase = fopen((path + (BASETC ? "atomicbase.txt" : "atomic.txt")).c_str(), "r");
@@ -616,13 +680,17 @@ int main(int argc, char* argv[]) {
     std::cout << "  \"tc\": \"" << tcname << "\",\n";
     std::cout << "  \"playermod\": " << playermod << ",\n";
     std::cout << "  \"runs\": " << finalSims << ",\n";
-    std::cout << "  \"picks\": " << finalPicks << ",\n";
-    std::cout << "  \"avgpicks\": " << std::fixed << std::setprecision(6) << (double)finalPicks / finalSims << ",\n";
+    std::cout << "  \"finditem\": " << finditem << ",\n";
     std::cout << "  \"drops\": [\n";
+
+    // Convert to vector and sort by count descending
+    std::vector<std::pair<Drop, long>> sortedDrops(finaldrops.begin(), finaldrops.end());
+    std::sort(sortedDrops.begin(), sortedDrops.end(),
+        [](const auto& a, const auto& b) { return a.second > b.second; });
 
     long count = 0;
 
-    for (const auto& drop : finaldrops) {
+    for (const auto& drop : sortedDrops) {
         std::string escapedDrop = drop.first.name;
         // Escape backslashes and double quotes in the drop name
         size_t pos = 0;
@@ -636,7 +704,7 @@ int main(int argc, char* argv[]) {
             pos += 2; // Move past the escaped quote
         }
         std::cout << "    [\"" + trim(escapedDrop) + "\", " << drop.second << ", " << drop.first.magic << ", " << drop.first.rare << ", " << drop.first.set << ", " << drop.first.unique << "]";
-        if (++count < finaldrops.size()) {
+        if (++count < sortedDrops.size()) {
             std::cout << ",";
         }
         std::cout << "\n";

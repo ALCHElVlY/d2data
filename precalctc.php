@@ -20,12 +20,10 @@ define('TREASURECLASSEX', json_decode(file_get_contents('json/treasureclassex.js
 define('TREASURECLASSEXBASE', json_decode(file_get_contents('json/base/treasureclassex.json'), TRUE));
 
 foreach ([
-  'json/precalctc/' => [TREASURECLASSEX, 'dropsim'],
-  'json/base/precalctc/' => [TREASURECLASSEXBASE, 'dropsimbase'],
+  'json/precalctc/' => [TREASURECLASSEX, 'dropsolver'],
+  'json/base/precalctc/' => [TREASURECLASSEXBASE, 'dropsolverbase'],
 ] as $basepath => [$treasureclassex, $simulator]) {
   print("Generating $basepath\n");
-  $statsfile = $basepath . '_stats.json';
-  $stats = file_exists($statsfile) ? json_decode(file_get_contents($statsfile), TRUE) : [];
 
   $index = [];
 
@@ -49,7 +47,7 @@ foreach ([
       $tcindex = $tccount++;
       $tc_name_escaped = escapeshellarg($tc_name);
       $tcpercent = number_format($tcindex / $tcmax * 100, 2);
-      print("[$tcpercent%] $tc_name [$dropmodifier]: ");
+      print("[$tcpercent%] $tc_name [$dropmodifier]..." . PHP_EOL);
       $start = microtime(true);
       $result = `./$simulator $tc_name_escaped $dropmodifier`;
       $elapsed = (microtime(true) - $start);
@@ -66,22 +64,12 @@ foreach ([
 
       $playermod = $data['playermod'] - 1;
 
-      $precalc[$playermod] = array_map(function ($entry) use ($data) {
-        $entry[1] /= $data['runs'];
-        return $entry;
-      }, $data['drops']);
+      $precalc[$playermod] = $data['drops'];
 
       usort($precalc[$playermod], fn ($a, $b) => $b[1] <=> $a[1]);
 
-      $stats["$tc_name [$dropmodifier]"] = [
-        'total' => $data['runs'],
-        'elapsed' => $elapsed,
-      ];
-
-      print($data['runs'] . " in " . number_format($elapsed, 3) . " seconds" . PHP_EOL);
+      print(PHP_EOL);
     }
-
-    file_put_contents($statsfile, json_encode((object) $stats, JSON_PRETTY_PRINT));
 
     if ($precalc) {
       file_put_contents($filepath, json_encode($precalc, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE));

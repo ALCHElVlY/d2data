@@ -6,6 +6,10 @@ dropsim
 dropsimbase
 dropsim.exe
 dropsim.pdb
+dropsolver
+dropsolverbase
+dropsolver.exe
+dropsolver.pdb
 *.txt
 !atomic.txt
 !atomicbase.txt

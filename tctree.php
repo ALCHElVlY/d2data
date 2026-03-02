@@ -56,5 +56,5 @@ function print_tc_tree($tc_name, $indent = 0) {
   }
 }
 
-print($argv[1]);
+print($argv[1] . "\n");
 print_tc_tree($argv[1], 1);
