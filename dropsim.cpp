@@ -715,7 +715,7 @@ int main(int argc, char* argv[]) {
             escapedDrop.insert(pos, "\\");
             pos += 2; // Move past the escaped quote
         }
-        std::cout << "    [\"" + trim(escapedDrop) + "\", " << drop.second << ", " << drop.first.magic << ", " << drop.first.rare << ", " << drop.first.set << ", " << drop.first.unique << "]";
+        std::cout << "    [\"" + trim(escapedDrop) + "\", " << ((double)drop.second / finalSims) << ", " << drop.first.magic << ", " << drop.first.rare << ", " << drop.first.set << ", " << drop.first.unique << "]";
         if (++count < sortedDrops.size()) {
             std::cout << ",";
         }
