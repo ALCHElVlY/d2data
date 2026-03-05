@@ -28,7 +28,7 @@ foreach ([
   $index = [];
 
   $tccount = 0;
-  $tcmax = count($treasureclassex) * 8;
+  $tcmax = count($treasureclassex) * 24;
 
   foreach ($treasureclassex as $tc_name => $tc) {
     $filename = preg_replace('/[^a-z0-9() -_]\+/i', '_', $tc_name);
@@ -37,38 +37,40 @@ foreach ([
     $filepath = $basepath . $filename . ".json";
 
     if (file_exists($filepath)) {
-      $tccount += 8;
+      $tccount += 24;
       continue;
     }
 
     $precalc = [];
 
-    foreach ([1, 2, 3, 4, 5, 6, 7, 8] as $dropmodifier) {
-      $tcindex = $tccount++;
-      $tc_name_escaped = escapeshellarg($tc_name);
-      $tcpercent = number_format($tcindex / $tcmax * 100, 2);
-      print("[$tcpercent%] $tc_name [$dropmodifier]..." . PHP_EOL);
-      $start = microtime(true);
-      $result = `./$simulator $tc_name_escaped $dropmodifier`;
-      $elapsed = (microtime(true) - $start);
-
-      if (!$result) {
-        throw new Exception("Simulation failed for $tc_name with drop modifier $dropmodifier");
+    foreach ([0, 1, 2] as $difficulty) {
+      foreach ([1, 2, 3, 4, 5, 6, 7, 8] as $dropmodifier) {
+        $tcindex = $tccount++;
+        $tc_name_escaped = escapeshellarg($tc_name);
+        $tcpercent = number_format($tcindex / $tcmax * 100, 2);
+        print("[$tcpercent%] $tc_name [$dropmodifier]..." . PHP_EOL);
+        $start = microtime(true);
+        $result = `./$simulator $tc_name_escaped $dropmodifier 0 $difficulty`;
+        $elapsed = (microtime(true) - $start);
+  
+        if (!$result) {
+          throw new Exception("Simulation failed for $tc_name with drop modifier $dropmodifier");
+        }
+  
+        $data = json_decode($result, TRUE);
+  
+        if ($data['tc'] !== $tc_name) {
+          throw new Exception("Expected TC $tc_name but got " . $data['tc']);
+        }
+  
+        $playermod = $data['playermod'] - 1;
+  
+        $precalc[$difficulty][$playermod] = $data['drops'];
+  
+        usort($precalc[$difficulty][$playermod], fn ($a, $b) => $b[1] <=> $a[1]);
+  
+        print(PHP_EOL);
       }
-
-      $data = json_decode($result, TRUE);
-
-      if ($data['tc'] !== $tc_name) {
-        throw new Exception("Expected TC $tc_name but got " . $data['tc']);
-      }
-
-      $playermod = $data['playermod'] - 1;
-
-      $precalc[$playermod] = $data['drops'];
-
-      usort($precalc[$playermod], fn ($a, $b) => $b[1] <=> $a[1]);
-
-      print(PHP_EOL);
     }
 
     if ($precalc) {
