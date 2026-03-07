@@ -495,7 +495,12 @@ const fs = require('fs');
   [0, 1, 2].forEach((diff) => {
     let uniqueCount = 3.5 + diff;
     let champCount = 3;
-    let uniqueRatio = 0.8, champRatio = 0.2;
+    let uniqueRatio = 0.8, champRatio = 0.2 * champCount;
+    let uadj = uniqueRatio + champRatio * 3;
+
+    uniqueRatio /= uadj;
+    champRatio /= uadj;
+
     let s = _s(diff);
     full.levels.forEach((level) => {
       let l = (key) => level[key] || 0;
@@ -543,7 +548,7 @@ const fs = require('fs');
               )
             );
           }, 0),
-          monucount = avg(l(s("MonUMin")), l(s("MonUMax"))),
+          monucount = avg(l(s("MonUMin")), l(s("MonUMax"))) + 0.47, // The bonus here comes from champions spawn last, overcapping the spawns.
           ucount = monucount * uniqueRatio * uniqueCount,
           ccount = 0;
   
@@ -589,7 +594,7 @@ const fs = require('fs');
           forEachMonster(level, diff, (mon, mlvl, type, rarity) => {
             let mult = [
               count * ratio[type][mon.Id] / (avg((mon["MinGrp"] || 0), (mon["MaxGrp"] || 0)) + avg((mon["PartyMin"] || 0), (mon["PartyMax"] || 0))),
-              monucount * rarity * champRatio,
+              monucount * rarity * champRatio / champCount,
               monucount * rarity * uniqueRatio,
             ][type];
             monpopulation[level.Id][['normal', 'champion', 'unique'][type]][mon.Id] = monpopulation[level.Id][['normal', 'champion', 'unique'][type]][mon.Id] || {
