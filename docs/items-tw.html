@@ -25,6 +25,7 @@
 				z-index: 50;
 			}
 			.tw-tooltip:hover::after { opacity: 1; }
+			.tab-pane-tw.hidden { display: none; }
 		</style>
 	</head>
 
@@ -117,7 +118,7 @@
 				</div>
 
 				<!-- Armor Tab -->
-				<div id="armorapp" class="tab-pane-tw" data-tab="armor" style="display:none">
+				<div id="armorapp" class="tab-pane-tw hidden" data-tab="armor">
 					<h1 class="bg-blue-700 text-white text-center p-4 text-2xl font-semibold">{{ pageTitle }}</h1>
 					<div class="p-4">
 						<p v-if="!visible" class="text-center text-gray-600">Loading...</p>
@@ -190,7 +191,7 @@
 				</div>
 
 				<!-- Unique Items Tab -->
-				<div id="uniqueitemsapp" class="tab-pane-tw" data-tab="uniqueitems" style="display:none">
+				<div id="uniqueitemsapp" class="tab-pane-tw hidden" data-tab="uniqueitems">
 					<h1 class="bg-blue-700 text-white text-center p-4 text-2xl font-semibold">{{ pageTitle }}</h1>
 					<div class="p-4">
 						<p v-if="!visible" class="text-center text-gray-600">Loading...</p>
@@ -237,7 +238,7 @@
 				</div>
 
 				<!-- Set Items Tab -->
-				<div id="setitemsapp" class="tab-pane-tw" data-tab="setitems" style="display:none">
+				<div id="setitemsapp" class="tab-pane-tw hidden" data-tab="setitems">
 					<h1 class="bg-blue-700 text-white text-center p-4 text-2xl font-semibold">{{ pageTitle }}</h1>
 					<div class="p-4">
 						<p v-if="!visible" class="text-center text-gray-600">Loading...</p>
@@ -280,7 +281,7 @@
 				</div>
 
 				<!-- Misc Items Tab -->
-				<div id="miscapp" class="tab-pane-tw" data-tab="misc" style="display:none">
+				<div id="miscapp" class="tab-pane-tw hidden" data-tab="misc">
 					<h1 class="bg-blue-700 text-white text-center p-4 text-2xl font-semibold">{{ pageTitle }}</h1>
 					<div class="p-4">
 						<p v-if="!visible" class="text-center text-gray-600">Loading...</p>
@@ -325,7 +326,7 @@
 				</div>
 
 				<!-- Runewords Tab -->
-				<div id="runewordsapp" class="tab-pane-tw" data-tab="runewords" style="display:none">
+				<div id="runewordsapp" class="tab-pane-tw hidden" data-tab="runewords">
 					<h1 class="bg-blue-700 text-white text-center p-4 text-2xl font-semibold">{{ pageTitle }}</h1>
 					<div class="p-4">
 						<p v-if="!visible" class="text-center text-gray-600">Loading...</p>
@@ -374,7 +375,11 @@
 			function setTab(name) {
 				activeTab = name;
 				document.querySelectorAll('.tab-pane-tw').forEach(function(el) {
-					el.style.display = el.dataset.tab === name ? '' : 'none';
+					if (el.dataset.tab === name) {
+						el.classList.remove('hidden');
+					} else {
+						el.classList.add('hidden');
+					}
 				});
 				document.querySelectorAll('.tab-link-tw').forEach(function(el) {
 					var active = el.dataset.tab === name;
