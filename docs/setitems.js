@@ -1,36 +1,43 @@
 'use strict'; /* global Vue */
 
 (function () {
-	let data = fetch('https://raw.githubusercontent.com/ALCHElVlY/d2data/master/json/setitems.json');
+	let itemsPromise = fetch('https://raw.githubusercontent.com/ALCHElVlY/d2data/master/json/setitems.json');
+	let propsPromise = fetch('https://raw.githubusercontent.com/ALCHElVlY/d2data/master/json/properties.json');
 
 	function first (...values) {
 		return values.filter(v => v !== undefined).shift();
 	}
 
-	function renderProps (item, count) {
-		let props = [];
+	function parseProps(item, properties, propPrefix, minPrefix, maxPrefix, count) {
+		let result = [];
 		for (let i = 1; i <= count; i++) {
-			let prop = item['prop' + i];
-			if (prop) {
-				let mn = item['min' + i], mx = item['max' + i];
-				let range = mn !== undefined ? ' (' + mn + (mx !== undefined && mx !== mn ? '-' + mx : '') + ')' : '';
-				props.push(prop + range);
-			}
+			let code = item[propPrefix + i];
+			if (!code || String(code).startsWith('*')) continue;
+			let mn = item[minPrefix + i];
+			let mx = item[maxPrefix + i];
+			let tooltip = (properties[code] && properties[code]['*Tooltip']) || code;
+			let range = mn !== undefined
+				? (mx !== undefined && mx !== mn ? mn + '-' + mx : String(mn))
+				: '';
+			result.push(tooltip.replace(/#/g, range));
 		}
-		return props.join(', ') || '—';
+		return result.join(', ') || '—';
 	}
 
-	function renderAProps (item) {
-		let props = [];
+	function parseAProps(item, properties) {
+		let result = [];
 		for (let i = 1; i <= 5; i++) {
-			let prop = item['aprop' + i + 'a'];
-			if (prop) {
-				let mn = item['amin' + i + 'a'], mx = item['amax' + i + 'a'];
-				let range = mn !== undefined ? ' (' + mn + (mx !== undefined && mx !== mn ? '-' + mx : '') + ')' : '';
-				props.push(prop + range);
-			}
+			let code = item['aprop' + i + 'a'];
+			if (!code || String(code).startsWith('*')) continue;
+			let mn = item['amin' + i + 'a'];
+			let mx = item['amax' + i + 'a'];
+			let tooltip = (properties[code] && properties[code]['*Tooltip']) || code;
+			let range = mn !== undefined
+				? (mx !== undefined && mx !== mn ? mn + '-' + mx : String(mn))
+				: '';
+			result.push(tooltip.replace(/#/g, range));
 		}
-		return props.join(', ') || '—';
+		return result.join(', ') || '—';
 	}
 
 	new Vue({
@@ -52,12 +59,12 @@
 			},
 			columns: [
 				{ label: '', value: '', headstyle: 'width:auto;user-select:none;cursor:pointer;' },
-				{ label: 'Item Name', key: 'index', render: item => item.index, headstyle: 'width:1px;user-select:none;cursor:pointer;text-align:center;white-space:nowrap;', style: 'text-align:left;white-space:nowrap;', tooltip: 'The set item name.' },
-				{ label: 'Set', key: 'set', render: item => item.set || '??', sortDefault: '??', headstyle: 'width:1px;user-select:none;cursor:pointer;text-align:center;white-space:nowrap;', style: 'text-align:left;white-space:nowrap;', tooltip: 'The set this item belongs to.' },
-				{ label: 'Base Item', key: 'ItemName', render: item => item['*ItemName'] || '??', sortDefault: '??', tooltip: 'The base item type.' },
-				{ label: 'Req Level', key: 'levelreq', render: item => item['lvl req'] || 0, sortDefault: 0, tooltip: 'Required character level to equip.' },
-				{ label: 'Properties', key: 'props', render: item => renderProps(item, 9), headstyle: 'width:auto;user-select:none;cursor:pointer;', style: 'text-align:left;font-size:0.85em;', tooltip: 'Own item properties.' },
-				{ label: 'Set Bonuses', key: 'setbonus', render: item => renderAProps(item), headstyle: 'width:auto;user-select:none;cursor:pointer;', style: 'text-align:left;font-size:0.85em;', tooltip: 'Partial set bonuses.' },
+				{ label: 'Item Name', key: 'index', render: item => item.index, headstyle: 'width:1px;user-select:none;cursor:pointer;text-align:center;white-space:nowrap;', style: 'text-align:left;white-space:nowrap;' },
+				{ label: 'Set', key: 'set', render: item => item.set || '??', sortDefault: '??', headstyle: 'width:1px;user-select:none;cursor:pointer;text-align:center;white-space:nowrap;', style: 'text-align:left;white-space:nowrap;' },
+				{ label: 'Base Item', key: 'ItemName', render: item => item['*ItemName'] || '??', sortDefault: '??' },
+				{ label: 'Req Level', key: 'levelreq', render: item => item['lvl req'] || 0, sortDefault: 0 },
+				{ label: 'Properties', key: 'parsedProps', render: item => item.parsedProps, headstyle: 'width:auto;user-select:none;cursor:pointer;', style: 'text-align:left;font-size:0.85em;white-space:pre-wrap;' },
+				{ label: 'Set Bonuses', key: 'parsedSetBonus', render: item => item.parsedSetBonus, headstyle: 'width:auto;user-select:none;cursor:pointer;', style: 'text-align:left;font-size:0.85em;white-space:pre-wrap;' },
 				{ label: '', value: '', headstyle: 'width:auto;user-select:none;cursor:pointer;' },
 			],
 		},
@@ -66,9 +73,7 @@
 				if (this.sortColumn === column) {
 					column.sortOrder = -column.sortOrder;
 				} else {
-					if (this.sortColumn) {
-						delete this.sortColumn.headclass;
-					}
+					if (this.sortColumn) delete this.sortColumn.headclass;
 					this.sortColumn = column;
 					column.sortOrder = column.sortOrder || column.defaultSortOrder || 1;
 				}
@@ -95,9 +100,16 @@
 			first,
 		},
 		created: async function () {
-			dat = await data;
-			dat = await data.json();
-			this.items = Object.values(data).filter(i => i.spawnable);
+			let [itemsRes, propsRes] = await Promise.all([itemsPromise, propsPromise]);
+			let itemsData = await itemsRes.json();
+			let properties = await propsRes.json();
+			this.items = Object.values(itemsData)
+				.filter(i => i.spawnable)
+				.map(i => {
+					i.parsedProps = parseProps(i, properties, 'prop', 'min', 'max', 9);
+					i.parsedSetBonus = parseAProps(i, properties);
+					return i;
+				});
 			let maxlvl = Math.max(...this.items.map(i => i['lvl req'] || 0));
 			this.maxlevelreq = this.levelrequpper = maxlvl;
 			this.visible = true;
