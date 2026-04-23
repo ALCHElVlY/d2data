@@ -28,7 +28,7 @@ let encode = arr => {
 		el: '#skillapp',
 		data: {
 			d2: {
-				skills: await (fetch('https://raw.githubusercontent.com/blizzhackers/d2data/master/json/skills.json').then(res => res.json())),
+				skills: await (fetch('https://raw.githubusercontent.com/ALCHElVlY/d2data/master/json/skills.json').then(res => res.json())),
 			},
 			classes: [
 				{
