@@ -39,11 +39,11 @@
 			},
 			columns: [
 				{ label: '', value: '', headstyle: 'width:auto;user-select:none;cursor:pointer;' },
-				{ label: 'Unique Name', key: 'index', render: item => item.index, headstyle: 'width:1px;user-select:none;cursor:pointer;text-align:center;white-space:nowrap;', style: 'text-align:left;white-space:nowrap;' },
+				{ label: 'Unique Name', key: 'index', render: item => item.index, headstyle: 'width:1px;user-select:none;cursor:pointer;text-align:center;white-space:nowrap;', style: 'text-align:center;white-space:nowrap;' },
 				{ label: 'Base Item', key: 'ItemName', render: item => item['*ItemName'] || '??', sortDefault: '??' },
 				{ label: 'Req Level', key: 'levelreq', render: item => item['lvl req'] || 0, sortDefault: 0, tooltip: 'Required character level.' },
 				{ label: 'Version', key: 'version', render: item => item.version === 100 ? 'LoD' : 'Classic', sortDefault: 'Classic' },
-				{ label: 'Properties', key: 'parsedProps', render: item => item.parsedProps, headstyle: 'width:auto;user-select:none;cursor:pointer;', style: 'text-align:left;font-size:0.85em;white-space:pre-wrap;' },
+				{ label: 'Properties', key: 'parsedProps', render: item => item.parsedProps, headstyle: 'width:auto;user-select:none;cursor:pointer;', style: 'text-align:center;font-size:0.85em;white-space:pre-wrap;' },
 				{ label: '', value: '', headstyle: 'width:auto;user-select:none;cursor:pointer;' },
 			],
 		},
