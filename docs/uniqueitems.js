@@ -18,7 +18,7 @@
 				: '';
 			result.push(tooltip.replace(/#/g, range));
 		}
-		return result.join(', ') || '—';
+		return result.join('\n') || '—';
 	}
 	new Vue({
 		el: '#uniqueitemsapp',
