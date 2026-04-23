@@ -1,7 +1,7 @@
 'use strict'; /* global Vue */
 
 (function () {
-	let data = fetch('https://raw.githubusercontent.com/blizzhackers/d2data/master/json/armor.json');
+	let data = fetch('https://raw.githubusercontent.com/ALCHElVlY/d2data/master/json/armor.json');
 
 	function first (...values) {
 		return values.filter(v => v !== undefined).shift();
