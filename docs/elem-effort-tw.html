@@ -1,0 +1,166 @@
+<!doctype html>
+<html>
+	<head>
+		<title>Diablo 2 Elemental Effort Visualizer</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<script src="https://cdn.tailwindcss.com"></script>
+		<script src="https://cdn.jsdelivr.net/npm/vue@2"></script>
+		<style>
+			.tw-tooltip { position: relative; cursor: default; }
+			.tw-tooltip::after {
+				content: attr(data-tooltip);
+				position: absolute;
+				bottom: calc(100% + 4px);
+				left: 50%;
+				transform: translateX(-50%);
+				background: #1f2937;
+				color: #f9fafb;
+				font-size: 0.75rem;
+				padding: 4px 8px;
+				border-radius: 4px;
+				white-space: nowrap;
+				pointer-events: none;
+				opacity: 0;
+				transition: opacity 0.15s;
+				z-index: 50;
+			}
+			.tw-tooltip:hover::after { opacity: 1; }
+			html, body, div { box-sizing: border-box; }
+			html { display: block; padding: 0; margin: 0; min-width: 100%; min-height: 100%; font-size: 15px; }
+			.svg-wrapper svg { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }
+			svg text { font-size: 1em; white-space: pre; fill: black; }
+			svg text.debug { fill: #0FF; }
+			svg line { stroke: black; stroke-width: 1; }
+			svg rect { stroke: #000000; stroke-width: 0; }
+			.element-table th { white-space: pre; }
+			.element-table * { box-sizing: border-box; }
+			.element-table input { width: 100%; }
+		</style>
+	</head>
+	<body class="max-w-[1360px] mx-auto p-[15px] bg-white xl:shadow-xl xl:rounded xl:mt-[15px]">
+		<div id="effortapp">
+			<!-- Settings bar -->
+			<div class="flex flex-row gap-4 mb-4">
+				<!-- Difficulty / options column -->
+				<div>
+					<div class="h-7 leading-7 flex items-center">
+						<label class="flex-1 mr-2">Normal</label>
+						<input class="w-20 flex-none" type="checkbox" v-model="difficulty[0]" @change="updateGraphs">
+					</div>
+					<div class="h-7 leading-7 flex items-center">
+						<label class="flex-1 mr-2">Nightmare</label>
+						<input class="w-20 flex-none" type="checkbox" v-model="difficulty[1]" @change="updateGraphs">
+					</div>
+					<div class="h-7 leading-7 flex items-center">
+						<label class="flex-1 mr-2">Hell</label>
+						<input class="w-20 flex-none" type="checkbox" v-model="difficulty[2]" @change="updateGraphs">
+					</div>
+					<div class="h-7 leading-7 flex items-center">
+						<label class="flex-1 mr-2">Optional Areas</label>
+						<input class="w-20 flex-none" type="checkbox" v-model="optionalAreas" @change="updateGraphs">
+					</div>
+					<div class="h-7 leading-7 flex items-center">
+						<label class="flex-1 mr-2">Count Immunes</label>
+						<input class="w-20 flex-none" type="checkbox" v-model="countImmunes" @change="updateGraphs">
+					</div>
+				</div>
+				<!-- Skills column -->
+				<div>
+					<div class="h-7 leading-7 flex items-center">
+						<label class="flex-1 mr-2">Conviction %</label>
+						<input class="w-20 flex-none" type="number" step="5" min="0" v-model="skills.conviction" @change="updateGraphs">
+					</div>
+					<div class="h-7 leading-7 flex items-center">
+						<label class="flex-1 mr-2">Lower Resist %</label>
+						<input class="w-20 flex-none" type="number" step="5" min="0" v-model="skills.lowerResist" @change="updateGraphs">
+					</div>
+					<div class="h-7 leading-7 flex items-center">
+						<label class="flex-1 mr-2">Amplify/Decrepify %</label>
+						<input class="w-20 flex-none" type="number" step="50" min="0" max="100" v-model="skills.amplify" @change="updateGraphs">
+					</div>
+					<div class="h-7 leading-7">&nbsp;</div>
+				</div>
+				<!-- Element table -->
+				<table class="element-table flex-none w-[35em]">
+					<tr>
+						<td>&nbsp;</td>
+						<th>Physical</th>
+						<th>Magic</th>
+						<th>Fire</th>
+						<th>Lightning</th>
+						<th>Cold</th>
+						<th>Poison</th>
+					</tr>
+					<tr>
+						<th>Min Dmg</th>
+						<td><input type="number" step="1" min="0" v-model="damage.min.physical" @change="updateGraphs"></td>
+						<td><input type="number" step="1" min="0" v-model="damage.min.magic" @change="updateGraphs"></td>
+						<td><input type="number" step="1" min="0" v-model="damage.min.fire" @change="updateGraphs"></td>
+						<td><input type="number" step="1" min="0" v-model="damage.min.lightning" @change="updateGraphs"></td>
+						<td><input type="number" step="1" min="0" v-model="damage.min.cold" @change="updateGraphs"></td>
+						<td><input type="number" step="1" min="0" v-model="damage.min.poison" @change="updateGraphs"></td>
+					</tr>
+					<tr>
+						<th>Max Dmg</th>
+						<td><input type="number" step="1" min="0" v-model="damage.max.physical" @change="updateGraphs"></td>
+						<td><input type="number" step="1" min="0" v-model="damage.max.magic" @change="updateGraphs"></td>
+						<td><input type="number" step="1" min="0" v-model="damage.max.fire" @change="updateGraphs"></td>
+						<td><input type="number" step="1" min="0" v-model="damage.max.lightning" @change="updateGraphs"></td>
+						<td><input type="number" step="1" min="0" v-model="damage.max.cold" @change="updateGraphs"></td>
+						<td><input type="number" step="1" min="0" v-model="damage.max.poison" @change="updateGraphs"></td>
+					</tr>
+					<tr>
+						<th>Pierce %</th>
+						<td><input type="number" step="1" min="0" v-model="pierce.physical" @change="updateGraphs" disabled></td>
+						<td><input type="number" step="1" min="0" v-model="pierce.magic" @change="updateGraphs" disabled></td>
+						<td><input type="number" step="1" min="0" v-model="pierce.fire" @change="updateGraphs"></td>
+						<td><input type="number" step="1" min="0" v-model="pierce.lightning" @change="updateGraphs"></td>
+						<td><input type="number" step="1" min="0" v-model="pierce.cold" @change="updateGraphs"></td>
+						<td><input type="number" step="1" min="0" v-model="pierce.poison" @change="updateGraphs"></td>
+					</tr>
+					<tr>
+						<th>Hit Count</th>
+						<td><input type="number" step="1" min="1" v-model="damage.hits.physical" @change="updateGraphs"></td>
+						<td><input type="number" step="1" min="1" v-model="damage.hits.magic" @change="updateGraphs"></td>
+						<td><input type="number" step="1" min="1" v-model="damage.hits.fire" @change="updateGraphs"></td>
+						<td><input type="number" step="1" min="1" v-model="damage.hits.lightning" @change="updateGraphs"></td>
+						<td><input type="number" step="1" min="1" v-model="damage.hits.cold" @change="updateGraphs"></td>
+						<td><input type="number" step="1" min="1" v-model="damage.hits.poison" @change="updateGraphs"></td>
+					</tr>
+					<tr>
+						<th>AoE Max</th>
+						<td><input type="number" step="1" min="1" v-model="damage.aoe.physical" @change="updateGraphs"></td>
+						<td><input type="number" step="1" min="1" v-model="damage.aoe.magic" @change="updateGraphs"></td>
+						<td><input type="number" step="1" min="1" v-model="damage.aoe.fire" @change="updateGraphs"></td>
+						<td><input type="number" step="1" min="1" v-model="damage.aoe.lightning" @change="updateGraphs"></td>
+						<td><input type="number" step="1" min="1" v-model="damage.aoe.cold" @change="updateGraphs"></td>
+						<td><input type="number" step="1" min="1" v-model="damage.aoe.poison" @change="updateGraphs"></td>
+					</tr>
+					<tr>
+						<th>*FPA</th>
+						<td><input type="number" step="1" min="1" v-model="damage.fpa.physical" @change="updateGraphs"></td>
+						<td><input type="number" step="1" min="1" v-model="damage.fpa.magic" @change="updateGraphs"></td>
+						<td><input type="number" step="1" min="1" v-model="damage.fpa.fire" @change="updateGraphs"></td>
+						<td><input type="number" step="1" min="1" v-model="damage.fpa.lightning" @change="updateGraphs"></td>
+						<td><input type="number" step="1" min="1" v-model="damage.fpa.cold" @change="updateGraphs"></td>
+						<td><input type="number" step="1" min="1" v-model="damage.fpa.poison" @change="updateGraphs"></td>
+					</tr>
+				</table>
+			</div>
+			<p>Higher values mean more effectiveness. AoE max is capped at group size. *FPA = Frames Per Attack (25 frames = 1 second)</p>
+			<div class="relative" style="padding-top: 50%;" v-if="visible">
+				<svg id="renderer" :height="svg.height" :width="svg.width" :style="`font-size:${fontSize}px`">
+					<template v-for="element in svg.elements">
+						<line v-if="element.type === 'line'" :x1="svg.width * element.x1" :y1="svg.height * element.y1" :x2="svg.width * element.x2" :y2="svg.height * element.y2" :style="'stroke:' + element.color" />
+						<rect v-else-if="element.type === 'rect'" :x="svg.width * element.x" :y="svg.height * element.y" :width="svg.width * element.width" :height="svg.height * element.height" :style="'fill:' + element.color" />
+						<text v-else-if="element.type === 'text'" :x="svg.width * element.x" :y="svg.height * element.y" :style="'fill:' + element.color" dominant-baseline="middle" text-anchor="middle">{{ element.text }}</text>
+					</template>
+					<text :x="5" :y="svg.height - 5" class="debug">{{ debugMessage }}</text>
+				</svg>
+			</div>
+			<p v-else>Loading...</p>
+		</div>
+	</body>
+	<script src="vue-setup-tw.js"></script>
+	<script src="effort.js"></script>
+</html>

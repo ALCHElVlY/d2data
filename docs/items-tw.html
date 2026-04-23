@@ -1,0 +1,394 @@
+<!doctype html>
+<html class="bg-gray-900">
+	<head>
+		<title>Diablo 2 (1.14d and D2R) Data Browser</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<script src="https://cdn.tailwindcss.com"></script>
+		<script src="https://cdn.jsdelivr.net/npm/vue@2"></script>
+		<style>
+			.tw-tooltip { position: relative; cursor: default; }
+			.tw-tooltip::after {
+				content: attr(data-tooltip);
+				position: absolute;
+				bottom: calc(100% + 4px);
+				left: 50%;
+				transform: translateX(-50%);
+				background: #1f2937;
+				color: #f9fafb;
+				font-size: 0.75rem;
+				padding: 4px 8px;
+				border-radius: 4px;
+				white-space: nowrap;
+				pointer-events: none;
+				opacity: 0;
+				transition: opacity 0.15s;
+				z-index: 50;
+			}
+			.tw-tooltip:hover::after { opacity: 1; }
+		</style>
+	</head>
+
+	<body class="max-w-screen-xl mx-auto p-0 bg-gray-900">
+		<div class="rounded shadow my-5">
+			<!-- Tab Navigation -->
+			<div class="flex border-b border-gray-600 bg-gray-800">
+				<a class="tab-link-tw px-4 py-2 cursor-pointer border-b-2 border-blue-400 text-blue-300" data-tab="weapons" onclick="setTab('weapons')">Weapons</a>
+				<a class="tab-link-tw px-4 py-2 cursor-pointer text-gray-400" data-tab="armor" onclick="setTab('armor')">Armor</a>
+				<a class="tab-link-tw px-4 py-2 cursor-pointer text-gray-400" data-tab="uniqueitems" onclick="setTab('uniqueitems')">Unique Items</a>
+				<a class="tab-link-tw px-4 py-2 cursor-pointer text-gray-400" data-tab="setitems" onclick="setTab('setitems')">Set Items</a>
+				<a class="tab-link-tw px-4 py-2 cursor-pointer text-gray-400" data-tab="misc" onclick="setTab('misc')">Misc Items</a>
+				<a class="tab-link-tw px-4 py-2 cursor-pointer text-gray-400" data-tab="runewords" onclick="setTab('runewords')">Runewords</a>
+			</div>
+
+			<div class="bg-white">
+				<!-- Weapons Tab -->
+				<div id="weaponapp" class="tab-pane-tw" data-tab="weapons">
+					<h1 class="bg-blue-700 text-white text-center p-4 text-2xl font-semibold">{{ pageTitle }}</h1>
+					<div class="p-4">
+						<p v-if="!visible" class="text-center text-gray-600">Loading...</p>
+						<div class="flex flex-wrap gap-4 mb-4">
+							<div class="w-full md:flex-1">
+								<label>Search by Name</label>
+								<input type="text" class="w-full border border-gray-600 rounded px-2 py-1 text-sm bg-gray-800 text-gray-100" v-model:value="contains">
+							</div>
+							<div class="w-full md:flex-1">
+								<label>Minimum Required Level: {{ levelreqlower }}</label>
+								<input type="range" class="w-full" min="0" :max="maxlevelreq" v-model:value="levelreqlower">
+							</div>
+							<div class="w-full md:flex-1">
+								<label>Maximum Required Level: {{ levelrequpper }}</label>
+								<input type="range" class="w-full" min="0" :max="maxlevelreq" v-model:value="levelrequpper">
+							</div>
+							<div class="w-full md:flex-1">
+								<label>Minimum Sockets: {{ sockets }}</label>
+								<input type="range" class="w-full" min="0" max="6" v-model:value="sockets">
+							</div>
+						</div>
+						<div class="flex flex-wrap gap-4 mb-4">
+							<div class="w-full md:flex-1">
+								<label>Item Tier</label>
+								<select class="w-full border border-gray-600 rounded px-2 py-1 text-sm bg-gray-800 text-gray-100" v-model="tier">
+									<option value="0">All</option>
+									<option value="1">Normal</option>
+									<option value="2">Exceptional</option>
+									<option value="3">Elite</option>
+								</select>
+							</div>
+							<div class="w-full md:flex-1">
+								<label>Item Type</label>
+								<select class="w-full border border-gray-600 rounded px-2 py-1 text-sm bg-gray-800 text-gray-100" v-model="itemtype">
+									<option v-for="type in itemtypes" :key="type" :value="type">{{ type }}</option>
+								</select>
+							</div>
+							<div class="w-full md:flex-1">
+								<div><label>Has:</label></div>
+								<label class="inline-flex items-center mr-4">
+									<input class="mr-1" type="checkbox" v-model="requireonehand">
+									1h Damage
+								</label>
+								<label class="inline-flex items-center mr-4">
+									<input class="mr-1" type="checkbox" v-model="requiretwohand">
+									2h Damage
+								</label>
+								<label class="inline-flex items-center">
+									<input class="mr-1" type="checkbox" v-model="requiremissile">
+									Throw Damage
+								</label>
+							</div>
+							<div class="w-full md:flex-1 flex items-end">
+								<button class="px-3 py-1 bg-gray-600 hover:bg-gray-500 text-white rounded text-sm cursor-pointer" @click="resetValues">Reset</button>
+							</div>
+						</div>
+					</div>
+					<div class="overflow-x-auto">
+						<table v-if="visible" class="w-full text-sm text-right border-collapse">
+							<thead class="bg-blue-100">
+								<tr>
+									<th v-for="(column, index) in columns" :key="index" :class="column.headclass" :style="first(column.headstyle, defaults.headstyle)" @click="sort(column)" v-tooltip="column.tooltip">{{ column.label }}</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr v-for="item in items" :key="item.code" v-if="canShow(item)" class="border-t border-gray-200 hover:bg-gray-50">
+									<td v-for="(column, index) in columns" :key="index" :class="column.class" :style="first(column.style, defaults.style)">{{ column.render ? column.render(item) : '' }}</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+
+				<!-- Armor Tab -->
+				<div id="armorapp" class="tab-pane-tw" data-tab="armor" style="display:none">
+					<h1 class="bg-blue-700 text-white text-center p-4 text-2xl font-semibold">{{ pageTitle }}</h1>
+					<div class="p-4">
+						<p v-if="!visible" class="text-center text-gray-600">Loading...</p>
+						<div class="flex flex-wrap gap-4 mb-4">
+							<div class="w-full md:flex-1">
+								<label>Search by Name</label>
+								<input type="text" class="w-full border border-gray-600 rounded px-2 py-1 text-sm bg-gray-800 text-gray-100" v-model:value="contains">
+							</div>
+							<div class="w-full md:flex-1">
+								<label>Minimum Required Level: {{ levelreqlower }}</label>
+								<input type="range" class="w-full" min="0" :max="maxlevelreq" v-model:value="levelreqlower">
+							</div>
+							<div class="w-full md:flex-1">
+								<label>Maximum Required Level: {{ levelrequpper }}</label>
+								<input type="range" class="w-full" min="0" :max="maxlevelreq" v-model:value="levelrequpper">
+							</div>
+							<div class="w-full md:flex-1">
+								<label>Minimum Sockets: {{ sockets }}</label>
+								<input type="range" class="w-full" min="0" max="4" v-model:value="sockets">
+							</div>
+						</div>
+						<div class="flex flex-wrap gap-4 mb-4">
+							<div class="w-full md:flex-1">
+								<label>Item Tier</label>
+								<select class="w-full border border-gray-600 rounded px-2 py-1 text-sm bg-gray-800 text-gray-100" v-model="tier">
+									<option value="0">All</option>
+									<option value="1">Normal</option>
+									<option value="2">Exceptional</option>
+									<option value="3">Elite</option>
+								</select>
+							</div>
+							<div class="w-full md:flex-1">
+								<label>Item Type</label>
+								<select class="w-full border border-gray-600 rounded px-2 py-1 text-sm bg-gray-800 text-gray-100" v-model="itemtype">
+									<option v-for="type in itemtypes" :key="type" :value="type">{{ type }}</option>
+								</select>
+							</div>
+							<div class="w-full md:flex-1">
+								<label>Item Weight</label>
+								<select class="w-full border border-gray-600 rounded px-2 py-1 text-sm bg-gray-800 text-gray-100" v-model="weight">
+									<option value="-1">All</option>
+									<option value="0">Light</option>
+									<option value="5">Medium</option>
+									<option value="10">Heavy</option>
+								</select>
+							</div>
+							<div class="w-full md:flex-1">
+								<label>Max Required Str: {{ maxstrreq }}</label>
+								<input type="range" class="w-full" min="0" :max="maxstrreqmax" v-model:value="maxstrreq">
+							</div>
+							<div class="w-full md:flex-1 flex items-end">
+								<button class="px-3 py-1 bg-gray-600 hover:bg-gray-500 text-white rounded text-sm cursor-pointer" @click="resetValues">Reset</button>
+							</div>
+						</div>
+					</div>
+					<div class="overflow-x-auto">
+						<table v-if="visible" class="w-full text-sm text-right border-collapse">
+							<thead class="bg-blue-100">
+								<tr>
+									<th v-for="(column, index) in columns" :key="index" :class="column.headclass" :style="first(column.headstyle, defaults.headstyle)" @click="sort(column)" v-tooltip="column.tooltip">{{ column.label }}</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr v-for="item in items" :key="item.code" v-if="canShow(item)" class="border-t border-gray-200 hover:bg-gray-50">
+									<td v-for="(column, index) in columns" :key="index" :class="column.class" :style="first(column.style, defaults.style)">{{ column.render ? column.render(item) : '' }}</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+
+				<!-- Unique Items Tab -->
+				<div id="uniqueitemsapp" class="tab-pane-tw" data-tab="uniqueitems" style="display:none">
+					<h1 class="bg-blue-700 text-white text-center p-4 text-2xl font-semibold">{{ pageTitle }}</h1>
+					<div class="p-4">
+						<p v-if="!visible" class="text-center text-gray-600">Loading...</p>
+						<div class="flex flex-wrap gap-4 mb-4">
+							<div class="w-full md:flex-1">
+								<label>Search by Name</label>
+								<input type="text" class="w-full border border-gray-600 rounded px-2 py-1 text-sm bg-gray-800 text-gray-100" v-model="contains">
+							</div>
+							<div class="w-full md:flex-1">
+								<label>Min Req Level: {{ levelreqlower }}</label>
+								<input type="range" class="w-full" min="0" :max="maxlevelreq" v-model.number="levelreqlower">
+							</div>
+							<div class="w-full md:flex-1">
+								<label>Max Req Level: {{ levelrequpper }}</label>
+								<input type="range" class="w-full" min="0" :max="maxlevelreq" v-model.number="levelrequpper">
+							</div>
+							<div class="w-full md:flex-1">
+								<label>Version</label>
+								<select class="w-full border border-gray-600 rounded px-2 py-1 text-sm bg-gray-800 text-gray-100" v-model="version">
+									<option value="All">All</option>
+									<option value="Classic">Classic</option>
+									<option value="LoD">Lord of Destruction</option>
+								</select>
+							</div>
+							<div class="w-full md:flex-1 flex items-end">
+								<button class="px-3 py-1 bg-gray-600 hover:bg-gray-500 text-white rounded text-sm cursor-pointer" @click="resetValues">Reset</button>
+							</div>
+						</div>
+					</div>
+					<div class="overflow-x-auto">
+						<table v-if="visible" class="w-full text-sm border-collapse">
+							<thead class="bg-blue-100">
+								<tr>
+									<th v-for="(column, index) in columns" :key="index" :class="column.headclass" :style="first(column.headstyle, defaults.headstyle)" @click="sort(column)">{{ column.label }}</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr v-for="item in items" :key="item['*ID']" v-if="canShow(item)" class="border-t border-gray-200 hover:bg-gray-50">
+									<td v-for="(column, index) in columns" :key="index" :style="first(column.style, defaults.style)">{{ column.render ? column.render(item) : '' }}</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+
+				<!-- Set Items Tab -->
+				<div id="setitemsapp" class="tab-pane-tw" data-tab="setitems" style="display:none">
+					<h1 class="bg-blue-700 text-white text-center p-4 text-2xl font-semibold">{{ pageTitle }}</h1>
+					<div class="p-4">
+						<p v-if="!visible" class="text-center text-gray-600">Loading...</p>
+						<div class="flex flex-wrap gap-4 mb-4">
+							<div class="w-full md:flex-1">
+								<label>Search by Item Name</label>
+								<input type="text" class="w-full border border-gray-600 rounded px-2 py-1 text-sm bg-gray-800 text-gray-100" v-model="contains">
+							</div>
+							<div class="w-full md:flex-1">
+								<label>Search by Set</label>
+								<input type="text" class="w-full border border-gray-600 rounded px-2 py-1 text-sm bg-gray-800 text-gray-100" v-model="setcontains">
+							</div>
+							<div class="w-full md:flex-1">
+								<label>Min Req Level: {{ levelreqlower }}</label>
+								<input type="range" class="w-full" min="0" :max="maxlevelreq" v-model.number="levelreqlower">
+							</div>
+							<div class="w-full md:flex-1">
+								<label>Max Req Level: {{ levelrequpper }}</label>
+								<input type="range" class="w-full" min="0" :max="maxlevelreq" v-model.number="levelrequpper">
+							</div>
+							<div class="w-full md:flex-1 flex items-end">
+								<button class="px-3 py-1 bg-gray-600 hover:bg-gray-500 text-white rounded text-sm cursor-pointer" @click="resetValues">Reset</button>
+							</div>
+						</div>
+					</div>
+					<div class="overflow-x-auto">
+						<table v-if="visible" class="w-full text-sm border-collapse">
+							<thead class="bg-blue-100">
+								<tr>
+									<th v-for="(column, index) in columns" :key="index" :class="column.headclass" :style="first(column.headstyle, defaults.headstyle)" @click="sort(column)">{{ column.label }}</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr v-for="item in items" :key="item.index" v-if="canShow(item)" class="border-t border-gray-200 hover:bg-gray-50">
+									<td v-for="(column, index) in columns" :key="index" :style="first(column.style, defaults.style)">{{ column.render ? column.render(item) : '' }}</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+
+				<!-- Misc Items Tab -->
+				<div id="miscapp" class="tab-pane-tw" data-tab="misc" style="display:none">
+					<h1 class="bg-blue-700 text-white text-center p-4 text-2xl font-semibold">{{ pageTitle }}</h1>
+					<div class="p-4">
+						<p v-if="!visible" class="text-center text-gray-600">Loading...</p>
+						<div class="flex flex-wrap gap-4 mb-4">
+							<div class="w-full md:flex-1">
+								<label>Search by Name</label>
+								<input type="text" class="w-full border border-gray-600 rounded px-2 py-1 text-sm bg-gray-800 text-gray-100" v-model="contains">
+							</div>
+							<div class="w-full md:flex-1">
+								<label>Item Type</label>
+								<select class="w-full border border-gray-600 rounded px-2 py-1 text-sm bg-gray-800 text-gray-100" v-model="itemtype">
+									<option v-for="type in itemtypes" :key="type" :value="type">{{ type }}</option>
+								</select>
+							</div>
+							<div class="w-full md:flex-1">
+								<label>Version</label>
+								<select class="w-full border border-gray-600 rounded px-2 py-1 text-sm bg-gray-800 text-gray-100" v-model="version">
+									<option value="All">All</option>
+									<option value="Classic">Classic</option>
+									<option value="LoD">Lord of Destruction</option>
+								</select>
+							</div>
+							<div class="w-full md:flex-1 flex items-end">
+								<button class="px-3 py-1 bg-gray-600 hover:bg-gray-500 text-white rounded text-sm cursor-pointer" @click="resetValues">Reset</button>
+							</div>
+						</div>
+					</div>
+					<div class="overflow-x-auto">
+						<table v-if="visible" class="w-full text-sm text-right border-collapse">
+							<thead class="bg-blue-100">
+								<tr>
+									<th v-for="(column, index) in columns" :key="index" :class="column.headclass" :style="first(column.headstyle, defaults.headstyle)" @click="sort(column)" v-tooltip="column.tooltip">{{ column.label }}</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr v-for="item in items" :key="item.code" v-if="canShow(item)" class="border-t border-gray-200 hover:bg-gray-50">
+									<td v-for="(column, index) in columns" :key="index" :class="column.class" :style="first(column.style, defaults.style)">{{ column.render ? column.render(item) : '' }}</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+
+				<!-- Runewords Tab -->
+				<div id="runewordsapp" class="tab-pane-tw" data-tab="runewords" style="display:none">
+					<h1 class="bg-blue-700 text-white text-center p-4 text-2xl font-semibold">{{ pageTitle }}</h1>
+					<div class="p-4">
+						<p v-if="!visible" class="text-center text-gray-600">Loading...</p>
+						<div class="flex flex-wrap gap-4 mb-4">
+							<div class="w-full md:flex-1">
+								<label>Search by Name</label>
+								<input type="text" class="w-full border border-gray-600 rounded px-2 py-1 text-sm bg-gray-800 text-gray-100" v-model="contains">
+							</div>
+							<div class="w-full md:flex-1">
+								<label>Search by Runes</label>
+								<input type="text" class="w-full border border-gray-600 rounded px-2 py-1 text-sm bg-gray-800 text-gray-100" v-model="runecontains" placeholder="e.g. BerJahBer">
+							</div>
+							<div class="w-full md:flex-1">
+								<label>Allowed Item Type</label>
+								<select class="w-full border border-gray-600 rounded px-2 py-1 text-sm bg-gray-800 text-gray-100" v-model="itemtype">
+									<option v-for="type in itemtypes" :key="type" :value="type">{{ type }}</option>
+								</select>
+							</div>
+							<div class="w-full md:flex-1 flex items-end">
+								<button class="px-3 py-1 bg-gray-600 hover:bg-gray-500 text-white rounded text-sm cursor-pointer" @click="resetValues">Reset</button>
+							</div>
+						</div>
+					</div>
+					<div class="overflow-x-auto">
+						<table v-if="visible" class="w-full text-sm text-right border-collapse">
+							<thead class="bg-blue-100">
+								<tr>
+									<th v-for="(column, index) in columns" :key="index" :class="column.headclass" :style="first(column.headstyle, defaults.headstyle)" @click="sort(column)" v-tooltip="column.tooltip">{{ column.label }}</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr v-for="item in items" :key="item.runeName" v-if="canShow(item)" class="border-t border-gray-200 hover:bg-gray-50">
+									<td v-for="(column, index) in columns" :key="index" :class="column.class" :style="first(column.style, defaults.style)">{{ column.render ? column.render(item) : '' }}</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+			</div>
+
+			<div class="text-center p-3 bg-gray-100 text-gray-600"><em>Powered by <a href="https://vuejs.org" class="text-blue-600 hover:underline">Vue.js</a> and <a href="https://tailwindcss.com" class="text-blue-600 hover:underline">Tailwind CSS</a></em></div>
+		</div>
+
+		<script>
+			var activeTab = 'weapons';
+			function setTab(name) {
+				activeTab = name;
+				document.querySelectorAll('.tab-pane-tw').forEach(function(el) {
+					el.style.display = el.dataset.tab === name ? '' : 'none';
+				});
+				document.querySelectorAll('.tab-link-tw').forEach(function(el) {
+					var active = el.dataset.tab === name;
+					el.className = 'tab-link-tw px-4 py-2 cursor-pointer ' + (active ? 'border-b-2 border-blue-400 text-blue-300' : 'text-gray-400 hover:text-gray-200');
+				});
+			}
+		</script>
+	</body>
+
+	<script src="vue-setup-tw.js"></script>
+	<script src="weapons.js"></script>
+	<script src="armor.js"></script>
+	<script src="uniqueitems.js"></script>
+	<script src="setitems.js"></script>
+	<script src="misc.js"></script>
+	<script src="runewords.js"></script>
+</html>
