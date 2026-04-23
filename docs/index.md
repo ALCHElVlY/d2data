@@ -1,5 +1,5 @@
 These are examples of how to use the json data contained within this repo.
 
-[Item Browser (Weapons and Armor)](items.html)
-[Drop Calculator](drops.html)
+[Data Browser (Weapons and Armor)](items.html)<br/>
+[Drop Calculator](drops.html)<br/>
 [Elemental Effectiveness](elem-effort.html)
