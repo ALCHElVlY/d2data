@@ -3,6 +3,7 @@
 (function () {
 	let runesPromise = fetch('https://raw.githubusercontent.com/ALCHElVlY/d2data/master/json/runes.json');
 	let propsPromise = fetch('https://raw.githubusercontent.com/ALCHElVlY/d2data/master/json/properties.json');
+	let itemTypesPromise = fetch('https://raw.githubusercontent.com/ALCHElVlY/d2data/master/json/itemtypes.json');
 
 	function first (...values) {
 		return values.filter(v => v !== undefined).shift();
@@ -41,11 +42,18 @@
 		return result.join('\n') || '—';
 	}
 
-	function parseAllowedTypes(item) {
+	function formatRunes(runesUsed) {
+		if (!runesUsed) return '—';
+		return (runesUsed.match(/[A-Z][a-z]*/g) || [runesUsed]).join(', ');
+	}
+
+	function parseAllowedTypes(item, itemTypes) {
 		let types = [];
 		for (let i = 1; i <= 6; i++) {
-			let t = item['itype' + i];
-			if (t) types.push(t);
+			let code = item['itype' + i];
+			if (!code) continue;
+			let friendly = (itemTypes[code] && itemTypes[code]['ItemType']) || code;
+			types.push(friendly);
 		}
 		return types.join(', ') || '—';
 	}
@@ -69,7 +77,7 @@
 			columns: [
 				{ label: '', value: '', headstyle: 'width:auto;user-select:none;cursor:pointer;' },
 				{ label: 'Runeword', key: 'runeName', render: item => item.runeName, headstyle: 'width:1px;user-select:none;cursor:pointer;text-align:center;white-space:nowrap;', style: 'text-align:left;white-space:nowrap;' },
-				{ label: 'Runes', key: 'runesUsed', render: item => item['*RunesUsed'] || '—', sortDefault: '—', headstyle: 'width:1px;user-select:none;cursor:pointer;text-align:center;white-space:nowrap;', style: 'text-align:left;white-space:nowrap;' },
+				{ label: 'Runes', key: 'runesUsed', render: item => formatRunes(item['*RunesUsed']), sortDefault: '—', headstyle: 'width:1px;user-select:none;cursor:pointer;text-align:center;white-space:nowrap;', style: 'text-align:left;white-space:nowrap;' },
 				{ label: 'Sockets', key: 'sockets', render: item => item.sockets, sortDefault: 0 },
 				{ label: 'Allowed Types', key: 'allowedTypes', render: item => item.allowedTypes, headstyle: 'width:1px;user-select:none;cursor:pointer;text-align:center;white-space:nowrap;', style: 'text-align:left;white-space:nowrap;' },
 				{ label: 'Properties', key: 'parsedProps', render: item => item.parsedProps, headstyle: 'width:auto;user-select:none;cursor:pointer;', style: 'text-align:left;font-size:0.85em;white-space:pre-wrap;' },
@@ -106,14 +114,15 @@
 			first,
 		},
 		created: async function () {
-			let [runesRes, propsRes] = await Promise.all([runesPromise, propsPromise]);
+			let [runesRes, propsRes, itemTypesRes] = await Promise.all([runesPromise, propsPromise, itemTypesPromise]);
 			let runesData = await runesRes.json();
 			let properties = await propsRes.json();
+			let itemTypes = await itemTypesRes.json();
 			this.items = Object.values(runesData)
 				.filter(i => i.complete === 1)
 				.map(i => {
 					i.runeName = i['*Rune Name'];
-					i.allowedTypes = parseAllowedTypes(i);
+					i.allowedTypes = parseAllowedTypes(i, itemTypes);
 					i.parsedProps = parseRunewordProps(i, properties);
 					// count sockets = number of Rune{n} keys present
 					let s = 0;
@@ -121,7 +130,11 @@
 					i.sockets = s;
 					// collect unique item types for filter dropdown
 					for (let n = 1; n <= 6; n++) {
-						if (i['itype' + n]) this.itemtypes[i['itype' + n]] = i['itype' + n];
+						let code = i['itype' + n];
+						if (code) {
+							let friendly = (itemTypes[code] && itemTypes[code]['ItemType']) || code;
+							this.itemtypes[friendly] = friendly;
+						}
 					}
 					return i;
 				});
