@@ -1,7 +1,16 @@
 {
  "0": {
   "Level": 0,
-  "ExpRatio": 1024
+  "Amazon": 0,
+  "Sorceress": 0,
+  "Necromancer": 0,
+  "Paladin": 0,
+  "Barbarian": 0,
+  "Druid": 0,
+  "Assassin": 0,
+  "Warlock": 0,
+  "ExpRatio": 1024,
+  "lineNumber": 1
  },
  "1": {
   "Level": 1,
@@ -12,7 +21,9 @@
   "Barbarian": 500,
   "Druid": 500,
   "Assassin": 500,
-  "ExpRatio": 1024
+  "Warlock": 500,
+  "ExpRatio": 1024,
+  "lineNumber": 2
  },
  "2": {
   "Level": 2,
@@ -23,7 +34,9 @@
   "Barbarian": 1500,
   "Druid": 1500,
   "Assassin": 1500,
-  "ExpRatio": 1024
+  "Warlock": 1500,
+  "ExpRatio": 1024,
+  "lineNumber": 3
  },
  "3": {
   "Level": 3,
@@ -34,7 +47,9 @@
   "Barbarian": 3750,
   "Druid": 3750,
   "Assassin": 3750,
-  "ExpRatio": 1024
+  "Warlock": 3750,
+  "ExpRatio": 1024,
+  "lineNumber": 4
  },
  "4": {
   "Level": 4,
@@ -45,7 +60,9 @@
   "Barbarian": 7875,
   "Druid": 7875,
   "Assassin": 7875,
-  "ExpRatio": 1024
+  "Warlock": 7875,
+  "ExpRatio": 1024,
+  "lineNumber": 5
  },
  "5": {
   "Level": 5,
@@ -56,7 +73,9 @@
   "Barbarian": 14175,
   "Druid": 14175,
   "Assassin": 14175,
-  "ExpRatio": 1024
+  "Warlock": 14175,
+  "ExpRatio": 1024,
+  "lineNumber": 6
  },
  "6": {
   "Level": 6,
@@ -67,7 +86,9 @@
   "Barbarian": 22680,
   "Druid": 22680,
   "Assassin": 22680,
-  "ExpRatio": 1024
+  "Warlock": 22680,
+  "ExpRatio": 1024,
+  "lineNumber": 7
  },
  "7": {
   "Level": 7,
@@ -78,7 +99,9 @@
   "Barbarian": 32886,
   "Druid": 32886,
   "Assassin": 32886,
-  "ExpRatio": 1024
+  "Warlock": 32886,
+  "ExpRatio": 1024,
+  "lineNumber": 8
  },
  "8": {
   "Level": 8,
@@ -89,7 +112,9 @@
   "Barbarian": 44396,
   "Druid": 44396,
   "Assassin": 44396,
-  "ExpRatio": 1024
+  "Warlock": 44396,
+  "ExpRatio": 1024,
+  "lineNumber": 9
  },
  "9": {
   "Level": 9,
@@ -100,7 +125,9 @@
   "Barbarian": 57715,
   "Druid": 57715,
   "Assassin": 57715,
-  "ExpRatio": 1024
+  "Warlock": 57715,
+  "ExpRatio": 1024,
+  "lineNumber": 10
  },
  "10": {
   "Level": 10,
@@ -111,7 +138,9 @@
   "Barbarian": 72144,
   "Druid": 72144,
   "Assassin": 72144,
-  "ExpRatio": 1024
+  "Warlock": 72144,
+  "ExpRatio": 1024,
+  "lineNumber": 11
  },
  "11": {
   "Level": 11,
@@ -122,7 +151,9 @@
   "Barbarian": 90180,
   "Druid": 90180,
   "Assassin": 90180,
-  "ExpRatio": 1024
+  "Warlock": 90180,
+  "ExpRatio": 1024,
+  "lineNumber": 12
  },
  "12": {
   "Level": 12,
@@ -133,7 +164,9 @@
   "Barbarian": 112725,
   "Druid": 112725,
   "Assassin": 112725,
-  "ExpRatio": 1024
+  "Warlock": 112725,
+  "ExpRatio": 1024,
+  "lineNumber": 13
  },
  "13": {
   "Level": 13,
@@ -144,7 +177,9 @@
   "Barbarian": 140906,
   "Druid": 140906,
   "Assassin": 140906,
-  "ExpRatio": 1024
+  "Warlock": 140906,
+  "ExpRatio": 1024,
+  "lineNumber": 14
  },
  "14": {
   "Level": 14,
@@ -155,7 +190,9 @@
   "Barbarian": 176132,
   "Druid": 176132,
   "Assassin": 176132,
-  "ExpRatio": 1024
+  "Warlock": 176132,
+  "ExpRatio": 1024,
+  "lineNumber": 15
  },
  "15": {
   "Level": 15,
@@ -166,7 +203,9 @@
   "Barbarian": 220165,
   "Druid": 220165,
   "Assassin": 220165,
-  "ExpRatio": 1024
+  "Warlock": 220165,
+  "ExpRatio": 1024,
+  "lineNumber": 16
  },
  "16": {
   "Level": 16,
@@ -177,7 +216,9 @@
   "Barbarian": 275207,
   "Druid": 275207,
   "Assassin": 275207,
-  "ExpRatio": 1024
+  "Warlock": 275207,
+  "ExpRatio": 1024,
+  "lineNumber": 17
  },
  "17": {
   "Level": 17,
@@ -188,7 +229,9 @@
   "Barbarian": 344008,
   "Druid": 344008,
   "Assassin": 344008,
-  "ExpRatio": 1024
+  "Warlock": 344008,
+  "ExpRatio": 1024,
+  "lineNumber": 18
  },
  "18": {
   "Level": 18,
@@ -199,7 +242,9 @@
   "Barbarian": 430010,
   "Druid": 430010,
   "Assassin": 430010,
-  "ExpRatio": 1024
+  "Warlock": 430010,
+  "ExpRatio": 1024,
+  "lineNumber": 19
  },
  "19": {
   "Level": 19,
@@ -210,7 +255,9 @@
   "Barbarian": 537513,
   "Druid": 537513,
   "Assassin": 537513,
-  "ExpRatio": 1024
+  "Warlock": 537513,
+  "ExpRatio": 1024,
+  "lineNumber": 20
  },
  "20": {
   "Level": 20,
@@ -221,7 +268,9 @@
   "Barbarian": 671891,
   "Druid": 671891,
   "Assassin": 671891,
-  "ExpRatio": 1024
+  "Warlock": 671891,
+  "ExpRatio": 1024,
+  "lineNumber": 21
  },
  "21": {
   "Level": 21,
@@ -232,7 +281,9 @@
   "Barbarian": 839864,
   "Druid": 839864,
   "Assassin": 839864,
-  "ExpRatio": 1024
+  "Warlock": 839864,
+  "ExpRatio": 1024,
+  "lineNumber": 22
  },
  "22": {
   "Level": 22,
@@ -243,7 +294,9 @@
   "Barbarian": 1049830,
   "Druid": 1049830,
   "Assassin": 1049830,
-  "ExpRatio": 1024
+  "Warlock": 1049830,
+  "ExpRatio": 1024,
+  "lineNumber": 23
  },
  "23": {
   "Level": 23,
@@ -254,7 +307,9 @@
   "Barbarian": 1312287,
   "Druid": 1312287,
   "Assassin": 1312287,
-  "ExpRatio": 1024
+  "Warlock": 1312287,
+  "ExpRatio": 1024,
+  "lineNumber": 24
  },
  "24": {
   "Level": 24,
@@ -265,7 +320,9 @@
   "Barbarian": 1640359,
   "Druid": 1640359,
   "Assassin": 1640359,
-  "ExpRatio": 1024
+  "Warlock": 1640359,
+  "ExpRatio": 1024,
+  "lineNumber": 25
  },
  "25": {
   "Level": 25,
@@ -276,7 +333,9 @@
   "Barbarian": 2050449,
   "Druid": 2050449,
   "Assassin": 2050449,
-  "ExpRatio": 1024
+  "Warlock": 2050449,
+  "ExpRatio": 1024,
+  "lineNumber": 26
  },
  "26": {
   "Level": 26,
@@ -287,7 +346,9 @@
   "Barbarian": 2563061,
   "Druid": 2563061,
   "Assassin": 2563061,
-  "ExpRatio": 1024
+  "Warlock": 2563061,
+  "ExpRatio": 1024,
+  "lineNumber": 27
  },
  "27": {
   "Level": 27,
@@ -298,7 +359,9 @@
   "Barbarian": 3203826,
   "Druid": 3203826,
   "Assassin": 3203826,
-  "ExpRatio": 1024
+  "Warlock": 3203826,
+  "ExpRatio": 1024,
+  "lineNumber": 28
  },
  "28": {
   "Level": 28,
@@ -309,7 +372,9 @@
   "Barbarian": 3902260,
   "Druid": 3902260,
   "Assassin": 3902260,
-  "ExpRatio": 1024
+  "Warlock": 3902260,
+  "ExpRatio": 1024,
+  "lineNumber": 29
  },
  "29": {
   "Level": 29,
@@ -320,7 +385,9 @@
   "Barbarian": 4663553,
   "Druid": 4663553,
   "Assassin": 4663553,
-  "ExpRatio": 1024
+  "Warlock": 4663553,
+  "ExpRatio": 1024,
+  "lineNumber": 30
  },
  "30": {
   "Level": 30,
@@ -331,7 +398,9 @@
   "Barbarian": 5493363,
   "Druid": 5493363,
   "Assassin": 5493363,
-  "ExpRatio": 1024
+  "Warlock": 5493363,
+  "ExpRatio": 1024,
+  "lineNumber": 31
  },
  "31": {
   "Level": 31,
@@ -342,7 +411,9 @@
   "Barbarian": 6397855,
   "Druid": 6397855,
   "Assassin": 6397855,
-  "ExpRatio": 1024
+  "Warlock": 6397855,
+  "ExpRatio": 1024,
+  "lineNumber": 32
  },
  "32": {
   "Level": 32,
@@ -353,7 +424,9 @@
   "Barbarian": 7383752,
   "Druid": 7383752,
   "Assassin": 7383752,
-  "ExpRatio": 1024
+  "Warlock": 7383752,
+  "ExpRatio": 1024,
+  "lineNumber": 33
  },
  "33": {
   "Level": 33,
@@ -364,7 +437,9 @@
   "Barbarian": 8458379,
   "Druid": 8458379,
   "Assassin": 8458379,
-  "ExpRatio": 1024
+  "Warlock": 8458379,
+  "ExpRatio": 1024,
+  "lineNumber": 34
  },
  "34": {
   "Level": 34,
@@ -375,7 +450,9 @@
   "Barbarian": 9629723,
   "Druid": 9629723,
   "Assassin": 9629723,
-  "ExpRatio": 1024
+  "Warlock": 9629723,
+  "ExpRatio": 1024,
+  "lineNumber": 35
  },
  "35": {
   "Level": 35,
@@ -386,7 +463,9 @@
   "Barbarian": 10906488,
   "Druid": 10906488,
   "Assassin": 10906488,
-  "ExpRatio": 1024
+  "Warlock": 10906488,
+  "ExpRatio": 1024,
+  "lineNumber": 36
  },
  "36": {
   "Level": 36,
@@ -397,7 +476,9 @@
   "Barbarian": 12298162,
   "Druid": 12298162,
   "Assassin": 12298162,
-  "ExpRatio": 1024
+  "Warlock": 12298162,
+  "ExpRatio": 1024,
+  "lineNumber": 37
  },
  "37": {
   "Level": 37,
@@ -408,7 +489,9 @@
   "Barbarian": 13815086,
   "Druid": 13815086,
   "Assassin": 13815086,
-  "ExpRatio": 1024
+  "Warlock": 13815086,
+  "ExpRatio": 1024,
+  "lineNumber": 38
  },
  "38": {
   "Level": 38,
@@ -419,7 +502,9 @@
   "Barbarian": 15468534,
   "Druid": 15468534,
   "Assassin": 15468534,
-  "ExpRatio": 1024
+  "Warlock": 15468534,
+  "ExpRatio": 1024,
+  "lineNumber": 39
  },
  "39": {
   "Level": 39,
@@ -430,7 +515,9 @@
   "Barbarian": 17270791,
   "Druid": 17270791,
   "Assassin": 17270791,
-  "ExpRatio": 1024
+  "Warlock": 17270791,
+  "ExpRatio": 1024,
+  "lineNumber": 40
  },
  "40": {
   "Level": 40,
@@ -441,7 +528,9 @@
   "Barbarian": 19235252,
   "Druid": 19235252,
   "Assassin": 19235252,
-  "ExpRatio": 1024
+  "Warlock": 19235252,
+  "ExpRatio": 1024,
+  "lineNumber": 41
  },
  "41": {
   "Level": 41,
@@ -452,7 +541,9 @@
   "Barbarian": 21376515,
   "Druid": 21376515,
   "Assassin": 21376515,
-  "ExpRatio": 1024
+  "Warlock": 21376515,
+  "ExpRatio": 1024,
+  "lineNumber": 42
  },
  "42": {
   "Level": 42,
@@ -463,7 +554,9 @@
   "Barbarian": 23710491,
   "Druid": 23710491,
   "Assassin": 23710491,
-  "ExpRatio": 1024
+  "Warlock": 23710491,
+  "ExpRatio": 1024,
+  "lineNumber": 43
  },
  "43": {
   "Level": 43,
@@ -474,7 +567,9 @@
   "Barbarian": 26254525,
   "Druid": 26254525,
   "Assassin": 26254525,
-  "ExpRatio": 1024
+  "Warlock": 26254525,
+  "ExpRatio": 1024,
+  "lineNumber": 44
  },
  "44": {
   "Level": 44,
@@ -485,7 +580,9 @@
   "Barbarian": 29027522,
   "Druid": 29027522,
   "Assassin": 29027522,
-  "ExpRatio": 1024
+  "Warlock": 29027522,
+  "ExpRatio": 1024,
+  "lineNumber": 45
  },
  "45": {
   "Level": 45,
@@ -496,7 +593,9 @@
   "Barbarian": 32050088,
   "Druid": 32050088,
   "Assassin": 32050088,
-  "ExpRatio": 1024
+  "Warlock": 32050088,
+  "ExpRatio": 1024,
+  "lineNumber": 46
  },
  "46": {
   "Level": 46,
@@ -507,7 +606,9 @@
   "Barbarian": 35344686,
   "Druid": 35344686,
   "Assassin": 35344686,
-  "ExpRatio": 1024
+  "Warlock": 35344686,
+  "ExpRatio": 1024,
+  "lineNumber": 47
  },
  "47": {
   "Level": 47,
@@ -518,7 +619,9 @@
   "Barbarian": 38935798,
   "Druid": 38935798,
   "Assassin": 38935798,
-  "ExpRatio": 1024
+  "Warlock": 38935798,
+  "ExpRatio": 1024,
+  "lineNumber": 48
  },
  "48": {
   "Level": 48,
@@ -529,7 +632,9 @@
   "Barbarian": 42850109,
   "Druid": 42850109,
   "Assassin": 42850109,
-  "ExpRatio": 1024
+  "Warlock": 42850109,
+  "ExpRatio": 1024,
+  "lineNumber": 49
  },
  "49": {
   "Level": 49,
@@ -540,7 +645,9 @@
   "Barbarian": 47116709,
   "Druid": 47116709,
   "Assassin": 47116709,
-  "ExpRatio": 1024
+  "Warlock": 47116709,
+  "ExpRatio": 1024,
+  "lineNumber": 50
  },
  "50": {
   "Level": 50,
@@ -551,7 +658,9 @@
   "Barbarian": 51767302,
   "Druid": 51767302,
   "Assassin": 51767302,
-  "ExpRatio": 1024
+  "Warlock": 51767302,
+  "ExpRatio": 1024,
+  "lineNumber": 51
  },
  "51": {
   "Level": 51,
@@ -562,7 +671,9 @@
   "Barbarian": 56836449,
   "Druid": 56836449,
   "Assassin": 56836449,
-  "ExpRatio": 1024
+  "Warlock": 56836449,
+  "ExpRatio": 1024,
+  "lineNumber": 52
  },
  "52": {
   "Level": 52,
@@ -573,7 +684,9 @@
   "Barbarian": 62361819,
   "Druid": 62361819,
   "Assassin": 62361819,
-  "ExpRatio": 1024
+  "Warlock": 62361819,
+  "ExpRatio": 1024,
+  "lineNumber": 53
  },
  "53": {
   "Level": 53,
@@ -584,7 +697,9 @@
   "Barbarian": 68384473,
   "Druid": 68384473,
   "Assassin": 68384473,
-  "ExpRatio": 1024
+  "Warlock": 68384473,
+  "ExpRatio": 1024,
+  "lineNumber": 54
  },
  "54": {
   "Level": 54,
@@ -595,7 +710,9 @@
   "Barbarian": 74949165,
   "Druid": 74949165,
   "Assassin": 74949165,
-  "ExpRatio": 1024
+  "Warlock": 74949165,
+  "ExpRatio": 1024,
+  "lineNumber": 55
  },
  "55": {
   "Level": 55,
@@ -606,7 +723,9 @@
   "Barbarian": 82104680,
   "Druid": 82104680,
   "Assassin": 82104680,
-  "ExpRatio": 1024
+  "Warlock": 82104680,
+  "ExpRatio": 1024,
+  "lineNumber": 56
  },
  "56": {
   "Level": 56,
@@ -617,7 +736,9 @@
   "Barbarian": 89904191,
   "Druid": 89904191,
   "Assassin": 89904191,
-  "ExpRatio": 1024
+  "Warlock": 89904191,
+  "ExpRatio": 1024,
+  "lineNumber": 57
  },
  "57": {
   "Level": 57,
@@ -628,7 +749,9 @@
   "Barbarian": 98405658,
   "Druid": 98405658,
   "Assassin": 98405658,
-  "ExpRatio": 1024
+  "Warlock": 98405658,
+  "ExpRatio": 1024,
+  "lineNumber": 58
  },
  "58": {
   "Level": 58,
@@ -639,7 +762,9 @@
   "Barbarian": 107672256,
   "Druid": 107672256,
   "Assassin": 107672256,
-  "ExpRatio": 1024
+  "Warlock": 107672256,
+  "ExpRatio": 1024,
+  "lineNumber": 59
  },
  "59": {
   "Level": 59,
@@ -650,7 +775,9 @@
   "Barbarian": 117772849,
   "Druid": 117772849,
   "Assassin": 117772849,
-  "ExpRatio": 1024
+  "Warlock": 117772849,
+  "ExpRatio": 1024,
+  "lineNumber": 60
  },
  "60": {
   "Level": 60,
@@ -661,7 +788,9 @@
   "Barbarian": 128782495,
   "Druid": 128782495,
   "Assassin": 128782495,
-  "ExpRatio": 1024
+  "Warlock": 128782495,
+  "ExpRatio": 1024,
+  "lineNumber": 61
  },
  "61": {
   "Level": 61,
@@ -672,7 +801,9 @@
   "Barbarian": 140783010,
   "Druid": 140783010,
   "Assassin": 140783010,
-  "ExpRatio": 1024
+  "Warlock": 140783010,
+  "ExpRatio": 1024,
+  "lineNumber": 62
  },
  "62": {
   "Level": 62,
@@ -683,7 +814,9 @@
   "Barbarian": 153863570,
   "Druid": 153863570,
   "Assassin": 153863570,
-  "ExpRatio": 1024
+  "Warlock": 153863570,
+  "ExpRatio": 1024,
+  "lineNumber": 63
  },
  "63": {
   "Level": 63,
@@ -694,7 +827,9 @@
   "Barbarian": 168121381,
   "Druid": 168121381,
   "Assassin": 168121381,
-  "ExpRatio": 1024
+  "Warlock": 168121381,
+  "ExpRatio": 1024,
+  "lineNumber": 64
  },
  "64": {
   "Level": 64,
@@ -705,7 +840,9 @@
   "Barbarian": 183662396,
   "Druid": 183662396,
   "Assassin": 183662396,
-  "ExpRatio": 1024
+  "Warlock": 183662396,
+  "ExpRatio": 1024,
+  "lineNumber": 65
  },
  "65": {
   "Level": 65,
@@ -716,7 +853,9 @@
   "Barbarian": 200602101,
   "Druid": 200602101,
   "Assassin": 200602101,
-  "ExpRatio": 1024
+  "Warlock": 200602101,
+  "ExpRatio": 1024,
+  "lineNumber": 66
  },
  "66": {
   "Level": 66,
@@ -727,7 +866,9 @@
   "Barbarian": 219066380,
   "Druid": 219066380,
   "Assassin": 219066380,
-  "ExpRatio": 1024
+  "Warlock": 219066380,
+  "ExpRatio": 1024,
+  "lineNumber": 67
  },
  "67": {
   "Level": 67,
@@ -738,7 +879,9 @@
   "Barbarian": 239192444,
   "Druid": 239192444,
   "Assassin": 239192444,
-  "ExpRatio": 1024
+  "Warlock": 239192444,
+  "ExpRatio": 1024,
+  "lineNumber": 68
  },
  "68": {
   "Level": 68,
@@ -749,7 +892,9 @@
   "Barbarian": 261129853,
   "Druid": 261129853,
   "Assassin": 261129853,
-  "ExpRatio": 1024
+  "Warlock": 261129853,
+  "ExpRatio": 1024,
+  "lineNumber": 69
  },
  "69": {
   "Level": 69,
@@ -760,7 +905,9 @@
   "Barbarian": 285041630,
   "Druid": 285041630,
   "Assassin": 285041630,
-  "ExpRatio": 1024
+  "Warlock": 285041630,
+  "ExpRatio": 1024,
+  "lineNumber": 70
  },
  "70": {
   "Level": 70,
@@ -771,7 +918,9 @@
   "Barbarian": 311105466,
   "Druid": 311105466,
   "Assassin": 311105466,
-  "ExpRatio": 976
+  "Warlock": 311105466,
+  "ExpRatio": 976,
+  "lineNumber": 71
  },
  "71": {
   "Level": 71,
@@ -782,7 +931,9 @@
   "Barbarian": 339515048,
   "Druid": 339515048,
   "Assassin": 339515048,
-  "ExpRatio": 928
+  "Warlock": 339515048,
+  "ExpRatio": 928,
+  "lineNumber": 72
  },
  "72": {
   "Level": 72,
@@ -793,7 +944,9 @@
   "Barbarian": 370481492,
   "Druid": 370481492,
   "Assassin": 370481492,
-  "ExpRatio": 880
+  "Warlock": 370481492,
+  "ExpRatio": 880,
+  "lineNumber": 73
  },
  "73": {
   "Level": 73,
@@ -804,7 +957,9 @@
   "Barbarian": 404234916,
   "Druid": 404234916,
   "Assassin": 404234916,
-  "ExpRatio": 832
+  "Warlock": 404234916,
+  "ExpRatio": 832,
+  "lineNumber": 74
  },
  "74": {
   "Level": 74,
@@ -815,7 +970,9 @@
   "Barbarian": 441026148,
   "Druid": 441026148,
   "Assassin": 441026148,
-  "ExpRatio": 784
+  "Warlock": 441026148,
+  "ExpRatio": 784,
+  "lineNumber": 75
  },
  "75": {
   "Level": 75,
@@ -826,7 +983,9 @@
   "Barbarian": 481128591,
   "Druid": 481128591,
   "Assassin": 481128591,
-  "ExpRatio": 736
+  "Warlock": 481128591,
+  "ExpRatio": 736,
+  "lineNumber": 76
  },
  "76": {
   "Level": 76,
@@ -837,7 +996,9 @@
   "Barbarian": 524840254,
   "Druid": 524840254,
   "Assassin": 524840254,
-  "ExpRatio": 688
+  "Warlock": 524840254,
+  "ExpRatio": 688,
+  "lineNumber": 77
  },
  "77": {
   "Level": 77,
@@ -848,7 +1009,9 @@
   "Barbarian": 572485967,
   "Druid": 572485967,
   "Assassin": 572485967,
-  "ExpRatio": 640
+  "Warlock": 572485967,
+  "ExpRatio": 640,
+  "lineNumber": 78
  },
  "78": {
   "Level": 78,
@@ -859,7 +1022,9 @@
   "Barbarian": 624419793,
   "Druid": 624419793,
   "Assassin": 624419793,
-  "ExpRatio": 592
+  "Warlock": 624419793,
+  "ExpRatio": 592,
+  "lineNumber": 79
  },
  "79": {
   "Level": 79,
@@ -870,7 +1035,9 @@
   "Barbarian": 681027665,
   "Druid": 681027665,
   "Assassin": 681027665,
-  "ExpRatio": 544
+  "Warlock": 681027665,
+  "ExpRatio": 544,
+  "lineNumber": 80
  },
  "80": {
   "Level": 80,
@@ -881,7 +1048,9 @@
   "Barbarian": 742730244,
   "Druid": 742730244,
   "Assassin": 742730244,
-  "ExpRatio": 496
+  "Warlock": 742730244,
+  "ExpRatio": 496,
+  "lineNumber": 81
  },
  "81": {
   "Level": 81,
@@ -892,7 +1061,9 @@
   "Barbarian": 809986056,
   "Druid": 809986056,
   "Assassin": 809986056,
-  "ExpRatio": 448
+  "Warlock": 809986056,
+  "ExpRatio": 448,
+  "lineNumber": 82
  },
  "82": {
   "Level": 82,
@@ -903,7 +1074,9 @@
   "Barbarian": 883294891,
   "Druid": 883294891,
   "Assassin": 883294891,
-  "ExpRatio": 400
+  "Warlock": 883294891,
+  "ExpRatio": 400,
+  "lineNumber": 83
  },
  "83": {
   "Level": 83,
@@ -914,7 +1087,9 @@
   "Barbarian": 963201521,
   "Druid": 963201521,
   "Assassin": 963201521,
-  "ExpRatio": 352
+  "Warlock": 963201521,
+  "ExpRatio": 352,
+  "lineNumber": 84
  },
  "84": {
   "Level": 84,
@@ -925,7 +1100,9 @@
   "Barbarian": 1050299747,
   "Druid": 1050299747,
   "Assassin": 1050299747,
-  "ExpRatio": 304
+  "Warlock": 1050299747,
+  "ExpRatio": 304,
+  "lineNumber": 85
  },
  "85": {
   "Level": 85,
@@ -936,7 +1113,9 @@
   "Barbarian": 1145236814,
   "Druid": 1145236814,
   "Assassin": 1145236814,
-  "ExpRatio": 256
+  "Warlock": 1145236814,
+  "ExpRatio": 256,
+  "lineNumber": 86
  },
  "86": {
   "Level": 86,
@@ -947,7 +1126,9 @@
   "Barbarian": 1248718217,
   "Druid": 1248718217,
   "Assassin": 1248718217,
-  "ExpRatio": 192
+  "Warlock": 1248718217,
+  "ExpRatio": 192,
+  "lineNumber": 87
  },
  "87": {
   "Level": 87,
@@ -958,7 +1139,9 @@
   "Barbarian": 1361512946,
   "Druid": 1361512946,
   "Assassin": 1361512946,
-  "ExpRatio": 144
+  "Warlock": 1361512946,
+  "ExpRatio": 144,
+  "lineNumber": 88
  },
  "88": {
   "Level": 88,
@@ -969,7 +1152,9 @@
   "Barbarian": 1484459201,
   "Druid": 1484459201,
   "Assassin": 1484459201,
-  "ExpRatio": 108
+  "Warlock": 1484459201,
+  "ExpRatio": 108,
+  "lineNumber": 89
  },
  "89": {
   "Level": 89,
@@ -980,7 +1165,9 @@
   "Barbarian": 1618470619,
   "Druid": 1618470619,
   "Assassin": 1618470619,
-  "ExpRatio": 81
+  "Warlock": 1618470619,
+  "ExpRatio": 81,
+  "lineNumber": 90
  },
  "90": {
   "Level": 90,
@@ -991,7 +1178,9 @@
   "Barbarian": 1764543065,
   "Druid": 1764543065,
   "Assassin": 1764543065,
-  "ExpRatio": 61
+  "Warlock": 1764543065,
+  "ExpRatio": 61,
+  "lineNumber": 91
  },
  "91": {
   "Level": 91,
@@ -1002,7 +1191,9 @@
   "Barbarian": 1923762030,
   "Druid": 1923762030,
   "Assassin": 1923762030,
-  "ExpRatio": 46
+  "Warlock": 1923762030,
+  "ExpRatio": 46,
+  "lineNumber": 92
  },
  "92": {
   "Level": 92,
@@ -1013,7 +1204,9 @@
   "Barbarian": 2097310703,
   "Druid": 2097310703,
   "Assassin": 2097310703,
-  "ExpRatio": 35
+  "Warlock": 2097310703,
+  "ExpRatio": 35,
+  "lineNumber": 93
  },
  "93": {
   "Level": 93,
@@ -1024,7 +1217,9 @@
   "Barbarian": 2286478756,
   "Druid": 2286478756,
   "Assassin": 2286478756,
-  "ExpRatio": 26
+  "Warlock": 2286478756,
+  "ExpRatio": 26,
+  "lineNumber": 94
  },
  "94": {
   "Level": 94,
@@ -1035,7 +1230,9 @@
   "Barbarian": 2492671933,
   "Druid": 2492671933,
   "Assassin": 2492671933,
-  "ExpRatio": 20
+  "Warlock": 2492671933,
+  "ExpRatio": 20,
+  "lineNumber": 95
  },
  "95": {
   "Level": 95,
@@ -1046,7 +1243,9 @@
   "Barbarian": 2717422497,
   "Druid": 2717422497,
   "Assassin": 2717422497,
-  "ExpRatio": 15
+  "Warlock": 2717422497,
+  "ExpRatio": 15,
+  "lineNumber": 96
  },
  "96": {
   "Level": 96,
@@ -1057,7 +1256,9 @@
   "Barbarian": 2962400612,
   "Druid": 2962400612,
   "Assassin": 2962400612,
-  "ExpRatio": 11
+  "Warlock": 2962400612,
+  "ExpRatio": 11,
+  "lineNumber": 97
  },
  "97": {
   "Level": 97,
@@ -1068,7 +1269,9 @@
   "Barbarian": 3229426756,
   "Druid": 3229426756,
   "Assassin": 3229426756,
-  "ExpRatio": 8
+  "Warlock": 3229426756,
+  "ExpRatio": 8,
+  "lineNumber": 98
  },
  "98": {
   "Level": 98,
@@ -1079,7 +1282,9 @@
   "Barbarian": 3520485254,
   "Druid": 3520485254,
   "Assassin": 3520485254,
-  "ExpRatio": 6
+  "Warlock": 3520485254,
+  "ExpRatio": 6,
+  "lineNumber": 99
  },
  "99": {
   "Level": 99,
@@ -1090,7 +1295,9 @@
   "Barbarian": 3837739017,
   "Druid": 3837739017,
   "Assassin": 3837739017,
-  "ExpRatio": 5
+  "Warlock": 3837739017,
+  "ExpRatio": 5,
+  "lineNumber": 100
  },
  "MaxLvl": {
   "Level": "MaxLvl",
@@ -1101,6 +1308,8 @@
   "Barbarian": 99,
   "Druid": 99,
   "Assassin": 99,
-  "ExpRatio": 10
+  "Warlock": 99,
+  "ExpRatio": 10,
+  "lineNumber": 0
  }
 }

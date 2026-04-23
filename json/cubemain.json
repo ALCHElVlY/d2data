@@ -1,7 +1,8 @@
 {
  "0": {
-  "description": "Staff of Kings + Viper amulet -> Horadric Staff",
+  "description": "Staff of Kings + Amulet of the Viper -> Horadric Staff",
   "enabled": 1,
+  "version": 0,
   "op": 28,
   "numinputs": 2,
   "input 1": "msf",
@@ -9,8 +10,9 @@
   "output": "hst"
  },
  "1": {
-  "description": "Khalim Flail + Khalim Heart + Khalim Eye + Khalim Brain -> Super Khalim Flail",
+  "description": "Khalim's Flail + Khalim's Heart + Khalim's Eye + Khalim's Brain -> Khalim's Will",
   "enabled": 1,
+  "version": 0,
   "op": 28,
   "numinputs": 4,
   "input 1": "qf1",
@@ -20,8 +22,9 @@
   "output": "qf2"
  },
  "2": {
-  "description": "1 Wirt's leg + 1 town portal book -> portal to cow lvl",
+  "description": "Wirt's Leg + Tome of Town Portal -> Portal to The Secret Cow Level",
   "enabled": 1,
+  "version": 0,
   "op": 28,
   "numinputs": 2,
   "input 1": "leg",
@@ -29,8 +32,9 @@
   "output": "Cow Portal"
  },
  "3": {
-  "description": "3 health potions + 3 mana potions + 1 standard gem -> full rejuvenate potion",
+  "description": "3 Healing Potions (Any) + 3 Mana Potions (Any) + 1 Standard Gem (Any) -> Full Rejuvenation Potion",
   "enabled": 1,
+  "version": 0,
   "numinputs": 7,
   "input 1": "\"hpot,qty=3\"",
   "input 2": "\"mpot,qty=3\"",
@@ -38,8 +42,9 @@
   "output": "rvl"
  },
  "4": {
-  "description": "3 health potions +  3 mana potions + 1 chipped gem -> rejuvenate potion",
+  "description": "3 Healing Potions (Any) + 3 Mana Potions (Any)  + 1 Chipped Gem (Any) -> Rejuvenation Potion",
   "enabled": 1,
+  "version": 0,
   "numinputs": 7,
   "input 1": "\"hpot,qty=3\"",
   "input 2": "\"mpot,qty=3\"",
@@ -47,15 +52,17 @@
   "output": "rvs"
  },
  "5": {
-  "description": "3 small rejuvs -> one large",
+  "description": "3 Rejuvenation Potions -> Full Rejuvenation Potion",
   "enabled": 1,
+  "version": 0,
   "numinputs": 3,
   "input 1": "\"rvs,qty=3\"",
   "output": "rvl"
  },
  "6": {
-  "description": "1 perfect gem of each type + 1 amulet -> prismatic amulet",
+  "description": "6 Perfect Gems (1 of each type) + 1 Magic Amulet -> Prismatic Amulet",
   "enabled": 1,
+  "version": 0,
   "numinputs": 7,
   "input 1": "\"amu,mag\"",
   "input 2": "gpv",
@@ -68,8 +75,9 @@
   "lvl": 50
  },
  "7": {
-  "description": "1 ring + 1 perfect ruby + 1 exploding potions -> garnet ring",
+  "description": "1 Magic Ring + 1 Perfect Ruby + 1 Exploding Potion -> Garnet Ring",
   "enabled": 1,
+  "version": 0,
   "numinputs": 3,
   "input 1": "\"rin,mag\"",
   "input 2": "gpr",
@@ -78,8 +86,9 @@
   "lvl": 30
  },
  "8": {
-  "description": "1 ring + 1 perfect sapphire + 1 thawing potions-> cobalt ring",
+  "description": "1 Magic Ring + 1 Perfect Sapphire + 1 Thawing Potion -> Cobalt Ring",
   "enabled": 1,
+  "version": 0,
   "numinputs": 3,
   "input 1": "\"rin,mag\"",
   "input 2": "gpb",
@@ -88,8 +97,9 @@
   "lvl": 30
  },
  "9": {
-  "description": "1 ring + 1 perfect topaz + 1 rejuvenation -> coral ring",
+  "description": "1 Magic Ring + 1 Perfect Topaz + 1 Rejuvenation Potion -> Coral Ring",
   "enabled": 1,
+  "version": 0,
   "numinputs": 3,
   "input 1": "\"rin,mag\"",
   "input 2": "gpy",
@@ -98,8 +108,9 @@
   "lvl": 30
  },
  "10": {
-  "description": "1 ring + 1 emerald + 1 antidote potions -> jade ring",
+  "description": "1 Magic Ring + 1 Standard Emerald + 1 Antidote Potion -> Jade Ring",
   "enabled": 1,
+  "version": 0,
   "numinputs": 3,
   "input 1": "\"rin,mag\"",
   "input 2": "gpg",
@@ -108,40 +119,45 @@
   "lvl": 30
  },
  "11": {
-  "description": "1 axe + 1 dagger -> throwing axe",
+  "description": "1 Axe (Any) + 1 Dagger (Any) -> Throwing Axe",
   "enabled": 1,
+  "version": 0,
   "numinputs": 2,
   "input 1": "axe",
   "input 2": "knif",
   "output": "\"tax,nor\""
  },
  "12": {
-  "description": "1 spear + 1 arrow quiver -> javelins",
+  "description": "1 Spear (Any) + 1 Arrows -> Javelins",
   "enabled": 1,
+  "version": 0,
   "numinputs": 2,
   "input 1": "spea",
   "input 2": "aqv",
   "output": "\"jav,nor\""
  },
  "13": {
-  "description": "3 rings -> amulet",
+  "description": "3 Magic Rings -> Magic Amulet",
   "enabled": 1,
+  "version": 0,
   "numinputs": 3,
   "input 1": "\"rin,mag,qty=3\"",
   "output": "\"amu,mag\"",
   "plvl": 75
  },
  "14": {
-  "description": "3 amulets -> ring",
+  "description": "3 Magic Amulets -> Magic Ring",
   "enabled": 1,
+  "version": 0,
   "numinputs": 3,
   "input 1": "\"amu,mag,qty=3\"",
   "output": "\"rin,mag\"",
   "plvl": 75
  },
  "15": {
-  "description": "\"3 standard gems + 1 socketed weapon ->  magic, socketable weapon\"",
+  "description": "3 Standard Gems + 1 Socketed Weapon ->  Socketed Magic Weapon",
   "enabled": 1,
+  "version": 0,
   "numinputs": 4,
   "input 1": "\"weap,sock\"",
   "input 2": "\"gem2,qty=3\"",
@@ -153,8 +169,9 @@
   "mod 1 max": 2
  },
  "16": {
-  "description": "\"3 flawless gems + 1 magic weapon -> socketed, magic weapon\"",
+  "description": "3 Flawless Gems + 1 Magic Weapon -> Socketed Magic Weapon",
   "enabled": 1,
+  "version": 0,
   "numinputs": 4,
   "input 1": "\"weap,mag\"",
   "input 2": "\"gem3,qty=3\"",
@@ -166,8 +183,9 @@
   "mod 1 max": 2
  },
  "17": {
-  "description": "1 magic small shield + 1 spiked club + 2 skulls -> shield of spikes",
+  "description": "1 Magic Shield + 1 Spiked Club + 2 Skulls (Any) -> Magic Shield of Spikes",
   "enabled": 1,
+  "version": 0,
   "numinputs": 4,
   "input 1": "\"shld,mag\"",
   "input 2": "\"gemz,qty=2\"",
@@ -177,8 +195,9 @@
   "ilvl": 60
  },
  "18": {
-  "description": "4 health potion + 1 ruby + 1 magic sword -> sword of the leech",
+  "description": "4 Healing Potions (Any) + 1 Standard Ruby + 1 Magic Sword -> Sword of the Leech",
   "enabled": 1,
+  "version": 0,
   "numinputs": 6,
   "input 1": "\"swor,mag\"",
   "input 2": "gemr",
@@ -188,8 +207,9 @@
   "ilvl": 60
  },
  "19": {
-  "description": "1 diamond + 1 kriss + 1 staff + 1 belt -> savage polearm",
+  "description": "1 Diamond (Any) + 1 Kris + 1 Staff + 1 Belt -> Savage Polearm",
   "enabled": 1,
+  "version": 0,
   "numinputs": 4,
   "input 1": "kri",
   "input 2": "gemd",
@@ -200,308 +220,350 @@
   "ilvl": 60
  },
  "20": {
-  "description": "1 strangling gas potion + 1 health potion -> antidote potion",
+  "description": "1 Strangling Gas Potion + 1 Healing Potion (Any) -> Antidote Potion",
   "enabled": 1,
+  "version": 0,
   "numinputs": 2,
   "input 1": "gpl",
   "input 2": "hpot",
   "output": "yps"
  },
  "21": {
-  "description": "2 arrows -> bolts",
+  "description": "2 Arrows -> Bolts",
   "enabled": 1,
+  "version": 0,
   "numinputs": 2,
   "input 1": "\"aqv,qty=2\"",
   "output": "cqv"
  },
  "22": {
-  "description": "2 bolts -> arrows",
+  "description": "2 Bolts -> Arrows",
   "enabled": 1,
+  "version": 0,
   "numinputs": 2,
   "input 1": "\"cqv,qty=2\"",
   "output": "aqv"
  },
  "23": {
-  "description": "3 chipped amethysts -> flawed amethyst",
+  "description": "3 Chipped Amethysts -> Flawed Amethyst",
   "enabled": 1,
+  "version": 0,
   "numinputs": 3,
   "input 1": "\"gcv,qty=3\"",
   "output": "gfv"
  },
  "24": {
-  "description": "3 flawed amethysts -> standard amethyst",
+  "description": "3 Flawed Amethysts -> Standard Amethyst",
   "enabled": 1,
+  "version": 0,
   "numinputs": 3,
   "input 1": "\"gfv,qty=3\"",
   "output": "gsv"
  },
  "25": {
-  "description": "3 standard amethysts -> flawless amethyst",
+  "description": "3 Standard Amethysts -> Flawless Amethyst",
   "enabled": 1,
+  "version": 0,
   "numinputs": 3,
   "input 1": "\"gsv,qty=3\"",
   "output": "gzv"
  },
  "26": {
-  "description": "3 flawless amethysts -> perfect amethyst",
+  "description": "3 Flawless Amethysts -> Perfect Amethyst",
   "enabled": 1,
+  "version": 0,
   "numinputs": 3,
   "input 1": "\"gzv,qty=3\"",
   "output": "gpv"
  },
  "27": {
-  "description": "3 chipped rubies -> flawed ruby",
+  "description": "3 Chipped Rubies -> Flawed Ruby",
   "enabled": 1,
+  "version": 0,
   "numinputs": 3,
   "input 1": "\"gcr,qty=3\"",
   "output": "gfr"
  },
  "28": {
-  "description": "3 flawed rubies -> standard ruby",
+  "description": "3 Flawed Rubies -> Standard Ruby",
   "enabled": 1,
+  "version": 0,
   "numinputs": 3,
   "input 1": "\"gfr,qty=3\"",
   "output": "gsr"
  },
  "29": {
-  "description": "3 standard rubies -> flawless ruby",
+  "description": "3 Standard Rubies -> Flawless Ruby",
   "enabled": 1,
+  "version": 0,
   "numinputs": 3,
   "input 1": "\"gsr,qty=3\"",
   "output": "glr"
  },
  "30": {
-  "description": "3 flawless rubies -> perfect ruby",
+  "description": "3 Flawless Rubies -> Perfect Ruby",
   "enabled": 1,
+  "version": 0,
   "numinputs": 3,
   "input 1": "\"glr,qty=3\"",
   "output": "gpr"
  },
  "31": {
-  "description": "3 chipped sapphires -> flawed sapphire",
+  "description": "3 Chipped Sapphires -> Flawed Sapphire",
   "enabled": 1,
+  "version": 0,
   "numinputs": 3,
   "input 1": "\"gcb,qty=3\"",
   "output": "gfb"
  },
  "32": {
-  "description": "3 flawed sapphires -> standard sapphire",
+  "description": "3 Flawed Sapphires -> Standard Sapphire",
   "enabled": 1,
+  "version": 0,
   "numinputs": 3,
   "input 1": "\"gfb,qty=3\"",
   "output": "gsb"
  },
  "33": {
-  "description": "3 standard sapphires -> flawless sapphire",
+  "description": "3 Standard Sapphires -> Flawless Sapphire",
   "enabled": 1,
+  "version": 0,
   "numinputs": 3,
   "input 1": "\"gsb,qty=3\"",
   "output": "glb"
  },
  "34": {
-  "description": "3 flawless sapphires -> perfect sapphire",
+  "description": "3 Flawless Sapphires -> Perfect Sapphire",
   "enabled": 1,
+  "version": 0,
   "numinputs": 3,
   "input 1": "\"glb,qty=3\"",
   "output": "gpb"
  },
  "35": {
-  "description": "3 chipped topazes -> flawed topaz",
+  "description": "3 Chipped Topazes -> Flawed Topaz",
   "enabled": 1,
+  "version": 0,
   "numinputs": 3,
   "input 1": "\"gcy,qty=3\"",
   "output": "gfy"
  },
  "36": {
-  "description": "3 flawed topazes -> standard topaz",
+  "description": "3 Flawed Topazes -> Standard Topaz",
   "enabled": 1,
+  "version": 0,
   "numinputs": 3,
   "input 1": "\"gfy,qty=3\"",
   "output": "gsy"
  },
  "37": {
-  "description": "3 standard topazes -> flawless topaz",
+  "description": "3 Standard Topazes -> Flawless Topaz",
   "enabled": 1,
+  "version": 0,
   "numinputs": 3,
   "input 1": "\"gsy,qty=3\"",
   "output": "gly"
  },
  "38": {
-  "description": "3 flawless topazes -> perfect topaz",
+  "description": "3 Flawless Topazes -> Perfect Topaz",
   "enabled": 1,
+  "version": 0,
   "numinputs": 3,
   "input 1": "\"gly,qty=3\"",
   "output": "gpy"
  },
  "39": {
-  "description": "3 chipped emeralds -> flawed emerald",
+  "description": "3 Chipped Emeralds -> Flawed Emerald",
   "enabled": 1,
+  "version": 0,
   "numinputs": 3,
   "input 1": "\"gcg,qty=3\"",
   "output": "gfg"
  },
  "40": {
-  "description": "3 flawed emeralds -> standard emerald",
+  "description": "3 Flawed Emeralds -> Standard Emerald",
   "enabled": 1,
+  "version": 0,
   "numinputs": 3,
   "input 1": "\"gfg,qty=3\"",
   "output": "gsg"
  },
  "41": {
-  "description": "3 standard emeralds -> flawless emerald",
+  "description": "3 Standard Emeralds -> Flawless Emerald",
   "enabled": 1,
+  "version": 0,
   "numinputs": 3,
   "input 1": "\"gsg,qty=3\"",
   "output": "glg"
  },
  "42": {
-  "description": "3 flawless emeralds -> perfect emerald",
+  "description": "3 Flawless Emeralds -> Perfect Emerald",
   "enabled": 1,
+  "version": 0,
   "numinputs": 3,
   "input 1": "\"glg,qty=3\"",
   "output": "gpg"
  },
  "43": {
-  "description": "3 chipped diamonds -> flawed diamond",
+  "description": "3 Chipped Diamonds -> Flawed Diamond",
   "enabled": 1,
+  "version": 0,
   "numinputs": 3,
   "input 1": "\"gcw,qty=3\"",
   "output": "gfw"
  },
  "44": {
-  "description": "3 flawed diamonds -> standard diamond",
+  "description": "3 Flawed Diamonds -> Standard Diamond",
   "enabled": 1,
+  "version": 0,
   "numinputs": 3,
   "input 1": "\"gfw,qty=3\"",
   "output": "gsw"
  },
  "45": {
-  "description": "3 standard diamonds -> flawless diamond",
+  "description": "3 Standard Diamonds -> Flawless Diamond",
   "enabled": 1,
+  "version": 0,
   "numinputs": 3,
   "input 1": "\"gsw,qty=3\"",
   "output": "glw"
  },
  "46": {
-  "description": "3 flawless diamonds -> perfect diamond",
+  "description": "3 Flawless Diamonds -> Perfect Diamond",
   "enabled": 1,
+  "version": 0,
   "numinputs": 3,
   "input 1": "\"glw,qty=3\"",
   "output": "gpw"
  },
  "47": {
-  "description": "3 chipped skulls -> flawed skull",
+  "description": "3 Chipped Skulls -> Flawed Skull",
   "enabled": 1,
+  "version": 0,
   "numinputs": 3,
   "input 1": "\"skc,qty=3\"",
   "output": "skf"
  },
  "48": {
-  "description": "3 flawed skulls -> standard skull",
+  "description": "3 Flawed Skulls -> Standard Skull",
   "enabled": 1,
+  "version": 0,
   "numinputs": 3,
   "input 1": "\"skf,qty=3\"",
   "output": "sku"
  },
  "49": {
-  "description": "3 standard skulls -> flawless skull",
+  "description": "3 Standard Skulls -> Flawless Skull",
   "enabled": 1,
+  "version": 0,
   "numinputs": 3,
   "input 1": "\"sku,qty=3\"",
   "output": "skl"
  },
  "50": {
-  "description": "3 flawless skulls -> perfect skull",
+  "description": "3 Flawless Skulls -> Perfect Skull",
   "enabled": 1,
+  "version": 0,
   "numinputs": 3,
   "input 1": "\"skl,qty=3\"",
   "output": "skz"
  },
  "51": {
-  "description": "3 rune 01 -> rune 02",
+  "description": "3 El Runes -> Eld Rune",
   "enabled": 1,
   "version": 100,
   "numinputs": 3,
   "input 1": "\"r01,qty=3\"",
-  "output": "r02"
+  "output": "r02",
+  "expansion": 1
  },
  "52": {
-  "description": "3 rune 02 -> rune 03",
+  "description": "3 Eld Runes -> Tir Rune",
   "enabled": 1,
   "version": 100,
   "numinputs": 3,
   "input 1": "\"r02,qty=3\"",
-  "output": "r03"
+  "output": "r03",
+  "expansion": 1
  },
  "53": {
-  "description": "3 rune 03 -> rune 04",
+  "description": "3 Tir Runes -> Nef Rune",
   "enabled": 1,
   "version": 100,
   "numinputs": 3,
   "input 1": "\"r03,qty=3\"",
-  "output": "r04"
+  "output": "r04",
+  "expansion": 1
  },
  "54": {
-  "description": "3 rune 04 -> rune 05",
+  "description": "3 Nef Runes -> Eth Rune",
   "enabled": 1,
   "version": 100,
   "numinputs": 3,
   "input 1": "\"r04,qty=3\"",
-  "output": "r05"
+  "output": "r05",
+  "expansion": 1
  },
  "55": {
-  "description": "3 rune 05 -> rune 06",
+  "description": "3 Eth Runes -> Ith Rune",
   "enabled": 1,
   "version": 100,
   "numinputs": 3,
   "input 1": "\"r05,qty=3\"",
-  "output": "r06"
+  "output": "r06",
+  "expansion": 1
  },
  "56": {
-  "description": "3 rune 06 -> rune 07",
+  "description": "3 Ith Runes -> Tal Rune",
   "enabled": 1,
   "version": 100,
   "numinputs": 3,
   "input 1": "\"r06,qty=3\"",
-  "output": "r07"
+  "output": "r07",
+  "expansion": 1
  },
  "57": {
-  "description": "3 rune 07 -> rune 08",
+  "description": "3 Tal Runes -> Ral Rune",
   "enabled": 1,
   "version": 100,
   "numinputs": 3,
   "input 1": "\"r07,qty=3\"",
-  "output": "r08"
+  "output": "r08",
+  "expansion": 1
  },
  "58": {
-  "description": "3 rune 08 -> rune 09",
+  "description": "3 Ral Runes -> Ort Rune",
   "enabled": 1,
   "version": 100,
   "numinputs": 3,
   "input 1": "\"r08,qty=3\"",
-  "output": "r09"
+  "output": "r09",
+  "expansion": 1
  },
  "59": {
-  "description": "3 rune 09 -> rune 10",
+  "description": "3 Ort Runes -> Thul Rune",
   "enabled": 1,
   "version": 100,
   "numinputs": 3,
   "input 1": "\"r09,qty=3\"",
-  "output": "r10"
+  "output": "r10",
+  "expansion": 1
  },
  "60": {
-  "description": "3 perfect gems + 1 magic item -> magic item",
+  "description": "3 Perfect Gems (Any) + 1 Magic Item -> Re-rolled Magic Item",
   "enabled": 1,
   "version": 100,
   "numinputs": 4,
   "input 1": "\"any,mag\"",
   "input 2": "\"gem4,qty=3\"",
   "output": "\"usetype,mag\"",
-  "ilvl": 100
+  "ilvl": 100,
+  "expansion": 1
  },
  "61": {
-  "description": "6 perfect skulls + 1 rare item -> 1 low level rare item",
+  "description": "6 Perfect Skulls + 1 Rare Item -> 1 Low Quality Rare Item",
   "enabled": 1,
+  "version": 0,
   "numinputs": 7,
   "input 1": "\"any,rar\"",
   "input 2": "\"skz,qty=6\"",
@@ -510,8 +572,9 @@
   "ilvl": 40
  },
  "62": {
-  "description": "1 perfect skull + 1 rare item + soj -> 1 high level rare item",
+  "description": "1 Perfect Skull + 1 Rare Item + 1 Stone of Jordan -> 1 High Quality Rare Item",
   "enabled": 1,
+  "version": 0,
   "numinputs": 3,
   "input 1": "\"any,rar\"",
   "input 2": "skz",
@@ -521,8 +584,9 @@
   "ilvl": 66
  },
  "63": {
-  "description": "3 perfect skull + 1 rare item + stone of jordan-> add 1 socket to rare",
+  "description": "3 Perfect Skull + 1 Rare Item + 1 Stone of Jordan -> Add 1 Socket to Rare Item",
   "enabled": 1,
+  "version": 0,
   "numinputs": 5,
   "input 1": "\"any,rar,nos\"",
   "input 2": "\"skz,qty=3\"",
@@ -530,7 +594,7 @@
   "output": "\"useitem,sock=1\""
  },
  "64": {
-  "description": "magic full helm + jewel + rune 06 + perfect sapphire -> hitpower helm",
+  "description": "1 Magic Full Helm + 1 Jewel + 1 Ith Rune + 1 Perfect Sapphire -> Hit Power Helm",
   "enabled": 1,
   "version": 100,
   "numinputs": 4,
@@ -550,10 +614,11 @@
   "mod 2 max": 7,
   "mod 3": "ac-miss",
   "mod 3 min": 25,
-  "mod 3 max": 50
+  "mod 3 max": 50,
+  "expansion": 1
  },
  "65": {
-  "description": "magic chain boots + jewel + rune 08 + perfect sapphire -> hitpower boots",
+  "description": "1 Magic Chain Boots + 1 Jewel + 1 Ral Rune + 1 Perfect Sapphire -> Hit Power Boots",
   "enabled": 1,
   "version": 100,
   "numinputs": 4,
@@ -573,10 +638,11 @@
   "mod 2 max": 7,
   "mod 3": "ac-hth",
   "mod 3 min": 25,
-  "mod 3 max": 60
+  "mod 3 max": 60,
+  "expansion": 1
  },
  "66": {
-  "description": "magic chain gloves + jewel + rune 09 + perfect sapphire -> hitpower gloves",
+  "description": "1 Magic Chain Gloves + 1 Jewel + 1 Ort Rune + 1 Perfect Sapphire -> Hit Power Gloves",
   "enabled": 1,
   "version": 100,
   "numinputs": 4,
@@ -596,10 +662,11 @@
   "mod 2 max": 7,
   "mod 3": "knock",
   "mod 3 min": 1,
-  "mod 3 max": 1
+  "mod 3 max": 1,
+  "expansion": 1
  },
  "67": {
-  "description": "magic heavy belt + jewel + rune 07 + perfect sapphire -> hitpower belt",
+  "description": "1 Magic Heavy Belt + 1 Jewel + 1 Tal Rune + 1 Perfect Sapphire -> Hit Power Belt",
   "enabled": 1,
   "version": 100,
   "numinputs": 4,
@@ -619,10 +686,11 @@
   "mod 2 max": 7,
   "mod 3": "dmg-to-mana",
   "mod 3 min": 5,
-  "mod 3 max": 10
+  "mod 3 max": 10,
+  "expansion": 1
  },
  "68": {
-  "description": "magic gothic shield + jewel + rune 05 + perfect sapphire -> hitpower shield",
+  "description": "1 Magic Gothic Shield + 1 Jewel + 1 Eth Rune + 1 Perfect Sapphire -> Hit Power Shield",
   "enabled": 1,
   "version": 100,
   "numinputs": 4,
@@ -642,10 +710,11 @@
   "mod 2 max": 10,
   "mod 3": "block",
   "mod 3 min": 5,
-  "mod 3 max": 10
+  "mod 3 max": 10,
+  "expansion": 1
  },
  "69": {
-  "description": "magic field plate + jewel + rune 04 + perfect sapphire -> hitpower body",
+  "description": "1 Magic Field Plate + 1 Jewel + 1 Nef Rune + 1 Perfect Sapphire -> Hit Power Body",
   "enabled": 1,
   "version": 100,
   "numinputs": 4,
@@ -665,10 +734,11 @@
   "mod 2 max": 10,
   "mod 3": "balance1",
   "mod 3 min": 10,
-  "mod 3 max": 20
+  "mod 3 max": 20,
+  "expansion": 1
  },
  "70": {
-  "description": "magic amulet + jewel + rune 10 + perfect sapphire -> hitpower amulet",
+  "description": "1 Magic Amulet + 1 Jewel + Thul Rune + 1 Perfect Sapphire -> Hit Power Amulet",
   "enabled": 1,
   "version": 100,
   "numinputs": 4,
@@ -688,10 +758,11 @@
   "mod 2 max": 10,
   "mod 3": "howl",
   "mod 3 min": 5,
-  "mod 3 max": 15
+  "mod 3 max": 15,
+  "expansion": 1
  },
  "71": {
-  "description": "magic ring + jewel + rune 11 + perfect sapphire -> hitpower ring",
+  "description": "1 Magic Ring + 1 Jewel + 1 Amn Rune + 1 Perfect Sapphire -> Hit Power Ring",
   "enabled": 1,
   "version": 100,
   "numinputs": 4,
@@ -711,10 +782,11 @@
   "mod 2 max": 6,
   "mod 3": "dex",
   "mod 3 min": 1,
-  "mod 3 max": 5
+  "mod 3 max": 5,
+  "expansion": 1
  },
  "72": {
-  "description": "magic blunt + jewel + rune 03 + perfect sapphire -> hitpower weapon",
+  "description": "1 Magic Blunt Weapon + 1 Jewel + 1 Tir Rune + 1 Perfect Sapphire -> Hit Power Weapon",
   "enabled": 1,
   "version": 100,
   "numinputs": 4,
@@ -734,10 +806,11 @@
   "mod 2 max": 7,
   "mod 3": "dmg%",
   "mod 3 min": 35,
-  "mod 3 max": 60
+  "mod 3 max": 60,
+  "expansion": 1
  },
  "73": {
-  "description": "magic helm + jewel + rune 08 + perfect ruby -> blood helm",
+  "description": "1 Magic Helm + 1 Jewel + 1 Ral Rune + 1 Perfect Ruby -> Blood Helm",
   "enabled": 1,
   "version": 100,
   "numinputs": 4,
@@ -756,10 +829,11 @@
   "mod 2 max": 20,
   "mod 3": "deadly",
   "mod 3 min": 5,
-  "mod 3 max": 10
+  "mod 3 max": 10,
+  "expansion": 1
  },
  "74": {
-  "description": "magic light plated boots + jewel + rune 05 + perfect ruby -> blood boots",
+  "description": "1 Magic Light Plated Boots + 1 Jewel + 1 Eth Rune + 1 Perfect Ruby -> Blood Boots",
   "enabled": 1,
   "version": 100,
   "numinputs": 4,
@@ -778,10 +852,11 @@
   "mod 2 max": 20,
   "mod 3": "regen",
   "mod 3 min": 5,
-  "mod 3 max": 10
+  "mod 3 max": 10,
+  "expansion": 1
  },
  "75": {
-  "description": "magic heavy gloves + jewel + rune 04 + perfect ruby -> blood gloves",
+  "description": "1 Magic Heavy Gloves + 1 Jewel + 1 Nef Rune + 1 Perfect Ruby -> Blood Gloves",
   "enabled": 1,
   "version": 100,
   "numinputs": 4,
@@ -800,10 +875,11 @@
   "mod 2 max": 20,
   "mod 3": "crush",
   "mod 3 min": 5,
-  "mod 3 max": 10
+  "mod 3 max": 10,
+  "expansion": 1
  },
  "76": {
-  "description": "magic belt + jewel + rune 07 + perfect ruby -> blood belt",
+  "description": "1 Magic Belt + 1 Jewel + 1 Tal Rune + 1 Perfect Ruby -> Blood Belt",
   "enabled": 1,
   "version": 100,
   "numinputs": 4,
@@ -822,10 +898,11 @@
   "mod 2 max": 20,
   "mod 3": "openwounds",
   "mod 3 min": 5,
-  "mod 3 max": 10
+  "mod 3 max": 10,
+  "expansion": 1
  },
  "77": {
-  "description": "magic spiked shield + jewel + rune 06 + perfect ruby -> blood shield",
+  "description": "1 Magic Spiked Shield + 1 Jewel + 1 Ith Rune + 1 Perfect Ruby -> Blood Shield",
   "enabled": 1,
   "version": 100,
   "numinputs": 4,
@@ -844,10 +921,11 @@
   "mod 2 max": 20,
   "mod 3": "thorns",
   "mod 3 min": 4,
-  "mod 3 max": 7
+  "mod 3 max": 7,
+  "expansion": 1
  },
  "78": {
-  "description": "magic plate mail + jewel + rune 10 + perfect ruby -> blood body",
+  "description": "1 Magic Plate Mail + 1 Jewel + 1 Thul Rune + 1 Perfect Ruby -> Blood Body",
   "enabled": 1,
   "version": 100,
   "numinputs": 4,
@@ -866,10 +944,11 @@
   "mod 2 max": 20,
   "mod 3": "demon-heal",
   "mod 3 min": 1,
-  "mod 3 max": 3
+  "mod 3 max": 3,
+  "expansion": 1
  },
  "79": {
-  "description": "magic amulet + jewel + rune 11 + perfect ruby -> blood amulet",
+  "description": "1 Magic Amulet + 1 Jewel + 1 Amn Rune + 1 Perfect Ruby -> Blood Amulet",
   "enabled": 1,
   "version": 100,
   "numinputs": 4,
@@ -888,10 +967,11 @@
   "mod 2 max": 20,
   "mod 3": "move1",
   "mod 3 min": 5,
-  "mod 3 max": 10
+  "mod 3 max": 10,
+  "expansion": 1
  },
  "80": {
-  "description": "magic ring + jewel + rune 12 + perfect ruby -> blood ring",
+  "description": "1 Magic Ring + 1 Jewel + 1 Sol Rune + 1 Perfect Ruby -> Blood Ring",
   "enabled": 1,
   "version": 100,
   "numinputs": 4,
@@ -910,10 +990,11 @@
   "mod 2 max": 20,
   "mod 3": "str",
   "mod 3 min": 1,
-  "mod 3 max": 5
+  "mod 3 max": 5,
+  "expansion": 1
  },
  "81": {
-  "description": "magic axe + jewel + rune 09 + perfect ruby -> blood weapon",
+  "description": "1 Magic Axe + 1 Jewel + Ort Rune + 1 Perfect Ruby -> Blood Weapon",
   "enabled": 1,
   "version": 100,
   "numinputs": 4,
@@ -932,10 +1013,11 @@
   "mod 2 max": 20,
   "mod 3": "dmg%",
   "mod 3 min": 35,
-  "mod 3 max": 60
+  "mod 3 max": 60,
+  "expansion": 1
  },
  "82": {
-  "description": "magic mask + jewel + rune 04 + perfect amethyst -> caster helm",
+  "description": "1 Magic Mask + 1 Jewel + Nef Rune + 1 Perfect Amethyst -> Caster Helm",
   "enabled": 1,
   "version": 100,
   "numinputs": 4,
@@ -954,10 +1036,11 @@
   "mod 2 max": 20,
   "mod 3": "manasteal",
   "mod 3 min": 1,
-  "mod 3 max": 4
+  "mod 3 max": 4,
+  "expansion": 1
  },
  "83": {
-  "description": "magic boots + jewel + rune 10 + perfect amethyst -> caster boots",
+  "description": "1 Magic Boots + 1 Jewel + Thul Rune + 1 Perfect Amethyst -> Caster Boots",
   "enabled": 1,
   "version": 100,
   "numinputs": 4,
@@ -976,10 +1059,11 @@
   "mod 2 max": 20,
   "mod 3": "mana%",
   "mod 3 min": 2,
-  "mod 3 max": 5
+  "mod 3 max": 5,
+  "expansion": 1
  },
  "84": {
-  "description": "magic leather gloves + jewel + rune 09 + perfect amethyst -> caster gloves",
+  "description": "1 Magic Leather Gloves + 1 Jewel + Ort Rune + 1 Perfect Amethyst -> Caster Gloves",
   "enabled": 1,
   "version": 100,
   "numinputs": 4,
@@ -998,10 +1082,11 @@
   "mod 2 max": 20,
   "mod 3": "mana-kill",
   "mod 3 min": 1,
-  "mod 3 max": 3
+  "mod 3 max": 3,
+  "expansion": 1
  },
  "85": {
-  "description": "magic light belt + jewel + rune 06 + perfect amethyst -> caster belt",
+  "description": "1 Magic Light Belt + 1 Jewel + Ith Rune + 1 Perfect Amethyst -> Caster Belt",
   "enabled": 1,
   "version": 100,
   "numinputs": 4,
@@ -1020,10 +1105,11 @@
   "mod 2 max": 20,
   "mod 3": "cast1",
   "mod 3 min": 5,
-  "mod 3 max": 10
+  "mod 3 max": 10,
+  "expansion": 1
  },
  "86": {
-  "description": "magic small shield + jewel + rune 05 + perfect amethyst -> caster shield",
+  "description": "1 Magic Small Shield + 1 Jewel + 1 Eth Rune + 1 Perfect Amethyst -> Caster Shield",
   "enabled": 1,
   "version": 100,
   "numinputs": 4,
@@ -1042,10 +1128,11 @@
   "mod 2 max": 20,
   "mod 3": "block",
   "mod 3 min": 5,
-  "mod 3 max": 10
+  "mod 3 max": 10,
+  "expansion": 1
  },
  "87": {
-  "description": "magic light plate + jewel + rune 07 + perfect amethyst -> caster body",
+  "description": "1 Magic Light Plate + 1 Jewel + 1 Tal Rune + 1 Perfect Amethyst -> Caster Body",
   "enabled": 1,
   "version": 100,
   "numinputs": 4,
@@ -1064,10 +1151,11 @@
   "mod 2 max": 20,
   "mod 3": "mana-kill",
   "mod 3 min": 1,
-  "mod 3 max": 3
+  "mod 3 max": 3,
+  "expansion": 1
  },
  "88": {
-  "description": "magic amulet + jewel + rune 08 + perfect amethyst -> caster amulet",
+  "description": "1 Magic Amulet + 1 Jewel + 1 Ral Rune + 1 Perfect Amethyst -> Caster Amulet",
   "enabled": 1,
   "version": 100,
   "numinputs": 4,
@@ -1086,10 +1174,11 @@
   "mod 2 max": 20,
   "mod 3": "cast1",
   "mod 3 min": 5,
-  "mod 3 max": 10
+  "mod 3 max": 10,
+  "expansion": 1
  },
  "89": {
-  "description": "magic ring + jewel + rune 11 + perfect amethyst -> caster ring",
+  "description": "1 Magic Ring + 1 Jewel + 1 Amn Rune + 1 Perfect Amethyst -> Caster Ring",
   "enabled": 1,
   "version": 100,
   "numinputs": 4,
@@ -1108,10 +1197,11 @@
   "mod 2 max": 20,
   "mod 3": "enr",
   "mod 3 min": 1,
-  "mod 3 max": 5
+  "mod 3 max": 5,
+  "expansion": 1
  },
  "90": {
-  "description": "magic rod + jewel + rune 03 + perfect amethyst -> caster weapon",
+  "description": "1 Magic Rod + 1 Jewel + 1 Tir Rune + 1 Perfect Amethyst -> Caster Weapon",
   "enabled": 1,
   "version": 100,
   "numinputs": 4,
@@ -1130,10 +1220,11 @@
   "mod 2 max": 20,
   "mod 3": "mana%",
   "mod 3 min": 1,
-  "mod 3 max": 5
+  "mod 3 max": 5,
+  "expansion": 1
  },
  "91": {
-  "description": "magic crown + jewel + rune 06 + perfect emerald -> safety helm",
+  "description": "1 Magic Crown + 1 Jewel + 1 Ith Rune + 1 Perfect Emerald -> Safety Helm",
   "enabled": 1,
   "version": 100,
   "numinputs": 4,
@@ -1155,10 +1246,11 @@
   "mod 3 max": 10,
   "mod 4": "ac%",
   "mod 4 min": 10,
-  "mod 4 max": 30
+  "mod 4 max": 30,
+  "expansion": 1
  },
  "92": {
-  "description": "magic plate boots + jewel + rune 09 + perfect emerald -> safety boots",
+  "description": "1 Magic Plated Boots + 1 Jewel + 1 Ort Rune + 1 Perfect Emerald -> Safety Boots",
   "enabled": 1,
   "version": 100,
   "numinputs": 4,
@@ -1180,10 +1272,11 @@
   "mod 3 max": 10,
   "mod 4": "ac%",
   "mod 4 min": 10,
-  "mod 4 max": 30
+  "mod 4 max": 30,
+  "expansion": 1
  },
  "93": {
-  "description": "magic gauntlets + jewel + rune 08 + perfect emerald -> safety gloves",
+  "description": "1 Magic Gauntlets + 1 Jewel + 1 Ral Rune + 1 Perfect Emerald -> Safety Gloves",
   "enabled": 1,
   "version": 100,
   "numinputs": 4,
@@ -1205,10 +1298,11 @@
   "mod 3 max": 10,
   "mod 4": "ac%",
   "mod 4 min": 10,
-  "mod 4 max": 30
+  "mod 4 max": 30,
+  "expansion": 1
  },
  "94": {
-  "description": "magic sash + jewel + rune 07 + perfect emerald -> safety belt",
+  "description": "1 Magic Sash + 1 Jewel + 1 Tal Rune + 1 Perfect Emerald -> Safety Belt",
   "enabled": 1,
   "version": 100,
   "numinputs": 4,
@@ -1230,10 +1324,11 @@
   "mod 3 max": 10,
   "mod 4": "ac%",
   "mod 4 min": 10,
-  "mod 4 max": 30
+  "mod 4 max": 30,
+  "expansion": 1
  },
  "95": {
-  "description": "magic kite shield + jewel + rune 04 + perfect emerald -> safety shield",
+  "description": "1 Magic Kite Shield + 1 Jewel + 1 Nef Rune + 1 Perfect Emerald -> Safety Shield",
   "enabled": 1,
   "version": 100,
   "numinputs": 4,
@@ -1255,10 +1350,11 @@
   "mod 3 max": 10,
   "mod 4": "ac%",
   "mod 4 min": 10,
-  "mod 4 max": 30
+  "mod 4 max": 30,
+  "expansion": 1
  },
  "96": {
-  "description": "magic breastplate + jewel + rune 05 + perfect emerald -> safety body",
+  "description": "1 Magic Breast Plate + 1 Jewel + 1 Eth Rune + 1 Perfect Emerald -> Safety Body",
   "enabled": 1,
   "version": 100,
   "numinputs": 4,
@@ -1280,10 +1376,11 @@
   "mod 3 max": 1,
   "mod 4": "ac%",
   "mod 4 min": 10,
-  "mod 4 max": 30
+  "mod 4 max": 30,
+  "expansion": 1
  },
  "97": {
-  "description": "magic amulet + jewel + rune 10 + perfect emerald -> safety amulet",
+  "description": "1 Magic Amulet + 1 Jewel + 1 Thul Rune + 1 Perfect Emerald -> Safety Amulet",
   "enabled": 1,
   "version": 100,
   "numinputs": 4,
@@ -1302,10 +1399,11 @@
   "mod 2 max": 2,
   "mod 3": "block",
   "mod 3 min": 1,
-  "mod 3 max": 10
+  "mod 3 max": 10,
+  "expansion": 1
  },
  "98": {
-  "description": "magic ring + jewel + rune 11 + perfect emerald -> safety ring",
+  "description": "1 Magic Ring + 1 Jewel + 1 Amn Rune + 1 Perfect Emerald -> Safety Ring",
   "enabled": 1,
   "version": 100,
   "numinputs": 4,
@@ -1324,10 +1422,11 @@
   "mod 2 max": 2,
   "mod 3": "vit",
   "mod 3 min": 1,
-  "mod 3 max": 5
+  "mod 3 max": 5,
+  "expansion": 1
  },
  "99": {
-  "description": "magic spear + jewel + rune 12 + perfect emerald -> safety weapon",
+  "description": "1 Magic Spear + 1 Jewel + 1 Sol Rune + 1 Perfect Emerald -> Safety Weapon",
   "enabled": 1,
   "version": 100,
   "numinputs": 4,
@@ -1346,236 +1445,241 @@
   "mod 2 max": 2,
   "mod 3": "ac%",
   "mod 3 min": 5,
-  "mod 3 max": 10
+  "mod 3 max": 10,
+  "expansion": 1
  },
  "100": {
-  "description": "3 rune 10 + 1 chipped topaz -> rune 11",
+  "description": "3 Thul Runes + 1 Chipped Topaz -> Amn Rune",
   "enabled": 1,
   "version": 100,
   "numinputs": 4,
   "input 1": "\"r10,qty=3\"",
   "input 2": "gcy",
-  "output": "r11"
+  "output": "r11",
+  "expansion": 1
  },
  "101": {
-  "description": "3 rune 11 + 1 chipped amethyst -> rune 12",
+  "description": "3 Amn Runes + 1 Chipped Amethyst -> Sol Rune",
   "enabled": 1,
   "version": 100,
   "numinputs": 4,
   "input 1": "\"r11,qty=3\"",
   "input 2": "gcv",
-  "output": "r12"
+  "output": "r12",
+  "expansion": 1
  },
  "102": {
-  "description": "3 rune 12 + 1 chipped sapphire -> rune 13",
+  "description": "3 Sol Runes + 1 Chipped Sapphire -> Shael Rune",
   "enabled": 1,
   "version": 100,
   "numinputs": 4,
   "input 1": "\"r12,qty=3\"",
   "input 2": "gcb",
-  "output": "r13"
+  "output": "r13",
+  "expansion": 1
  },
  "103": {
-  "description": "3 rune 13 + 1 chipped ruby -> rune 14",
+  "description": "3 Shael Runes + 1 Chipped Ruby -> Dol Rune",
   "enabled": 1,
   "version": 100,
   "numinputs": 4,
   "input 1": "\"r13,qty=3\"",
   "input 2": "gcr",
-  "output": "r14"
+  "output": "r14",
+  "expansion": 1
  },
  "104": {
-  "description": "3 rune 14 + 1 chipped emerald -> rune 15",
+  "description": "3 Dol Runes + 1 Chipped Emerald -> Hel Rune",
   "enabled": 1,
-  "ladder": 1,
   "version": 100,
   "numinputs": 4,
   "input 1": "\"r14,qty=3\"",
   "input 2": "gcg",
-  "output": "r15"
+  "output": "r15",
+  "expansion": 1
  },
  "105": {
-  "description": "3 rune 15 + 1 chipped diamond -> rune 16",
+  "description": "3 Hel Runes + 1 Chipped Diamond -> Io Rune",
   "enabled": 1,
-  "ladder": 1,
   "version": 100,
   "numinputs": 4,
   "input 1": "\"r15,qty=3\"",
   "input 2": "gcw",
-  "output": "r16"
+  "output": "r16",
+  "expansion": 1
  },
  "106": {
-  "description": "3 rune 16 + 1 flawed topaz -> rune 17",
+  "description": "3 Io Runes + 1 Flawed Topaz -> Lum Rune",
   "enabled": 1,
-  "ladder": 1,
   "version": 100,
   "numinputs": 4,
   "input 1": "\"r16,qty=3\"",
   "input 2": "gfy",
-  "output": "r17"
+  "output": "r17",
+  "expansion": 1
  },
  "107": {
-  "description": "3 rune 17 + 1 flawed amethyst -> rune 18",
+  "description": "3 Lum Runes + 1 Flawed Amethyst -> Ko Rune",
   "enabled": 1,
-  "ladder": 1,
   "version": 100,
   "numinputs": 4,
   "input 1": "\"r17,qty=3\"",
   "input 2": "gfv",
-  "output": "r18"
+  "output": "r18",
+  "expansion": 1
  },
  "108": {
-  "description": "3 rune 18 + 1 flawed sapphire -> rune 19",
+  "description": "3 Ko Runes + 1 Flawed Sapphire -> Fal Rune",
   "enabled": 1,
-  "ladder": 1,
   "version": 100,
   "numinputs": 4,
   "input 1": "\"r18,qty=3\"",
   "input 2": "gfb",
-  "output": "r19"
+  "output": "r19",
+  "expansion": 1
  },
  "109": {
-  "description": "3 rune 19 + 1 flawed ruby -> rune 20",
+  "description": "3 Fal Runes + 1 Flawed Ruby -> Lem Rune",
   "enabled": 1,
-  "ladder": 1,
   "version": 100,
   "numinputs": 4,
   "input 1": "\"r19,qty=3\"",
   "input 2": "gfr",
-  "output": "r20"
+  "output": "r20",
+  "expansion": 1
  },
  "110": {
-  "description": "3 rune 20 + 1 flawed emerald -> rune 21",
+  "description": "3 Lem Runes + 1 Flawed Emerald -> Pul Rune",
   "enabled": 1,
-  "ladder": 1,
   "version": 100,
   "numinputs": 4,
   "input 1": "\"r20,qty=3\"",
   "input 2": "gfg",
-  "output": "r21"
+  "output": "r21",
+  "expansion": 1
  },
  "111": {
-  "description": "2 rune 21 + 1 flawed diamond -> rune 22",
+  "description": "2 Pul Runes + 1 Flawed Diamond -> Um Rune",
   "enabled": 1,
-  "ladder": 1,
   "version": 100,
   "numinputs": 3,
   "input 1": "\"r21,qty=2\"",
   "input 2": "gfw",
-  "output": "r22"
+  "output": "r22",
+  "expansion": 1
  },
  "112": {
-  "description": "2 rune 22 + 1 standard topaz -> rune 23",
+  "description": "2 Um Runes + 1 Standard Topaz -> Mal Rune",
   "enabled": 1,
-  "ladder": 1,
   "version": 100,
   "numinputs": 3,
   "input 1": "\"r22,qty=2\"",
   "input 2": "gsy",
-  "output": "r23"
+  "output": "r23",
+  "expansion": 1
  },
  "113": {
-  "description": "2 rune 23 + 1 standard amethyst -> rune 24",
+  "description": "2 Mal Runes + 1 Standard Amethyst -> Ist Rune",
   "enabled": 1,
-  "ladder": 1,
   "version": 100,
   "numinputs": 3,
   "input 1": "\"r23,qty=2\"",
   "input 2": "gsv",
-  "output": "r24"
+  "output": "r24",
+  "expansion": 1
  },
  "114": {
-  "description": "2 rune 24 + 1 standard sapphire -> rune 25",
+  "description": "2 Ist Runes + 1 Standard Sapphire -> Gul Rune",
   "enabled": 1,
-  "ladder": 1,
   "version": 100,
   "numinputs": 3,
   "input 1": "\"r24,qty=2\"",
   "input 2": "gsb",
-  "output": "r25"
+  "output": "r25",
+  "expansion": 1
  },
  "115": {
-  "description": "2 rune 25 + 1 standard ruby -> rune 26",
+  "description": "2 Gul Runes + 1 Standard Ruby -> Vex Rune",
   "enabled": 1,
-  "ladder": 1,
   "version": 100,
   "numinputs": 3,
   "input 1": "\"r25,qty=2\"",
   "input 2": "gsr",
-  "output": "r26"
+  "output": "r26",
+  "expansion": 1
  },
  "116": {
-  "description": "2 rune 26 + 1 standard emerald -> rune 27",
+  "description": "2 Vex Runes + 1 Standard Emerald -> Ohm Rune",
   "enabled": 1,
-  "ladder": 1,
   "version": 100,
   "numinputs": 3,
   "input 1": "\"r26,qty=2\"",
   "input 2": "gsg",
-  "output": "r27"
+  "output": "r27",
+  "expansion": 1
  },
  "117": {
-  "description": "2 rune 27 + 1 standard diamond -> rune 28",
+  "description": "2 Ohm Runes + 1 Standard Diamond -> Lo Rune",
   "enabled": 1,
-  "ladder": 1,
   "version": 100,
   "numinputs": 3,
   "input 1": "\"r27,qty=2\"",
   "input 2": "gsw",
-  "output": "r28"
+  "output": "r28",
+  "expansion": 1
  },
  "118": {
-  "description": "2 rune 28 + 1 flawless topaz -> rune 29",
+  "description": "2 Lo Runes + 1 Flawless Topaz -> Sur Rune",
   "enabled": 1,
-  "ladder": 1,
   "version": 100,
   "numinputs": 3,
   "input 1": "\"r28,qty=2\"",
   "input 2": "gly",
-  "output": "r29"
+  "output": "r29",
+  "expansion": 1
  },
  "119": {
-  "description": "2 rune 29 + 1 flawless amethyst -> rune 30",
+  "description": "2 Sur Runes + 1 Flawless Amethyst -> Ber Rune",
   "enabled": 1,
-  "ladder": 1,
   "version": 100,
   "numinputs": 3,
   "input 1": "\"r29,qty=2\"",
   "input 2": "gzv",
-  "output": "r30"
+  "output": "r30",
+  "expansion": 1
  },
  "120": {
-  "description": "2 rune 30 + 1 flawless sapphire -> rune 31",
+  "description": "2 Ber Runes + 1 Flawless Sapphire -> Jah Rune",
   "enabled": 1,
-  "ladder": 1,
   "version": 100,
   "numinputs": 3,
   "input 1": "\"r30,qty=2\"",
   "input 2": "glb",
-  "output": "r31"
+  "output": "r31",
+  "expansion": 1
  },
  "121": {
-  "description": "2 rune 31 + 1 flawless ruby -> rune 32",
+  "description": "2 Jah Runes + 1 Flawless Ruby -> Cham Rune",
   "enabled": 1,
-  "ladder": 1,
   "version": 100,
   "numinputs": 3,
   "input 1": "\"r31,qty=2\"",
   "input 2": "glr",
-  "output": "r32"
+  "output": "r32",
+  "expansion": 1
  },
  "122": {
-  "description": "2 rune 32 + 1 flawless emerald -> rune 33",
+  "description": "2 Cham Runes + 1 Flawless Emerald -> Zod Rune",
   "enabled": 1,
-  "ladder": 1,
   "version": 100,
   "numinputs": 3,
   "input 1": "\"r32,qty=2\"",
   "input 2": "glg",
-  "output": "r33"
+  "output": "r33",
+  "expansion": 1
  },
  "123": {
-  "description": "r07 + r10 + 1 perfect topaz + normal torso -> socketed torso",
+  "description": "1 Tal Rune + 1 Thul Rune + 1 Perfect Topaz + 1 Normal Torso Armor -> Socketed Torso Armor",
   "enabled": 1,
   "version": 100,
   "numinputs": 4,
@@ -1586,10 +1690,11 @@
   "output": "useitem",
   "mod 1": "sock",
   "mod 1 min": 1,
-  "mod 1 max": 6
+  "mod 1 max": 6,
+  "expansion": 1
  },
  "124": {
-  "description": "r08 + r11 + 1 perfect amethyst + normal weapon -> socketed weapon",
+  "description": "1 Ral Rune + 1 Amn Rune + 1 Perfect Amethyst + 1 Normal Weapon -> Socketed Weapon",
   "enabled": 1,
   "version": 100,
   "numinputs": 4,
@@ -1600,10 +1705,11 @@
   "output": "useitem",
   "mod 1": "sock",
   "mod 1 min": 1,
-  "mod 1 max": 6
+  "mod 1 max": 6,
+  "expansion": 1
  },
  "125": {
-  "description": "r08 + r10 + 1 perfect sapphire + normal helm -> socketed helm",
+  "description": "1 Ral Rune + 1 Thul Rune + 1 Perfect Sapphire + 1 Normal Helm -> Socketed Helm",
   "enabled": 1,
   "version": 100,
   "numinputs": 4,
@@ -1614,10 +1720,11 @@
   "output": "useitem",
   "mod 1": "sock",
   "mod 1 min": 1,
-  "mod 1 max": 6
+  "mod 1 max": 6,
+  "expansion": 1
  },
  "126": {
-  "description": "r07 + r11 + 1 perfect ruby + normal shield -> socketed shield",
+  "description": "1 Tal Rune + 1 Amn Rune + 1 Perfect Ruby + 1 Normal Shield -> Socketed Shield",
   "enabled": 1,
   "version": 100,
   "numinputs": 4,
@@ -1628,30 +1735,33 @@
   "output": "useitem",
   "mod 1": "sock",
   "mod 1 min": 1,
-  "mod 1 max": 6
+  "mod 1 max": 6,
+  "expansion": 1
  },
  "127": {
-  "description": "r02 + 1 chipped gem + low weapon -> normal weapon",
+  "description": "1 Eld Rune + 1 Chipped Gem (Any) + 1 Low Quality Weapon -> Normal Weapon",
   "enabled": 1,
   "version": 100,
   "numinputs": 3,
   "input 1": "\"weap,low\"",
   "input 2": "r02",
   "input 3": "gem0",
-  "output": "\"usetype,nor\""
+  "output": "\"usetype,nor\"",
+  "expansion": 1
  },
  "128": {
-  "description": "r01 + 1 chipped gem + low armor -> normal armor",
+  "description": "1 El Rune + 1 Chipped Gem (Any) + 1 Low Quality Armor -> Normal Armor",
   "enabled": 1,
   "version": 100,
   "numinputs": 3,
   "input 1": "\"armo,low\"",
   "input 2": "r01",
   "input 3": "gem0",
-  "output": "\"usetype,nor\""
+  "output": "\"usetype,nor\"",
+  "expansion": 1
  },
  "129": {
-  "description": "r08 + r12 + perfect emerald + basic unique weapon -> exceptional unique weapon",
+  "description": "1 Ral Rune + 1 Sol Rune + 1 Perfect Emerald + 1 Normal Unique Weapon -> Exceptional Unique Weapon",
   "enabled": 1,
   "version": 100,
   "numinputs": 4,
@@ -1662,10 +1772,11 @@
   "output": "\"useitem,mod,exc\"",
   "mod 1": "levelreq",
   "mod 1 min": 5,
-  "mod 1 max": 5
+  "mod 1 max": 5,
+  "expansion": 1
  },
  "130": {
-  "description": "r07 + r13 + perfect diamond + basic unique armor -> exceptional unique armor",
+  "description": "1 Tal Rune + 1 Shael Rune + 1 Perfect Diamond + 1 Normal Unique Armor -> Exceptional Unique Armor",
   "enabled": 1,
   "version": 100,
   "numinputs": 4,
@@ -1676,12 +1787,12 @@
   "output": "\"useitem,mod,exc\"",
   "mod 1": "levelreq",
   "mod 1 min": 5,
-  "mod 1 max": 5
+  "mod 1 max": 5,
+  "expansion": 1
  },
  "131": {
-  "description": "r17 + r21 + perfect emerald + exceptional unique weapon -> elite unique weapon",
+  "description": "1 Lum Rune + 1 Pul Rune + 1 Perfect Emerald + 1 Exceptional Unique Weapon -> Elite Unique Weapon",
   "enabled": 1,
-  "ladder": 1,
   "version": 100,
   "numinputs": 4,
   "input 1": "\"weap,exc,uni\"",
@@ -1691,12 +1802,12 @@
   "output": "\"useitem,mod,eli\"",
   "mod 1": "levelreq",
   "mod 1 min": 7,
-  "mod 1 max": 7
+  "mod 1 max": 7,
+  "expansion": 1
  },
  "132": {
-  "description": "r18 + r20 + perfect diamond + exceptional unique armor -> elite unique armor",
+  "description": "1 Ko Rune + 1 Lem Rune + 1 Perfect Diamond + 1 Exceptional Unique Armor -> Elite Unique Armor",
   "enabled": 1,
-  "ladder": 1,
   "version": 100,
   "numinputs": 4,
   "input 1": "\"armo,exc,uni\"",
@@ -1706,10 +1817,11 @@
   "output": "\"useitem,mod,eli\"",
   "mod 1": "levelreq",
   "mod 1 min": 7,
-  "mod 1 max": 7
+  "mod 1 max": 7,
+  "expansion": 1
  },
  "133": {
-  "description": "r09 + r11 + perfect sapphire + basic rare weapon -> exceptional rare weapon",
+  "description": "1 Ort Rune + 1 Amn Rune + 1 Perfect Sapphire + 1 Normal Rare Weapon -> Exceptional Rare Weapon",
   "enabled": 1,
   "version": 100,
   "numinputs": 4,
@@ -1720,10 +1832,11 @@
   "output": "\"useitem,mod,exc\"",
   "mod 1": "levelreq",
   "mod 1 min": 5,
-  "mod 1 max": 5
+  "mod 1 max": 5,
+  "expansion": 1
  },
  "134": {
-  "description": "r08 + r10 + perfect amethyst + basic rare armor -> exceptional rare armor",
+  "description": "1 Ral Rune + 1 Thul Rune + 1 Perfect Amethyst + 1 Normal Rare Armor -> Exceptional Rare Armor",
   "enabled": 1,
   "version": 100,
   "numinputs": 4,
@@ -1734,10 +1847,11 @@
   "output": "\"useitem,mod,exc\"",
   "mod 1": "levelreq",
   "mod 1 min": 5,
-  "mod 1 max": 5
+  "mod 1 max": 5,
+  "expansion": 1
  },
  "135": {
-  "description": "r19 + r22 + perfect sapphire + exceptional rare weapon -> elite rare weapon",
+  "description": "1 Fal Rune + 1 Um Rune + 1 Perfect Sapphire + 1 Exceptional Rare Weapon -> Elite Rare Weapon",
   "enabled": 1,
   "version": 100,
   "numinputs": 4,
@@ -1748,10 +1862,11 @@
   "output": "\"useitem,mod,eli\"",
   "mod 1": "levelreq",
   "mod 1 min": 7,
-  "mod 1 max": 7
+  "mod 1 max": 7,
+  "expansion": 1
  },
  "136": {
-  "description": "r18 + r21 + perfect amethyst + exceptional rare armor -> elite rare armor",
+  "description": "1 Ko Rune + 1 Pul Rune + 1 Perfect Amethyst + 1 Exceptional Rare Armor -> Elite Rare Armor",
   "enabled": 1,
   "version": 100,
   "numinputs": 4,
@@ -1762,76 +1877,84 @@
   "output": "\"useitem,mod,eli\"",
   "mod 1": "levelreq",
   "mod 1 min": 7,
-  "mod 1 max": 7
+  "mod 1 max": 7,
+  "expansion": 1
  },
  "137": {
-  "description": "r09 + weapon -> repair",
+  "description": "1 Ort Rune + 1 Weapon -> Fully Repaired Weapon",
   "enabled": 1,
   "version": 100,
   "numinputs": 2,
   "input 1": "\"weap,noe\"",
   "input 2": "r09",
-  "output": "\"useitem,rep,qty=255\""
+  "output": "\"useitem,rep,qty=255\"",
+  "expansion": 1
  },
  "138": {
-  "description": "r08 + armor -> repair",
+  "description": "1 Ral Rune + 1 Armor -> Fully Repaired Armor",
   "enabled": 1,
   "version": 100,
   "numinputs": 2,
   "input 1": "\"armo,noe\"",
   "input 2": "r08",
-  "output": "\"useitem,rep,qty=255\""
+  "output": "\"useitem,rep,qty=255\"",
+  "expansion": 1
  },
  "139": {
-  "description": "r09 + weapon + chipped gem -> repair + recharge",
+  "description": "1 Ort Rune + 1 Chipped Gem (Any) + 1 Weapon -> Fully Repaired and Recharged Weapon",
   "enabled": 1,
   "version": 100,
   "numinputs": 3,
   "input 1": "\"weap,noe\"",
   "input 2": "r09",
   "input 3": "gem0",
-  "output": "\"useitem,rep,rch,qty=255\""
+  "output": "\"useitem,rep,rch,qty=255\"",
+  "expansion": 1
  },
  "140": {
-  "description": "r08 + armor + flawed gem -> repair + recharge",
+  "description": "1 Ral Rune + 1 Flawed Gem (Any) + 1 Armor -> Fully Repaired and Recharged Armor",
   "enabled": 1,
   "version": 100,
   "numinputs": 3,
   "input 1": "\"armo,noe\"",
   "input 2": "r08",
   "input 3": "gem1",
-  "output": "\"useitem,rep,rch,qty=255\""
+  "output": "\"useitem,rep,rch,qty=255\"",
+  "expansion": 1
  },
  "141": {
-  "description": "r15 + tsc + any socketed item -> unsocket (destroy gems)",
+  "description": "1 Hel Rune + Scroll of Town Portal + 1 Socketed Item -> Clear Sockets on Item",
   "enabled": 1,
   "version": 100,
   "numinputs": 3,
   "input 1": "\"any,sock\"",
   "input 2": "r15",
   "input 3": "tsc",
-  "output": "\"useitem,uns\""
+  "output": "\"useitem,uns\"",
+  "expansion": 1
  },
  "142": {
-  "description": "r08 + jew + superior armor -> tempered armor",
+  "description": "1 Ral Rune + 1 Jewel + 1 Superior Armor -> Tempered Armor",
   "version": 100,
   "numinputs": 3,
   "input 1": "\"armo,hiq,nos\"",
   "input 2": "jew",
   "input 3": "r08",
-  "output": "\"useitem,tmp\""
+  "output": "\"useitem,tmp\"",
+  "expansion": 1
  },
  "143": {
-  "description": "r08 + jew + superior weapon -> tempered weapon",
+  "description": "1 Ral Rune + 1 Jewel + 1 Superior Weapon -> Tempered Weapon",
   "version": 100,
   "numinputs": 3,
   "input 1": "\"weap,hiq,nos\"",
   "input 2": "jew",
   "input 3": "r08",
-  "output": "\"useitem,tmp\""
+  "output": "\"useitem,tmp\"",
+  "expansion": 1
  },
  "144": {
-  "description": "r08 + jew + magic ring -> tempered ring",
+  "description": "1 Ral Rune + 1 Jewel + Magic Ring -> Tempered Ring",
   "version": 100,
   "numinputs": 3,
   "input 1": "\"ring,mag\"",
@@ -1840,10 +1963,11 @@
   "output": "\"usetype,tmp\"",
   "mod 1": "levelreq",
   "mod 1 min": 3,
-  "mod 1 max": 3
+  "mod 1 max": 3,
+  "expansion": 1
  },
  "145": {
-  "description": "r08 + jew + magic amulet -> tempered amulet",
+  "description": "1 Ral Rune + 1 Jewel + 1 Magic Amulet -> Tempered Amulet",
   "version": 100,
   "numinputs": 3,
   "input 1": "\"amu,mag\"",
@@ -1852,10 +1976,11 @@
   "output": "\"usetype,tmp\"",
   "mod 1": "levelreq",
   "mod 1 min": 5,
-  "mod 1 max": 5
+  "mod 1 max": 5,
+  "expansion": 1
  },
  "146": {
-  "description": "r01 + gcv + tempered weapon -> +30-50 ar",
+  "description": "1 El Rune + 1 Chipped Gem (Any) + 1 Tempered Weapon -> Weapon With Extra Attack Rating",
   "version": 100,
   "numinputs": 3,
   "input 1": "\"weap,tmp\"",
@@ -1867,11 +1992,13 @@
   "mod 1 max": 2,
   "mod 2": "att",
   "mod 2 min": 30,
-  "mod 2 max": 50
+  "mod 2 max": 50,
+  "expansion": 1
  },
  "147": {
-  "description": "\"3 chipped gems + 1 magic weapon -> socketed, magic weapon\"",
+  "description": "3 Chipped Gems (Any) + 1 Magic Weapon -> Socketed Magic Weapon",
   "enabled": 1,
+  "version": 0,
   "numinputs": 4,
   "input 1": "\"weap,mag\"",
   "input 2": "\"gem0,qty=3\"",
@@ -1883,7 +2010,7 @@
   "mod 1 max": 2
  },
  "148": {
-  "description": "Pandemonium key",
+  "description": "1 Key of Terror + 1 Key of Hate + 1 Key of Destruction -> Portal to Matron's Den/Forgotten Sands/Furnace of Pain (Random)",
   "enabled": 1,
   "version": 100,
   "op": 28,
@@ -1891,10 +2018,11 @@
   "input 1": "pk1",
   "input 2": "pk2",
   "input 3": "pk3",
-  "output": "Pandemonium Portal"
+  "output": "Pandemonium Portal",
+  "expansion": 1
  },
  "149": {
-  "description": "Pandemonium Finale key",
+  "description": "1 Diablo's Horn + 1 Baal's Eye + 1 Mephisto's Brain -> Portal to Tristram (Pandemonium Finale)",
   "enabled": 1,
   "version": 100,
   "op": 28,
@@ -1902,10 +2030,11 @@
   "input 1": "dhn",
   "input 2": "bey",
   "input 3": "mbr",
-  "output": "Pandemonium Finale Portal"
+  "output": "Pandemonium Finale Portal",
+  "expansion": 1
  },
  "150": {
-  "description": "Token of Absolution",
+  "description": "1 Twisted Essence of Suffering + 1 Charged Essence of Hatred + 1 Burning Essence of Terror + 1 Festering Essence of Destruction -> Token of Absolution",
   "enabled": 1,
   "version": 100,
   "numinputs": 4,
@@ -1913,6 +2042,1145 @@
   "input 2": "ceh",
   "input 3": "bet",
   "input 4": "fed",
-  "output": "toa"
+  "output": "toa",
+  "expansion": 1
+ },
+ "151": {
+  "description": "1 Ral Rune + 1 Sol Rune + 1 Perfect Emerald + 1 Normal Set Weapon -> Exceptional Set Weapon",
+  "enabled": 1,
+  "firstLadderSeason": 1,
+  "lastLadderSeason": 2,
+  "version": 100,
+  "numinputs": 4,
+  "input 1": "\"weap,bas,set\"",
+  "input 2": "r08",
+  "input 3": "r12",
+  "input 4": "gpg",
+  "output": "\"useitem,mod,exc\"",
+  "mod 1": "levelreq",
+  "mod 1 min": 5,
+  "mod 1 max": 5,
+  "expansion": 1
+ },
+ "152": {
+  "description": "1 Tal Rune + 1 Shael Rune + 1 Perfect Diamond + 1 Normal Set Armor -> Exceptional Set Armor",
+  "enabled": 1,
+  "firstLadderSeason": 1,
+  "lastLadderSeason": 2,
+  "version": 100,
+  "numinputs": 4,
+  "input 1": "\"armo,bas,set\"",
+  "input 2": "r07",
+  "input 3": "r13",
+  "input 4": "gpw",
+  "output": "\"useitem,mod,exc\"",
+  "mod 1": "levelreq",
+  "mod 1 min": 5,
+  "mod 1 max": 5,
+  "expansion": 1
+ },
+ "153": {
+  "description": "1 Lum Rune + 1 Pul Rune + 1 Perfect Emerald + 1 Exceptional Set Weapon -> Elite Set Weapon",
+  "enabled": 1,
+  "firstLadderSeason": 1,
+  "lastLadderSeason": 2,
+  "version": 100,
+  "numinputs": 4,
+  "input 1": "\"weap,exc,set\"",
+  "input 2": "r17",
+  "input 3": "r21",
+  "input 4": "gpg",
+  "output": "\"useitem,mod,eli\"",
+  "mod 1": "levelreq",
+  "mod 1 min": 7,
+  "mod 1 max": 7,
+  "expansion": 1
+ },
+ "154": {
+  "description": "1 Ko Rune + 1 Lem Rune + 1 Perfect Diamond + 1 Exceptional Set Armor -> Elite Set Armor",
+  "enabled": 1,
+  "firstLadderSeason": 1,
+  "lastLadderSeason": 2,
+  "version": 100,
+  "numinputs": 4,
+  "input 1": "\"armo,exc,set\"",
+  "input 2": "r18",
+  "input 3": "r20",
+  "input 4": "gpw",
+  "output": "\"useitem,mod,eli\"",
+  "mod 1": "levelreq",
+  "mod 1 min": 7,
+  "mod 1 max": 7,
+  "expansion": 1
+ },
+ "155": {
+  "description": "1 Ko Rune + 1 Perfect Emerald + 1 Western Worldstone Shard + 1 Magic Amulet -> Virulent Amulet",
+  "enabled": 0,
+  "version": 100,
+  "numinputs": 4,
+  "input 1": "\"amu,mag\"",
+  "input 2": "r18",
+  "input 3": "gpg",
+  "input 4": "xa1",
+  "output": "\"useitem,pre=674\"",
+  "mod 1": "pierce-pois",
+  "mod 1 min": 1,
+  "mod 1 max": 3,
+  "expansion": 1
+ },
+ "156": {
+  "description": "1 Ko Rune + 1 Perfect Emerald + 1 Western Worldstone Shard + 1 Magic Ring -> Virulent Ring",
+  "enabled": 0,
+  "version": 100,
+  "numinputs": 4,
+  "input 1": "\"ring,mag\"",
+  "input 2": "r18",
+  "input 3": "gpg",
+  "input 4": "xa1",
+  "output": "\"useitem,pre=673\"",
+  "mod 1": "pierce-pois",
+  "mod 1 min": 1,
+  "mod 1 max": 2,
+  "expansion": 1
+ },
+ "157": {
+  "description": "1 Ko Rune + 1 Perfect Emerald + 1 Western Worldstone Shard + 1 Magic Helm -> Virulent Helm",
+  "enabled": 0,
+  "version": 100,
+  "numinputs": 4,
+  "input 1": "\"helm,mag\"",
+  "input 2": "r18",
+  "input 3": "gpg",
+  "input 4": "xa1",
+  "output": "\"useitem,pre=674\"",
+  "mod 1": "pierce-pois",
+  "mod 1 min": 1,
+  "mod 1 max": 3,
+  "expansion": 1
+ },
+ "158": {
+  "description": "1 Ko Rune + 1 Perfect Emerald + 1 Western Worldstone Shard + 1 Magic Boots -> Virulent Boots",
+  "enabled": 0,
+  "version": 100,
+  "numinputs": 4,
+  "input 1": "\"boot,mag\"",
+  "input 2": "r18",
+  "input 3": "gpg",
+  "input 4": "xa1",
+  "output": "\"useitem,pre=674\"",
+  "mod 1": "pierce-pois",
+  "mod 1 min": 1,
+  "mod 1 max": 3,
+  "expansion": 1
+ },
+ "159": {
+  "description": "1 Ko Rune + 1 Perfect Emerald + 1 Western Worldstone Shard + 1 Magic Gloves -> Virulent Gloves",
+  "enabled": 0,
+  "version": 100,
+  "numinputs": 4,
+  "input 1": "\"glov,mag\"",
+  "input 2": "r18",
+  "input 3": "gpg",
+  "input 4": "xa1",
+  "output": "\"useitem,pre=674\"",
+  "mod 1": "pierce-pois",
+  "mod 1 min": 1,
+  "mod 1 max": 3,
+  "expansion": 1
+ },
+ "160": {
+  "description": "1 Ko Rune + 1 Perfect Emerald + 1 Western Worldstone Shard + 1 Magic Armor -> Virulent Armor",
+  "enabled": 0,
+  "version": 100,
+  "numinputs": 4,
+  "input 1": "\"tors,mag\"",
+  "input 2": "r18",
+  "input 3": "gpg",
+  "input 4": "xa1",
+  "output": "\"useitem,pre=676\"",
+  "mod 1": "pierce-pois",
+  "mod 1 min": 2,
+  "mod 1 max": 8,
+  "expansion": 1
+ },
+ "161": {
+  "description": "1 Ko Rune + 1 Perfect Emerald + 1 Western Worldstone Shard + 1 Magic Weapon -> Virulent Weapon",
+  "enabled": 0,
+  "version": 100,
+  "numinputs": 4,
+  "input 1": "\"weap,mag\"",
+  "input 2": "r18",
+  "input 3": "gpg",
+  "input 4": "xa1",
+  "output": "\"useitem,pre=675\"",
+  "mod 1": "pierce-pois",
+  "mod 1 min": 1,
+  "mod 1 max": 4,
+  "expansion": 1
+ },
+ "162": {
+  "description": "1 Ko Rune + 1 Perfect Emerald + 1 Western Worldstone Shard + 1 Magic Shield -> Virulent Shield",
+  "enabled": 0,
+  "version": 100,
+  "numinputs": 4,
+  "input 1": "\"shie,mag\"",
+  "input 2": "r18",
+  "input 3": "gpg",
+  "input 4": "xa1",
+  "output": "\"useitem,pre=675\"",
+  "mod 1": "pierce-pois",
+  "mod 1 min": 1,
+  "mod 1 max": 4,
+  "expansion": 1
+ },
+ "163": {
+  "description": "1 Ko Rune + 1 Perfect Emerald + 1 Western Worldstone Shard + 1 Small Charm -> Virulent Small Charm",
+  "enabled": 0,
+  "version": 100,
+  "numinputs": 4,
+  "input 1": "\"scha,mag\"",
+  "input 2": "r18",
+  "input 3": "gpg",
+  "input 4": "xa1",
+  "output": "\"useitem,pre=671\"",
+  "mod 1": "pierce-pois",
+  "mod 1 min": 1,
+  "mod 1 max": 1,
+  "expansion": 1
+ },
+ "164": {
+  "description": "1 Ko Rune + 1 Perfect Emerald + 1 Western Worldstone Shard + 1 Large Charm -> Virulent Large Charm",
+  "enabled": 0,
+  "version": 100,
+  "numinputs": 4,
+  "input 1": "\"mcha,mag\"",
+  "input 2": "r18",
+  "input 3": "gpg",
+  "input 4": "xa1",
+  "output": "\"useitem,pre=673\"",
+  "mod 1": "pierce-pois",
+  "mod 1 min": 1,
+  "mod 1 max": 2,
+  "expansion": 1
+ },
+ "165": {
+  "description": "1 Ko Rune + 1 Perfect Emerald + 1 Uber Ancient Summon Material Act1 + 1 Rotting Fissure -> Virulent Rotting Fissure",
+  "enabled": 1,
+  "version": 100,
+  "numinputs": 4,
+  "input 1": "PreCrafted Rotting Fissure",
+  "input 2": "r18",
+  "input 3": "gpg",
+  "input 4": "xa1",
+  "output": "Crafted Rotting Fissure",
+  "ilvl": 69,
+  "expansion": 1
+ },
+ "166": {
+  "description": "1 Lum Rune + 1 Perfect Sapphire + 1 Eastern Worldstone Shard + 1 Magic Amulet -> Gelid Amulet",
+  "enabled": 0,
+  "version": 100,
+  "numinputs": 4,
+  "input 1": "\"amu,mag\"",
+  "input 2": "r17",
+  "input 3": "gpb",
+  "input 4": "xa2",
+  "output": "\"useitem,pre=684\"",
+  "mod 1": "pierce-cold",
+  "mod 1 min": 1,
+  "mod 1 max": 3,
+  "expansion": 1
+ },
+ "167": {
+  "description": "1 Lum Rune + 1 Perfect Sapphire + 1 Eastern Worldstone Shard + 1 Magic Ring -> Gelid Ring",
+  "enabled": 0,
+  "version": 100,
+  "numinputs": 4,
+  "input 1": "\"ring,mag\"",
+  "input 2": "r17",
+  "input 3": "gpb",
+  "input 4": "xa2",
+  "output": "\"useitem,pre=683\"",
+  "mod 1": "pierce-cold",
+  "mod 1 min": 1,
+  "mod 1 max": 2,
+  "expansion": 1
+ },
+ "168": {
+  "description": "1 Lum Rune + 1 Perfect Sapphire + 1 Eastern Worldstone Shard + 1 Magic Helm -> Gelid Helm",
+  "enabled": 0,
+  "version": 100,
+  "numinputs": 4,
+  "input 1": "\"helm,mag\"",
+  "input 2": "r17",
+  "input 3": "gpb",
+  "input 4": "xa2",
+  "output": "\"useitem,pre=684\"",
+  "mod 1": "pierce-cold",
+  "mod 1 min": 1,
+  "mod 1 max": 3,
+  "expansion": 1
+ },
+ "169": {
+  "description": "1 Lum Rune + 1 Perfect Sapphire + 1 Eastern Worldstone Shard + 1 Magic Boots -> Gelid Boots",
+  "enabled": 0,
+  "version": 100,
+  "numinputs": 4,
+  "input 1": "\"boot,mag\"",
+  "input 2": "r17",
+  "input 3": "gpb",
+  "input 4": "xa2",
+  "output": "\"useitem,pre=684\"",
+  "mod 1": "pierce-cold",
+  "mod 1 min": 1,
+  "mod 1 max": 3,
+  "expansion": 1
+ },
+ "170": {
+  "description": "1 Lum Rune + 1 Perfect Sapphire + 1 Eastern Worldstone Shard + 1 Magic Gloves -> Gelid Gloves",
+  "enabled": 0,
+  "version": 100,
+  "numinputs": 4,
+  "input 1": "\"glov,mag\"",
+  "input 2": "r17",
+  "input 3": "gpb",
+  "input 4": "xa2",
+  "output": "\"useitem,pre=684\"",
+  "mod 1": "pierce-cold",
+  "mod 1 min": 1,
+  "mod 1 max": 3,
+  "expansion": 1
+ },
+ "171": {
+  "description": "1 Lum Rune + 1 Perfect Sapphire + 1 Eastern Worldstone Shard + 1 Magic Armor -> Gelid Armor",
+  "enabled": 0,
+  "version": 100,
+  "numinputs": 4,
+  "input 1": "\"tors,mag\"",
+  "input 2": "r17",
+  "input 3": "gpb",
+  "input 4": "xa2",
+  "output": "\"useitem,pre=686\"",
+  "mod 1": "pierce-cold",
+  "mod 1 min": 2,
+  "mod 1 max": 8,
+  "expansion": 1
+ },
+ "172": {
+  "description": "1 Lum Rune + 1 Perfect Sapphire + 1 Eastern Worldstone Shard + 1 Magic Weapon -> Gelid Weapon",
+  "enabled": 0,
+  "version": 100,
+  "numinputs": 4,
+  "input 1": "\"weap,mag\"",
+  "input 2": "r17",
+  "input 3": "gpb",
+  "input 4": "xa2",
+  "output": "\"useitem,pre=685\"",
+  "mod 1": "pierce-cold",
+  "mod 1 min": 1,
+  "mod 1 max": 4,
+  "expansion": 1
+ },
+ "173": {
+  "description": "1 Lum Rune + 1 Perfect Sapphire + 1 Eastern Worldstone Shard + 1 Magic Shield -> Gelid Shield",
+  "enabled": 0,
+  "version": 100,
+  "numinputs": 4,
+  "input 1": "\"shie,mag\"",
+  "input 2": "r17",
+  "input 3": "gpb",
+  "input 4": "xa2",
+  "output": "\"useitem,pre=685\"",
+  "mod 1": "pierce-cold",
+  "mod 1 min": 1,
+  "mod 1 max": 4,
+  "expansion": 1
+ },
+ "174": {
+  "description": "1 Lum Rune + 1 Perfect Sapphire + 1 Eastern Worldstone Shard + 1 Small Charm -> Gelid Small Charm",
+  "enabled": 0,
+  "version": 100,
+  "numinputs": 4,
+  "input 1": "\"scha,mag\"",
+  "input 2": "r17",
+  "input 3": "gpb",
+  "input 4": "xa2",
+  "output": "\"useitem,pre=682\"",
+  "mod 1": "pierce-cold",
+  "mod 1 min": 1,
+  "mod 1 max": 1,
+  "expansion": 1
+ },
+ "175": {
+  "description": "1 Lum Rune + 1 Perfect Sapphire + 1 Eastern Worldstone Shard + 1 Large Charm -> Gelid Large Charm",
+  "enabled": 0,
+  "version": 100,
+  "numinputs": 4,
+  "input 1": "\"mcha,mag\"",
+  "input 2": "r17",
+  "input 3": "gpb",
+  "input 4": "xa2",
+  "output": "\"useitem,pre=683\"",
+  "mod 1": "pierce-cold",
+  "mod 1 min": 1,
+  "mod 1 max": 2,
+  "expansion": 1
+ },
+ "176": {
+  "description": "1 Lum Rune + 1 Perfect Sapphire + 1 Eastern Worldstone Shard + 1 Grand Charm -> Gelid Grand Charm",
+  "enabled": 0,
+  "version": 100,
+  "numinputs": 4,
+  "input 1": "\"lcha,mag\"",
+  "input 2": "r17",
+  "input 3": "gpb",
+  "input 4": "xa2",
+  "output": "\"useitem,pre=684\"",
+  "mod 1": "pierce-cold",
+  "mod 1 min": 1,
+  "mod 1 max": 3,
+  "expansion": 1
+ },
+ "177": {
+  "description": "1 Lum Rune + 1 Perfect Sapphire + 1 Uber Ancient Summon Material Act2 + 1 Cold Rupture -> Gelid Cold Rupture",
+  "enabled": 1,
+  "version": 100,
+  "numinputs": 4,
+  "input 1": "PreCrafted Cold Rupture",
+  "input 2": "r17",
+  "input 3": "gpb",
+  "input 4": "xa2",
+  "output": "Crafted Cold Rupture",
+  "ilvl": 69,
+  "expansion": 1
+ },
+ "178": {
+  "description": "1 Fal Rune + 1 Perfect Topaz + 1 Southern Worldstone Shard + 1 Magic Amulet -> Magnetic Amulet",
+  "enabled": 0,
+  "version": 100,
+  "numinputs": 4,
+  "input 1": "\"amu,mag\"",
+  "input 2": "r19",
+  "input 3": "gpy",
+  "input 4": "xa3",
+  "output": "\"useitem,pre=689\"",
+  "mod 1": "pierce-ltng",
+  "mod 1 min": 1,
+  "mod 1 max": 3,
+  "expansion": 1
+ },
+ "179": {
+  "description": "1 Fal Rune + 1 Perfect Topaz + 1 Southern Worldstone Shard + 1 Magic Ring -> Magnetic Ring",
+  "enabled": 0,
+  "version": 100,
+  "numinputs": 4,
+  "input 1": "\"ring,mag\"",
+  "input 2": "r19",
+  "input 3": "gpy",
+  "input 4": "xa3",
+  "output": "\"useitem,pre=688\"",
+  "mod 1": "pierce-ltng",
+  "mod 1 min": 1,
+  "mod 1 max": 2,
+  "expansion": 1
+ },
+ "180": {
+  "description": "1 Fal Rune + 1 Perfect Topaz + 1 Southern Worldstone Shard + 1 Magic Helm -> Magnetic Helm",
+  "enabled": 0,
+  "version": 100,
+  "numinputs": 4,
+  "input 1": "\"helm,mag\"",
+  "input 2": "r19",
+  "input 3": "gpy",
+  "input 4": "xa3",
+  "output": "\"useitem,pre=689\"",
+  "mod 1": "pierce-ltng",
+  "mod 1 min": 1,
+  "mod 1 max": 3,
+  "expansion": 1
+ },
+ "181": {
+  "description": "1 Fal Rune + 1 Perfect Topaz + 1 Southern Worldstone Shard + 1 Magic Boots -> Magnetic Boots",
+  "enabled": 0,
+  "version": 100,
+  "numinputs": 4,
+  "input 1": "\"boot,mag\"",
+  "input 2": "r19",
+  "input 3": "gpy",
+  "input 4": "xa3",
+  "output": "\"useitem,pre=689\"",
+  "mod 1": "pierce-ltng",
+  "mod 1 min": 1,
+  "mod 1 max": 3,
+  "expansion": 1
+ },
+ "182": {
+  "description": "1 Fal Rune + 1 Perfect Topaz + 1 Southern Worldstone Shard + 1 Magic Gloves -> Magnetic Gloves",
+  "enabled": 0,
+  "version": 100,
+  "numinputs": 4,
+  "input 1": "\"glov,mag\"",
+  "input 2": "r19",
+  "input 3": "gpy",
+  "input 4": "xa3",
+  "output": "\"useitem,pre=689\"",
+  "mod 1": "pierce-ltng",
+  "mod 1 min": 1,
+  "mod 1 max": 3,
+  "expansion": 1
+ },
+ "183": {
+  "description": "1 Fal Rune + 1 Perfect Topaz + 1 Southern Worldstone Shard + 1 Magic Armor -> Magnetic Armor",
+  "enabled": 0,
+  "version": 100,
+  "numinputs": 4,
+  "input 1": "\"tors,mag\"",
+  "input 2": "r19",
+  "input 3": "gpy",
+  "input 4": "xa3",
+  "output": "\"useitem,pre=691\"",
+  "mod 1": "pierce-ltng",
+  "mod 1 min": 2,
+  "mod 1 max": 8,
+  "expansion": 1
+ },
+ "184": {
+  "description": "1 Fal Rune + 1 Perfect Topaz + 1 Southern Worldstone Shard + 1 Magic Weapon -> Magnetic Weapon",
+  "enabled": 0,
+  "version": 100,
+  "numinputs": 4,
+  "input 1": "\"weap,mag\"",
+  "input 2": "r19",
+  "input 3": "gpy",
+  "input 4": "xa3",
+  "output": "\"useitem,pre=690\"",
+  "mod 1": "pierce-ltng",
+  "mod 1 min": 1,
+  "mod 1 max": 4,
+  "expansion": 1
+ },
+ "185": {
+  "description": "1 Fal Rune + 1 Perfect Topaz + 1 Southern Worldstone Shard + 1 Magic Shield -> Magnetic Shield",
+  "enabled": 0,
+  "version": 100,
+  "numinputs": 4,
+  "input 1": "\"shie,mag\"",
+  "input 2": "r19",
+  "input 3": "gpy",
+  "input 4": "xa3",
+  "output": "\"useitem,pre=690\"",
+  "mod 1": "pierce-ltng",
+  "mod 1 min": 1,
+  "mod 1 max": 4,
+  "expansion": 1
+ },
+ "186": {
+  "description": "1 Fal Rune + 1 Perfect Topaz + 1 Southern Worldstone Shard + 1 Small Charm -> Magnetic Small Charm",
+  "enabled": 0,
+  "version": 100,
+  "numinputs": 4,
+  "input 1": "\"scha,mag\"",
+  "input 2": "r19",
+  "input 3": "gpy",
+  "input 4": "xa3",
+  "output": "\"useitem,pre=687\"",
+  "mod 1": "pierce-ltng",
+  "mod 1 min": 1,
+  "mod 1 max": 1,
+  "expansion": 1
+ },
+ "187": {
+  "description": "1 Fal Rune + 1 Perfect Topaz + 1 Southern Worldstone Shard + 1 Large Charm -> Magnetic Large Charm",
+  "enabled": 0,
+  "version": 100,
+  "numinputs": 4,
+  "input 1": "\"mcha,mag\"",
+  "input 2": "r19",
+  "input 3": "gpy",
+  "input 4": "xa3",
+  "output": "\"useitem,pre=688\"",
+  "mod 1": "pierce-ltng",
+  "mod 1 min": 1,
+  "mod 1 max": 2,
+  "expansion": 1
+ },
+ "188": {
+  "description": "1 Fal Rune + 1 Perfect Topaz + 1 Southern Worldstone Shard + 1 Grand Charm -> Magnetic Grand Charm",
+  "enabled": 0,
+  "version": 100,
+  "numinputs": 4,
+  "input 1": "\"lcha,mag\"",
+  "input 2": "r19",
+  "input 3": "gpy",
+  "input 4": "xa3",
+  "output": "\"useitem,pre=689\"",
+  "mod 1": "pierce-ltng",
+  "mod 1 min": 1,
+  "mod 1 max": 3,
+  "expansion": 1
+ },
+ "189": {
+  "description": "1 Fal Rune + 1 Perfect Topaz + 1 Uber Ancient Summon Material Act3 + 1 Crack of the Heavens -> Magnetic Crack of the Heavens",
+  "enabled": 1,
+  "version": 100,
+  "numinputs": 4,
+  "input 1": "PreCrafted Crack of the Heavens",
+  "input 2": "r19",
+  "input 3": "gpy",
+  "input 4": "xa3",
+  "output": "Crafted Crack of the Heavens",
+  "ilvl": 69,
+  "expansion": 1
+ },
+ "190": {
+  "description": "1 Io Rune + 1 Perfect Ruby + 1 Deep Worldstone Shard + 1 Magic Amulet -> Incendiary Amulet",
+  "enabled": 0,
+  "version": 100,
+  "numinputs": 4,
+  "input 1": "\"amu,mag\"",
+  "input 2": "r16",
+  "input 3": "gpr",
+  "input 4": "xa4",
+  "output": "\"useitem,pre=679\"",
+  "mod 1": "pierce-fire",
+  "mod 1 min": 1,
+  "mod 1 max": 3,
+  "expansion": 1
+ },
+ "191": {
+  "description": "1 Io Rune + 1 Perfect Ruby + 1 Deep Worldstone Shard + 1 Magic Ring -> Incendiary Ring",
+  "enabled": 0,
+  "version": 100,
+  "numinputs": 4,
+  "input 1": "\"ring,mag\"",
+  "input 2": "r16",
+  "input 3": "gpr",
+  "input 4": "xa4",
+  "output": "\"useitem,pre=678\"",
+  "mod 1": "pierce-fire",
+  "mod 1 min": 1,
+  "mod 1 max": 2,
+  "expansion": 1
+ },
+ "192": {
+  "description": "1 Io Rune + 1 Perfect Ruby + 1 Deep Worldstone Shard + 1 Magic Helm -> Incendiary Helm",
+  "enabled": 0,
+  "version": 100,
+  "numinputs": 4,
+  "input 1": "\"helm,mag\"",
+  "input 2": "r16",
+  "input 3": "gpr",
+  "input 4": "xa4",
+  "output": "\"useitem,pre=679\"",
+  "mod 1": "pierce-fire",
+  "mod 1 min": 1,
+  "mod 1 max": 3,
+  "expansion": 1
+ },
+ "193": {
+  "description": "1 Io Rune + 1 Perfect Ruby + 1 Deep Worldstone Shard + 1 Magic Boots -> Incendiary Boots",
+  "enabled": 0,
+  "version": 100,
+  "numinputs": 4,
+  "input 1": "\"boot,mag\"",
+  "input 2": "r16",
+  "input 3": "gpr",
+  "input 4": "xa4",
+  "output": "\"useitem,pre=679\"",
+  "mod 1": "pierce-fire",
+  "mod 1 min": 1,
+  "mod 1 max": 3,
+  "expansion": 1
+ },
+ "194": {
+  "description": "1 Io Rune + 1 Perfect Ruby + 1 Deep Worldstone Shard + 1 Magic Gloves -> Incendiary Gloves",
+  "enabled": 0,
+  "version": 100,
+  "numinputs": 4,
+  "input 1": "\"glov,mag\"",
+  "input 2": "r16",
+  "input 3": "gpr",
+  "input 4": "xa4",
+  "output": "\"useitem,pre=679\"",
+  "mod 1": "pierce-fire",
+  "mod 1 min": 1,
+  "mod 1 max": 3,
+  "expansion": 1
+ },
+ "195": {
+  "description": "1 Io Rune + 1 Perfect Ruby + 1 Deep Worldstone Shard + 1 Magic Armor -> Incendiary Armor",
+  "enabled": 0,
+  "version": 100,
+  "numinputs": 4,
+  "input 1": "\"tors,mag\"",
+  "input 2": "r16",
+  "input 3": "gpr",
+  "input 4": "xa4",
+  "output": "\"useitem,pre=681\"",
+  "mod 1": "pierce-fire",
+  "mod 1 min": 2,
+  "mod 1 max": 8,
+  "expansion": 1
+ },
+ "196": {
+  "description": "1 Io Rune + 1 Perfect Ruby + 1 Deep Worldstone Shard + 1 Magic Weapon -> Incendiary Weapon",
+  "enabled": 0,
+  "version": 100,
+  "numinputs": 4,
+  "input 1": "\"weap,mag\"",
+  "input 2": "r16",
+  "input 3": "gpr",
+  "input 4": "xa4",
+  "output": "\"useitem,pre=680\"",
+  "mod 1": "pierce-fire",
+  "mod 1 min": 1,
+  "mod 1 max": 4,
+  "expansion": 1
+ },
+ "197": {
+  "description": "1 Io Rune + 1 Perfect Ruby + 1 Deep Worldstone Shard + 1 Magic Shield -> Incendiary Shield",
+  "enabled": 0,
+  "version": 100,
+  "numinputs": 4,
+  "input 1": "\"shie,mag\"",
+  "input 2": "r16",
+  "input 3": "gpr",
+  "input 4": "xa4",
+  "output": "\"useitem,pre=680\"",
+  "mod 1": "pierce-fire",
+  "mod 1 min": 1,
+  "mod 1 max": 4,
+  "expansion": 1
+ },
+ "198": {
+  "description": "1 Io Rune + 1 Perfect Ruby + 1 Deep Worldstone Shard + 1 Small Charm -> Incendiary Small Charm",
+  "enabled": 0,
+  "version": 100,
+  "numinputs": 4,
+  "input 1": "\"scha,mag\"",
+  "input 2": "r16",
+  "input 3": "gpr",
+  "input 4": "xa4",
+  "output": "\"useitem,pre=677\"",
+  "mod 1": "pierce-fire",
+  "mod 1 min": 1,
+  "mod 1 max": 1,
+  "expansion": 1
+ },
+ "199": {
+  "description": "1 Io Rune + 1 Perfect Ruby + 1 Deep Worldstone Shard + 1 Large Charm -> Incendiary Large Charm",
+  "enabled": 0,
+  "version": 100,
+  "numinputs": 4,
+  "input 1": "\"mcha,mag\"",
+  "input 2": "r16",
+  "input 3": "gpr",
+  "input 4": "xa4",
+  "output": "\"useitem,pre=678\"",
+  "mod 1": "pierce-fire",
+  "mod 1 min": 1,
+  "mod 1 max": 2,
+  "expansion": 1
+ },
+ "200": {
+  "description": "1 Io Rune + 1 Perfect Ruby + 1 Deep Worldstone Shard + 1 Grand Charm -> Incendiary Grand Charm",
+  "enabled": 0,
+  "version": 100,
+  "numinputs": 4,
+  "input 1": "\"lcha,mag\"",
+  "input 2": "r16",
+  "input 3": "gpr",
+  "input 4": "xa4",
+  "output": "\"useitem,pre=679\"",
+  "mod 1": "pierce-fire",
+  "mod 1 min": 1,
+  "mod 1 max": 3,
+  "expansion": 1
+ },
+ "201": {
+  "description": "1 Io Rune + 1 Perfect Ruby + 1 Uber Ancient Summon Material Act4 + 1 Flame Rift -> Incendiary Flame Rift",
+  "enabled": 1,
+  "version": 100,
+  "numinputs": 4,
+  "input 1": "PreCrafted Flame Rift",
+  "input 2": "r16",
+  "input 3": "gpr",
+  "input 4": "xa4",
+  "output": "Crafted Flame Rift",
+  "ilvl": 69,
+  "expansion": 1
+ },
+ "202": {
+  "description": "1 Pul Rune + 1 Perfect Amethyst + 1 Northern Worldstone Shard + 1 Magic Amulet -> Breaching Amulet",
+  "enabled": 0,
+  "version": 100,
+  "numinputs": 4,
+  "input 1": "\"amu,mag\"",
+  "input 2": "r21",
+  "input 3": "gpv",
+  "input 4": "xa5",
+  "output": "\"useitem,pre=699\"",
+  "mod 1": "pierce-dmg",
+  "mod 1 min": 1,
+  "mod 1 max": 3,
+  "expansion": 1
+ },
+ "203": {
+  "description": "1 Pul Rune + 1 Perfect Amethyst + 1 Northern Worldstone Shard + 1 Magic Ring -> Breaching Ring",
+  "enabled": 0,
+  "version": 100,
+  "numinputs": 4,
+  "input 1": "\"ring,mag\"",
+  "input 2": "r21",
+  "input 3": "gpv",
+  "input 4": "xa5",
+  "output": "\"useitem,pre=698\"",
+  "mod 1": "pierce-dmg",
+  "mod 1 min": 1,
+  "mod 1 max": 2,
+  "expansion": 1
+ },
+ "204": {
+  "description": "1 Pul Rune + 1 Perfect Amethyst + 1 Northern Worldstone Shard + 1 Magic Helm -> Breaching Helm",
+  "enabled": 0,
+  "version": 100,
+  "numinputs": 4,
+  "input 1": "\"helm,mag\"",
+  "input 2": "r21",
+  "input 3": "gpv",
+  "input 4": "xa5",
+  "output": "\"useitem,pre=699\"",
+  "mod 1": "pierce-dmg",
+  "mod 1 min": 1,
+  "mod 1 max": 3,
+  "expansion": 1
+ },
+ "205": {
+  "description": "1 Pul Rune + 1 Perfect Amethyst + 1 Northern Worldstone Shard + 1 Magic Boots -> Breaching Boots",
+  "enabled": 0,
+  "version": 100,
+  "numinputs": 4,
+  "input 1": "\"boot,mag\"",
+  "input 2": "r21",
+  "input 3": "gpv",
+  "input 4": "xa5",
+  "output": "\"useitem,pre=699\"",
+  "mod 1": "pierce-dmg",
+  "mod 1 min": 1,
+  "mod 1 max": 3,
+  "expansion": 1
+ },
+ "206": {
+  "description": "1 Pul Rune + 1 Perfect Amethyst + 1 Northern Worldstone Shard + 1 Magic Gloves -> Breaching Gloves",
+  "enabled": 0,
+  "version": 100,
+  "numinputs": 4,
+  "input 1": "\"glov,mag\"",
+  "input 2": "r21",
+  "input 3": "gpv",
+  "input 4": "xa5",
+  "output": "\"useitem,pre=699\"",
+  "mod 1": "pierce-dmg",
+  "mod 1 min": 1,
+  "mod 1 max": 3,
+  "expansion": 1
+ },
+ "207": {
+  "description": "1 Pul Rune + 1 Perfect Amethyst + 1 Northern Worldstone Shard + 1 Magic Armor -> Breaching Armor",
+  "enabled": 0,
+  "version": 100,
+  "numinputs": 4,
+  "input 1": "\"tors,mag\"",
+  "input 2": "r21",
+  "input 3": "gpv",
+  "input 4": "xa5",
+  "output": "\"useitem,pre=701\"",
+  "mod 1": "pierce-dmg",
+  "mod 1 min": 1,
+  "mod 1 max": 8,
+  "expansion": 1
+ },
+ "208": {
+  "description": "1 Pul Rune + 1 Perfect Amethyst + 1 Northern Worldstone Shard + 1 Magic Weapon -> Breaching Weapon",
+  "enabled": 0,
+  "version": 100,
+  "numinputs": 4,
+  "input 1": "\"weap,mag\"",
+  "input 2": "r21",
+  "input 3": "gpv",
+  "input 4": "xa5",
+  "output": "\"useitem,pre=700\"",
+  "mod 1": "pierce-dmg",
+  "mod 1 min": 1,
+  "mod 1 max": 4,
+  "expansion": 1
+ },
+ "209": {
+  "description": "1 Pul Rune + 1 Perfect Amethyst + 1 Northern Worldstone Shard + 1 Magic Shield -> Breaching Shield",
+  "enabled": 0,
+  "version": 100,
+  "numinputs": 4,
+  "input 1": "\"shie,mag\"",
+  "input 2": "r21",
+  "input 3": "gpv",
+  "input 4": "xa5",
+  "output": "\"useitem,pre=700\"",
+  "mod 1": "pierce-dmg",
+  "mod 1 min": 1,
+  "mod 1 max": 4,
+  "expansion": 1
+ },
+ "210": {
+  "description": "1 Pul Rune + 1 Perfect Amethyst + 1 Northern Worldstone Shard + 1 Small Charm -> Breaching Small Charm",
+  "enabled": 0,
+  "version": 100,
+  "numinputs": 4,
+  "input 1": "\"scha,mag\"",
+  "input 2": "r21",
+  "input 3": "gpv",
+  "input 4": "xa5",
+  "output": "\"useitem,pre=697\"",
+  "mod 1": "pierce-dmg",
+  "mod 1 min": 1,
+  "mod 1 max": 1,
+  "expansion": 1
+ },
+ "211": {
+  "description": "1 Pul Rune + 1 Perfect Amethyst + 1 Northern Worldstone Shard + 1 Large Charm -> Breaching Large Charm",
+  "enabled": 0,
+  "version": 100,
+  "numinputs": 4,
+  "input 1": "\"mcha,mag\"",
+  "input 2": "r21",
+  "input 3": "gpv",
+  "input 4": "xa5",
+  "output": "\"useitem,pre=698\"",
+  "mod 1": "pierce-dmg",
+  "mod 1 min": 1,
+  "mod 1 max": 2,
+  "expansion": 1
+ },
+ "212": {
+  "description": "1 Pul Rune + 1 Perfect Amethyst + 1 Northern Worldstone Shard + 1 Grand Charm -> Breaching Grand Charm",
+  "enabled": 0,
+  "version": 100,
+  "numinputs": 4,
+  "input 1": "\"lcha,mag\"",
+  "input 2": "r21",
+  "input 3": "gpv",
+  "input 4": "xa5",
+  "output": "\"useitem,pre=699\"",
+  "mod 1": "pierce-dmg",
+  "mod 1 min": 1,
+  "mod 1 max": 3,
+  "expansion": 1
+ },
+ "213": {
+  "description": "1 Pul Rune + 1 Perfect Amethyst + 1 Uber Ancient Summon Material Act5 + 1 Bone Break -> Breaching Bone Break",
+  "enabled": 1,
+  "version": 100,
+  "numinputs": 4,
+  "input 1": "PreCrafted Bone Break",
+  "input 2": "r21",
+  "input 3": "gpv",
+  "input 4": "xa5",
+  "output": "Crafted Bone Break",
+  "ilvl": 69,
+  "expansion": 1
+ },
+ "214": {
+  "description": "1 Mal Rune + 1 Perfect Diamond + 1 Northern Worldstone Shard + 1 Magic Amulet -> Mystical Amulet",
+  "enabled": 0,
+  "version": 100,
+  "numinputs": 4,
+  "input 1": "\"amu,mag\"",
+  "input 2": "r23",
+  "input 3": "gpw",
+  "input 4": "xa5",
+  "output": "\"useitem,pre=694\"",
+  "mod 1": "pierce-mag",
+  "mod 1 min": 1,
+  "mod 1 max": 3,
+  "expansion": 1
+ },
+ "215": {
+  "description": "1 Mal Rune + 1 Perfect Diamond + 1 Northern Worldstone Shard + 1 Magic Ring -> Mystical Ring",
+  "enabled": 0,
+  "version": 100,
+  "numinputs": 4,
+  "input 1": "\"ring,mag\"",
+  "input 2": "r23",
+  "input 3": "gpw",
+  "input 4": "xa5",
+  "output": "\"useitem,pre=693\"",
+  "mod 1": "pierce-mag",
+  "mod 1 min": 1,
+  "mod 1 max": 2,
+  "expansion": 1
+ },
+ "216": {
+  "description": "1 Mal Rune + 1 Perfect Diamond + 1 Northern Worldstone Shard + 1 Magic Helm -> Mystical Helm",
+  "enabled": 0,
+  "version": 100,
+  "numinputs": 4,
+  "input 1": "\"helm,mag\"",
+  "input 2": "r23",
+  "input 3": "gpw",
+  "input 4": "xa5",
+  "output": "\"useitem,pre=694\"",
+  "mod 1": "pierce-mag",
+  "mod 1 min": 1,
+  "mod 1 max": 3,
+  "expansion": 1
+ },
+ "217": {
+  "description": "1 Mal Rune + 1 Perfect Diamond + 1 Northern Worldstone Shard + 1 Magic Boots -> Mystical Boots",
+  "enabled": 0,
+  "version": 100,
+  "numinputs": 4,
+  "input 1": "\"boot,mag\"",
+  "input 2": "r23",
+  "input 3": "gpw",
+  "input 4": "xa5",
+  "output": "\"useitem,pre=694\"",
+  "mod 1": "pierce-mag",
+  "mod 1 min": 1,
+  "mod 1 max": 3,
+  "expansion": 1
+ },
+ "218": {
+  "description": "1 Mal Rune + 1 Perfect Diamond + 1 Northern Worldstone Shard + 1 Magic Gloves -> Mystical Gloves",
+  "enabled": 0,
+  "version": 100,
+  "numinputs": 4,
+  "input 1": "\"glov,mag\"",
+  "input 2": "r23",
+  "input 3": "gpw",
+  "input 4": "xa5",
+  "output": "\"useitem,pre=694\"",
+  "mod 1": "pierce-mag",
+  "mod 1 min": 1,
+  "mod 1 max": 3,
+  "expansion": 1
+ },
+ "219": {
+  "description": "1 Mal Rune + 1 Perfect Diamond + 1 Northern Worldstone Shard + 1 Magic Armor -> Mystical Armor",
+  "enabled": 0,
+  "version": 100,
+  "numinputs": 4,
+  "input 1": "\"tors,mag\"",
+  "input 2": "r23",
+  "input 3": "gpw",
+  "input 4": "xa5",
+  "output": "\"useitem,pre=696\"",
+  "mod 1": "pierce-mag",
+  "mod 1 min": 2,
+  "mod 1 max": 8,
+  "expansion": 1
+ },
+ "220": {
+  "description": "1 Mal Rune + 1 Perfect Diamond + 1 Northern Worldstone Shard + 1 Magic Weapon -> Mystical Weapon",
+  "enabled": 0,
+  "version": 100,
+  "numinputs": 4,
+  "input 1": "\"weap,mag\"",
+  "input 2": "r23",
+  "input 3": "gpw",
+  "input 4": "xa5",
+  "output": "\"useitem,pre=695\"",
+  "mod 1": "pierce-mag",
+  "mod 1 min": 1,
+  "mod 1 max": 4,
+  "expansion": 1
+ },
+ "221": {
+  "description": "1 Mal Rune + 1 Perfect Diamond + 1 Northern Worldstone Shard + 1 Magic Shield -> Mystical Shield",
+  "enabled": 0,
+  "version": 100,
+  "numinputs": 4,
+  "input 1": "\"shie,mag\"",
+  "input 2": "r23",
+  "input 3": "gpw",
+  "input 4": "xa5",
+  "output": "\"useitem,pre=695\"",
+  "mod 1": "pierce-mag",
+  "mod 1 min": 1,
+  "mod 1 max": 4,
+  "expansion": 1
+ },
+ "222": {
+  "description": "1 Mal Rune + 1 Perfect Diamond + 1 Northern Worldstone Shard + 1 Small Charm -> Mystical Small Charm",
+  "enabled": 0,
+  "version": 100,
+  "numinputs": 4,
+  "input 1": "\"scha,mag\"",
+  "input 2": "r23",
+  "input 3": "gpw",
+  "input 4": "xa5",
+  "output": "\"useitem,pre=692\"",
+  "mod 1": "pierce-mag",
+  "mod 1 min": 1,
+  "mod 1 max": 1,
+  "expansion": 1
+ },
+ "223": {
+  "description": "1 Mal Rune + 1 Perfect Diamond + 1 Northern Worldstone Shard + 1 Large Charm -> Mystical Large Charm",
+  "enabled": 0,
+  "version": 100,
+  "numinputs": 4,
+  "input 1": "\"mcha,mag\"",
+  "input 2": "r23",
+  "input 3": "gpw",
+  "input 4": "xa5",
+  "output": "\"useitem,pre=693\"",
+  "mod 1": "pierce-mag",
+  "mod 1 min": 1,
+  "mod 1 max": 2,
+  "expansion": 1
+ },
+ "224": {
+  "description": "1 Mal Rune + 1 Perfect Diamond + 1 Northern Worldstone Shard + 1 Grand Charm -> Mystical Grand Charm",
+  "enabled": 0,
+  "version": 100,
+  "numinputs": 4,
+  "input 1": "\"lcha,mag\"",
+  "input 2": "r23",
+  "input 3": "gpw",
+  "input 4": "xa5",
+  "output": "\"useitem,pre=694\"",
+  "mod 1": "pierce-mag",
+  "mod 1 min": 1,
+  "mod 1 max": 3,
+  "expansion": 1
+ },
+ "225": {
+  "description": "1 Mal Rune + 1 Perfect Diamond + 1 Uber Ancient Summon Material Act5 + 1 Black Cleft -> Mystical Black Cleft",
+  "enabled": 1,
+  "version": 100,
+  "numinputs": 6,
+  "input 1": "PreCrafted Black Cleft",
+  "input 2": "r23",
+  "input 3": "gpw",
+  "input 4": "xa3",
+  "input 5": "xa4",
+  "input 6": "xa5",
+  "output": "Crafted Black Cleft",
+  "ilvl": 69,
+  "expansion": 1
+ },
+ "226": {
+  "description": "1 Uber Ancient Summon Material from Act 1 + Act2 + Act3 + Act 4 + Act 5 -> Portal to Colossal Summit",
+  "enabled": 1,
+  "min diff": 2,
+  "version": 100,
+  "op": 28,
+  "numinputs": 5,
+  "input 1": "ua1",
+  "input 2": "ua2",
+  "input 3": "ua3",
+  "input 4": "ua4",
+  "input 5": "ua5",
+  "output": "\"Red Portal,lvl=137,qty=1\"",
+  "expansion": 1
  }
 }
