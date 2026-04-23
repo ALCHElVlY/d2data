@@ -79,7 +79,7 @@
 				{ label: 'Runes', key: 'runesUsed', render: item => formatRunes(item['*RunesUsed']), sortDefault: '—', headstyle: 'width:1px;user-select:none;cursor:pointer;text-align:center;white-space:nowrap;', style: 'text-align:left;white-space:nowrap;' },
 				{ label: 'Sockets', key: 'sockets', render: item => item.sockets, sortDefault: 0, headstyle: 'width:1px;user-select:none;cursor:pointer;text-align:center;white-space:nowrap;', style: 'text-align:center;' },
 				{ label: 'Allowed Types', key: 'allowedTypes', render: item => item.allowedTypes, headstyle: 'width:1px;user-select:none;cursor:pointer;text-align:center;white-space:nowrap;', style: 'text-align:left;white-space:nowrap;' },
-				{ label: 'Properties', key: 'parsedProps', render: item => item.parsedProps, headstyle: 'width:auto;user-select:none;cursor:pointer;', style: 'text-align:left;font-size:0.85em;white-space:pre-wrap;' },
+				{ label: 'Properties', key: 'parsedProps', render: item => item.parsedProps, headstyle: 'width:auto;user-select:none;cursor:pointer;text-align:left;', style: 'text-align:left;font-size:0.85em;white-space:pre-wrap;' },
 			],
 		},
 		methods: {
