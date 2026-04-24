@@ -1,0 +1,333 @@
+:root{
+    /* Text */
+    --d2r-text: #e3dfd0;        /* parchment white */
+    --d2r-text-muted: #9a9380;
+    --d2r-text-danger: #c0392b; /* health red */
+    --d2r-text-magic: #3fa7ff;  /* magic blue */
+    --d2r-text-rare: #f1c40f;   /* rare gold */
+    --d2r-text-set: #27ae60;    /* set green */
+    --d2r-text-unique: #ffb347; /* unique orange-gold */
+
+    /* Accents */
+    --d2r-accent-gold: #c9a45b;
+    --d2r-accent-gold-soft: #a88645;
+    --d2r-accent-red: #8b1a1a;
+    --d2r-accent-blue: #1f3b5b;
+
+    /* Borders & lines */
+    --d2r-border: #3a3a3a;
+    --d2r-border-strong: #7a5a2b;
+    --d2r-divider: #262626;
+
+    /* Glows */
+    --d2r-glow-gold: 0 0 8px rgba(201, 164, 91, 0.7);
+    --d2r-glow-red: 0 0 10px rgba(139, 26, 26, 0.8);
+    --d2r-glow-blue: 0 0 10px rgba(63, 167, 255, 0.7);
+
+    /* Controls */
+    --d2r-btn-bg: #252932;
+    --d2r-btn-bg-hover: #303544;
+    --d2r-input-bg: #101218;
+    --d2r-input-border: #4a4a4a;
+}
+
+.d2r-app {
+    min-height: 100vh;
+    background-image:
+        linear-gradient(to bottom, rgba(0, 0, 0, 0.9), rgba(0, 0, 0, 0.65)),
+        url("../../../images/DiabloII/diablo_ii_resurrected_background.jpg"); /* optional */
+    background-size: cover;
+    background-attachment: fixed;
+    padding: 1.5rem;
+}
+
+.d2r-tab-header {
+    background-image:
+        linear-gradient(to bottom, rgba(0, 0, 0, 0.9), rgba(0, 0, 0, 0.25)),
+        url("../../../images/DiabloII/DiabloII-Page-Header-Background.jpeg");
+}
+
+
+/**************************************************
+*                                                 *
+*                 PANELS & FRAMES                 *
+*                                                 *
+***************************************************/
+.d2r-panel {
+  background: radial-gradient(circle at top, #262a33 0, #151821 55%, #050608 100%);
+  border: 1px solid #000;
+  box-shadow:
+    0 0 0 1px rgba(255, 255, 255, 0.03),
+    0 0 0 2px rgba(0, 0, 0, 0.9),
+    var(--d2r-shadow-soft);
+  /* padding: 1rem; */
+  border-radius: 0;
+  position: relative;
+  color: var(--d2r-text);
+}
+
+.d2r-panel::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border: 1px solid var(--d2r-border-strong);
+  pointer-events: none;
+  mix-blend-mode: screen;
+  opacity: 0.4;
+}
+
+.d2r-panel-header {
+  font-family: var(--d2r-font-main);
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  font-size: 0.85rem;
+  color: var(--d2r-accent-gold);
+  border-bottom: 1px solid var(--d2r-divider);
+  padding-bottom: 0.35rem;
+  margin-bottom: 0.75rem;
+}
+
+
+/**************************************************
+*                                                 *
+*              BUTTONS & CONTROLS                 *
+*                                                 *
+***************************************************/
+.d2r-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.4rem 1.4rem;
+    border-radius: 0;
+    border: 1px solid #000;
+    background: linear-gradient(to bottom, #3b3f4a 0, #252932 50%, #181b22 100%);
+    color: var(--d2r-text);
+    font-family: var(--d2r-font-main);
+    text-transform: uppercase;
+    letter-spacing: 0.16em;
+    font-size: 0.75rem;
+    cursor: pointer;
+    box-shadow:
+        0 0 0 1px rgba(255, 255, 255, 0.05),
+        0 0 12px rgba(0, 0, 0, 0.9);
+    transition: background 120ms ease-out, box-shadow 120ms ease-out, transform 80ms ease-out;
+    }
+
+.d2r-btn:hover {
+    background: linear-gradient(to bottom, #4a4f5c 0, #303544 50%, #1f222b 100%);
+    box-shadow:
+        0 0 0 1px rgba(255, 255, 255, 0.08),
+        var(--d2r-glow-gold);
+}
+
+.d2r-btn:active {
+    transform: translateY(1px);
+    background: linear-gradient(to bottom, #252932 0, #181b22 100%);
+}
+
+
+/**************************************************
+*                                                 *
+*                 INPUTS & TOOLTIPS               *
+*                                                 *
+***************************************************/
+.d2r-input {
+    width: 100%;
+    padding: 0.4rem 0.6rem;
+    background: var(--d2r-input-bg);
+    border: 1px solid var(--d2r-input-border);
+    color: var(--d2r-text);
+    font-family: var(--d2r-font-body);
+    font-size: 0.85rem;
+    outline: none;
+    transition: all 0.3s ease;
+}
+
+.d2r-input:focus {
+    border-color: var(--d2r-accent-gold);
+    box-shadow: var(--d2r-glow-gold);
+}
+
+/* Hover */
+.d2r-input:hover {
+  border-color: #d8b56a;
+  box-shadow: 0 0 8px rgba(201,164,91,0.5);
+  cursor: pointer;
+}
+
+/* Item tooltip style */
+.d2r-tooltip {
+    max-width: 320px;
+    background: radial-gradient(circle at top, #20232b 0, #050608 80%);
+    border: 1px solid #000;
+    box-shadow: var(--d2r-shadow-soft);
+    padding: 0.6rem 0.8rem;
+    color: var(--d2r-text);
+    font-family: var(--d2r-font-body);
+    font-size: 0.8rem;
+}
+
+.d2r-tooltip-title {
+    font-family: var(--d2r-font-main);
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    margin-bottom: 0.25rem;
+}
+
+/* Rarity text helpers */
+.d2r-text-magic   { color: var(--d2r-text-magic); }
+.d2r-text-rare    { color: var(--d2r-text-rare); }
+.d2r-text-set     { color: var(--d2r-text-set); }
+.d2r-text-unique  { color: var(--d2r-text-unique); }
+.d2r-text-danger  { color: var(--d2r-text-danger); }
+.d2r-text-muted   { color: var(--d2r-text-muted); }
+
+
+/**************************************************
+*                                                 *
+*                 HEALTH & MANA BARS              *
+*                                                 *
+***************************************************/
+.d2r-bar {
+  position: relative;
+  height: 14px;
+  background: #111;
+  border: 1px solid #000;
+  box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.05);
+  overflow: hidden;
+}
+
+.d2r-bar-fill {
+  height: 100%;
+  transition: width 160ms linear;
+}
+
+.d2r-bar-fill--life {
+  background: radial-gradient(circle at center, #ff3b3b 0, #8b1a1a 60%, #3b0505 100%);
+  box-shadow: var(--d2r-glow-red);
+}
+
+.d2r-bar-fill--mana {
+  background: radial-gradient(circle at center, #4aa3ff 0, #1f3b5b 60%, #050814 100%);
+  box-shadow: var(--d2r-glow-blue);
+}
+
+.d2r-slider {
+  -webkit-appearance: none;
+  width: 100%;
+  height: 6px;
+  background: #181b22;
+  border: 1px solid #3a3a3a;
+  box-shadow: inset 0 0 6px rgba(0,0,0,0.6);
+}
+
+/* Track */
+.d2r-slider::-webkit-slider-runnable-track {
+  height: 6px;
+  background: linear-gradient(to right, #7a5a2b, #c9a45b);
+}
+
+/* Thumb */
+.d2r-slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 16px;
+  height: 16px;
+  background: linear-gradient(to bottom, #c9a45b, #a88645);
+  border: 1px solid #7a5a2b;
+  border-radius: 2px;
+  box-shadow: 0 0 8px rgba(201,164,91,0.7);
+  cursor: pointer;
+  margin-top: -5px;
+}
+
+.d2r-slider::-webkit-slider-thumb:hover {
+  background: linear-gradient(to bottom, #d8b56a, #b8954f);
+  box-shadow: 0 0 10px rgba(201,164,91,0.9);
+  cursor: grab;
+}
+
+
+/**************************************************
+*                                                 *
+*                    TABLES                       *
+*                                                 *
+***************************************************/
+.d2r-table {
+    width: 100%;
+    border-collapse: collapse;
+    color: var(--d2r-text);
+    font-size: 0.85rem;
+}
+
+.d2r-table thead th {
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    background: #151821;  /* matches panel mid-stop */
+    /* border-bottom: 1px solid var(--d2r-border-strong); */
+    padding: 0.6rem 0.75rem;
+    text-align: center;
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--d2r-accent-gold);
+    white-space: nowrap;
+    user-select: none;
+    cursor: pointer;
+}
+
+.d2r-table thead th:hover {
+    color: var(--d2r-text);
+}
+
+.d2r-table tbody tr {
+    border-bottom: 1px solid var(--d2r-divider);
+    transition: background 80ms ease-out;
+    background: #151821;
+}
+
+.d2r-table tbody tr:nth-child(even) {
+    background: #181c25;  /* very subtle stripe */
+}
+
+.d2r-table tbody tr:hover {
+    background: rgba(201, 164, 91, 0.06);   /* faint gold highlight */
+}
+
+.d2r-table tbody td {
+    padding: 0.5rem 0.75rem;
+    text-align: center;
+    color: var(--d2r-text);
+    white-space: nowrap;
+}
+
+.d2r-table tbody td.d2r-col-name {
+    font-weight: 600;
+    color: var(--d2r-text);
+    text-align: left;
+}
+
+/* Sticky left: pin only the Item Name column (nth-child(2) due to blank spacer at index 0) */
+/* .d2r-table thead th:nth-child(2) {
+    position: sticky;
+    left: 0;
+    z-index: 11;
+    background: #151821;
+}
+
+.d2r-table tbody td:nth-child(2) {
+    position: sticky;
+    left: 0;
+    z-index: 1;
+    background: #151821;
+}
+
+.d2r-table tbody tr:nth-child(even) td:nth-child(2) {
+    background: #181c25;
+}
+
+.d2r-table tbody tr:hover td:nth-child(2) {
+    background: #1e2130;
+} */
+
+

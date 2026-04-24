@@ -1,6 +1,12 @@
 'use strict'; /* global Vue */
 
 (function () {
+	const CLASS_NAMES = {
+		ama: 'Amazon', sor: 'Sorceress', nec: 'Necromancer',
+		pal: 'Paladin', bar: 'Barbarian', dru: 'Druid', ass: 'Assassin',
+		war: 'Warlock',
+	};
+	
 	let baseWeapons = fetch('https://raw.githubusercontent.com/ALCHElVlY/d2data/master/json/weapons.json');
 	let itemTypes = fetch('https://raw.githubusercontent.com/ALCHElVlY/d2data/master/json/itemtypes.json');
 
@@ -8,17 +14,11 @@
 		return values.filter(v => v !== undefined).shift();
 	}
 
-	const CLASS_NAMES = {
-		ama: 'Amazon', sor: 'Sorceress', nec: 'Necromancer',
-		pal: 'Paladin', bar: 'Barbarian', dru: 'Druid', ass: 'Assassin',
-		war: 'Warlock',
-	};
-
 	new Vue({
-		el: '#weaponapp',
+		el: '#weapontab',
 		data: {
 			visible: false,
-			pageTitle: 'Diablo 2 Weapon Base Browser',
+			pageTitle: 'Diablo II: Resurrected Data Browser | Weapon Bases',
 			items: [],
 			sortColumn: undefined,
 			contains: '',
@@ -45,7 +45,7 @@
 			},
 			columns: [
 				{ label: '', value: '', headstyle: 'width:auto;user-select:none;cursor:pointer;' },
-				{ label: 'Item Name', key: 'name', render: item => item.name, headstyle: 'width:1px;user-select:none;cursor:pointer;text-align:center;white-space:nowrap;', style: 'text-align:center;white-space:nowrap;', tooltip: 'The item name (and internal item code).' },
+				{ label: 'Name', key: 'name', render: item => item.name, headstyle: 'width:1px;user-select:none;cursor:pointer;text-align:center;white-space:nowrap;', style: 'text-align:center;white-space:nowrap;', tooltip: 'The item name (and internal item code).' },
 				{ label: 'Class', key: 'className', render: item => item.className || '—', sortDefault: '', tooltip: 'The class this item is restricted to, if any.' },
 				{ label: 'Type', key: 'type', render: item => item.typeName || '??', sortDefault: '??', tooltip: 'The category this item belongs to.' },
 				{ label: 'Speed', key: 'speed', render: item => item.speed || 0, sortDefault: 0, tooltip: 'Higher values mean slower weapons.' },

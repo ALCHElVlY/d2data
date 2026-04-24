@@ -1,4 +1,5 @@
 'use strict'; /* global Vue */
+
 Vue && Vue.directive('tooltip', {
   bind: function (el, binding) {
     if (binding.value) {

@@ -1,17 +1,17 @@
 'use strict'; /* global Vue */
 
 (function () {
-	let dataPromise = fetch('https://raw.githubusercontent.com/ALCHElVlY/d2data/master/json/misc.json');
+	let miscitems = fetch('https://raw.githubusercontent.com/ALCHElVlY/d2data/master/json/misc.json');
 
 	function first (...values) {
 		return values.filter(v => v !== undefined).shift();
 	}
 
 	new Vue({
-		el: '#miscapp',
+		el: '#miscitemstab',
 		data: {
 			visible: false,
-			pageTitle: 'Diablo 2 Misc Items',
+			pageTitle: 'Diablo II: Resurrected Data Browser | Misc Items',
 			items: [],
 			sortColumn: undefined,
 			contains: '',
@@ -28,12 +28,12 @@
 			},
 			columns: [
 				{ label: '', value: '', headstyle: 'width:auto;user-select:none;cursor:pointer;' },
-				{ label: 'Name', key: 'name', render: item => item.name + ' (' + item.code + ')', headstyle: 'width:1px;user-select:none;cursor:pointer;text-align:center;white-space:nowrap;', style: 'text-align:left;white-space:nowrap;' },
+				{ label: 'Name', key: 'name', render: item => item.name, headstyle: 'width:1px;user-select:none;cursor:pointer;text-align:center;white-space:nowrap;', style: 'text-align:left;white-space:nowrap;' },
 				{ label: 'Type', key: 'type', render: item => item.type || '??', sortDefault: '??', tooltip: 'Item category.' },
-				{ label: 'Req Level', key: 'levelreq', render: item => item.levelreq || 0, sortDefault: 0 },
-				{ label: 'Sockets', key: 'gemsockets', render: item => item.gemsockets || 0, sortDefault: 0 },
+				{ label: 'Required Level', key: 'levelreq', render: item => item.levelreq || 0, sortDefault: 0 },
+				{ label: 'Maximum Sockets', key: 'gemsockets', render: item => item.gemsockets || 0, sortDefault: 0 },
 				{ label: 'Stackable', key: 'stackable', render: item => item.stackable ? 'Yes (' + item.minstack + '-' + item.maxstack + ')' : 'No', sortDefault: 'No' },
-				{ label: 'Version', key: 'version', render: item => item.version === 100 ? 'LoD' : 'Classic', sortDefault: 'Classic' },
+				{ label: 'Version', key: 'version', render: item => item.version === 100 ? 'Lord of Destruction' : 'Classic', sortDefault: 'Classic' },
 				{ label: '', value: '', headstyle: 'width:auto;user-select:none;cursor:pointer;' },
 			],
 		},
@@ -72,12 +72,14 @@
 			first,
 		},
 		created: async function () {
-			let res = await dataPromise;
-			let data = await res.json();
-			this.items = Object.values(data).filter(i => i.spawnable);
+			let miscItemsResponse = await miscitems;
+			let miscItemsJson = await miscItemsResponse.json();
+			this.items = Object.values(miscItemsJson).filter(i => i.spawnable);
+
 			this.items.forEach(i => {
 				this.itemtypes[i.type || 'none'] = i.type || 'none';
 			});
+
 			let maxlvl = Math.max(...this.items.map(i => i.levelreq || 0));
 			this.maxlevelreq = this.levelrequpper = maxlvl || 99;
 			this.visible = true;

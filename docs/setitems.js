@@ -1,14 +1,13 @@
 'use strict'; /* global Vue */
 
 (function () {
-	let itemsPromise = fetch('https://raw.githubusercontent.com/ALCHElVlY/d2data/master/json/setitems.json');
-	let propsPromise = fetch('https://raw.githubusercontent.com/ALCHElVlY/d2data/master/json/properties.json');
+	let setItems = fetch('https://raw.githubusercontent.com/ALCHElVlY/d2data/master/json/setitems.json');
+	let properties = fetch('https://raw.githubusercontent.com/ALCHElVlY/d2data/master/json/properties.json');
 
 	function first (...values) {
 		return values.filter(v => v !== undefined).shift();
 	}
-
-	function parseProps(item, properties, propPrefix, minPrefix, maxPrefix, count) {
+	function parseProperties(item, properties, propPrefix, minPrefix, maxPrefix, count) {
 		let result = [];
 		for (let i = 1; i <= count; i++) {
 			let code = item[propPrefix + i];
@@ -23,8 +22,7 @@
 		}
 		return result.join('\n') || '—';
 	}
-
-	function parseAProps(item, properties) {
+	function parseSetBonus(item, properties) {
 		let result = [];
 		for (let i = 1; i <= 5; i++) {
 			let code = item['aprop' + i + 'a'];
@@ -41,10 +39,10 @@
 	}
 
 	new Vue({
-		el: '#setitemsapp',
+		el: '#setitemstab',
 		data: {
 			visible: false,
-			pageTitle: 'Diablo 2 Set Items',
+			pageTitle: 'Diablo II: Resurrected Data Browser | Set Items',
 			items: [],
 			sortColumn: undefined,
 			contains: '',
@@ -59,11 +57,11 @@
 			},
 			columns: [
 				{ label: '', value: '', headstyle: 'width:auto;user-select:none;cursor:pointer;' },
-				{ label: 'Item Name', key: 'index', render: item => item.index, headstyle: 'width:1px;user-select:none;cursor:pointer;text-align:center;white-space:nowrap;', style: 'text-align:center;white-space:nowrap;' },
+				{ label: 'Name', key: 'index', render: item => item.index, headstyle: 'width:1px;user-select:none;cursor:pointer;text-align:center;white-space:nowrap;', style: 'text-align:center;white-space:nowrap;' },
 				{ label: 'Set', key: 'set', render: item => item.set || '??', sortDefault: '??', headstyle: 'width:1px;user-select:none;cursor:pointer;text-align:center;white-space:nowrap;', style: 'text-align:center;white-space:nowrap;' },
 				{ label: 'Base Item', key: 'ItemName', render: item => item['*ItemName'] || '??', sortDefault: '??' },
 				{ label: 'Req Level', key: 'levelreq', render: item => item['lvl req'] || 0, sortDefault: 0 },
-				{ label: 'Properties', key: 'parsedProps', render: item => item.parsedProps, headstyle: 'width:auto;user-select:none;cursor:pointer;', style: 'text-align:center;font-size:0.85em;white-space:pre-wrap;' },
+				{ label: 'Properties', key: 'parsedProperties', render: item => item.parsedProperties, headstyle: 'width:auto;user-select:none;cursor:pointer;', style: 'text-align:center;font-size:0.85em;white-space:pre-wrap;' },
 				{ label: 'Set Bonuses', key: 'parsedSetBonus', render: item => item.parsedSetBonus, headstyle: 'width:auto;user-select:none;cursor:pointer;', style: 'text-align:center;font-size:0.85em;white-space:pre-wrap;' },
 				{ label: '', value: '', headstyle: 'width:auto;user-select:none;cursor:pointer;' },
 			],
@@ -100,16 +98,18 @@
 			first,
 		},
 		created: async function () {
-			let [itemsRes, propsRes] = await Promise.all([itemsPromise, propsPromise]);
-			let itemsData = await itemsRes.json();
-			let properties = await propsRes.json();
-			this.items = Object.values(itemsData)
+			let [setItemsResponse, propertiesResponse] = await Promise.all([setItems, properties]);
+			let setItemsJson = await setItemsResponse.json();
+			let propertiesJson = await propertiesResponse.json();
+
+			this.items = Object.values(setItemsJson)
 				.filter(i => i.spawnable)
 				.map(i => {
-					i.parsedProps = parseProps(i, properties, 'prop', 'min', 'max', 9);
-					i.parsedSetBonus = parseAProps(i, properties);
+					i.parsedProperties = parseProperties(i, propertiesJson, 'prop', 'min', 'max', 9);
+					i.parsedSetBonus = parseSetBonus(i, propertiesJson);
 					return i;
 				});
+
 			let maxlvl = Math.max(...this.items.map(i => i['lvl req'] || 0));
 			this.maxlevelreq = this.levelrequpper = maxlvl;
 			this.visible = true;

@@ -1,21 +1,24 @@
 'use strict'; /* global Vue */
 
 (function () {
-	let runesPromise = fetch('https://raw.githubusercontent.com/ALCHElVlY/d2data/master/json/runes.json');
-	let propsPromise = fetch('https://raw.githubusercontent.com/ALCHElVlY/d2data/master/json/properties.json');
-	let itemTypesPromise = fetch('https://raw.githubusercontent.com/ALCHElVlY/d2data/master/json/itemtypes.json');
-
-	function first (...values) {
-		return values.filter(v => v !== undefined).shift();
-	}
-
 	const CLASS_SKILL_LABELS = {
 		ama: 'Amazon Skills', sor: 'Sorceress Skills', nec: 'Necromancer Skills',
 		pal: 'Paladin Skills', bar: 'Barbarian Skills', dru: 'Druid Skills',
 		war: 'Assassin Skills',
 	};
 
-	function parseRunewordProps(item, properties) {
+	let runewords = fetch('https://raw.githubusercontent.com/ALCHElVlY/d2data/master/json/runes.json');
+	let properties = fetch('https://raw.githubusercontent.com/ALCHElVlY/d2data/master/json/properties.json');
+	let itemTypes = fetch('https://raw.githubusercontent.com/ALCHElVlY/d2data/master/json/itemtypes.json');
+
+	function first (...values) {
+		return values.filter(v => v !== undefined).shift();
+	}
+	function formatRunes(runesUsed) {
+		if (!runesUsed) return '—';
+		return (runesUsed.match(/[A-Z][a-z]*/g) || [runesUsed]).join(', ');
+	}
+	function parseRunewordProperties(item, properties) {
 		let result = [];
 		for (let i = 1; i <= 7; i++) {
 			let code = item['T1Code' + i];
@@ -41,12 +44,6 @@
 		}
 		return result.join('\n') || '—';
 	}
-
-	function formatRunes(runesUsed) {
-		if (!runesUsed) return '—';
-		return (runesUsed.match(/[A-Z][a-z]*/g) || [runesUsed]).join(', ');
-	}
-
 	function parseAllowedTypes(item, itemTypes) {
 		let types = [];
 		for (let i = 1; i <= 6; i++) {
@@ -59,10 +56,10 @@
 	}
 
 	new Vue({
-		el: '#runewordsapp',
+		el: '#runewordstab',
 		data: {
 			visible: false,
-			pageTitle: 'Diablo 2 Runeword Browser',
+			pageTitle: 'Diablo II: Resurrected Data Browser | Runewords',
 			items: [],
 			sortColumn: undefined,
 			contains: '',
@@ -75,11 +72,11 @@
 				style: 'text-align:center;',
 			},
 			columns: [
-				{ label: 'Runeword', key: 'runeName', render: item => item.runeName, headstyle: 'width:1px;user-select:none;cursor:pointer;text-align:center;white-space:nowrap;', style: 'text-align:center;white-space:nowrap;' },
+				{ label: 'Name', key: 'runeName', render: item => item.runeName, headstyle: 'width:1px;user-select:none;cursor:pointer;text-align:center;white-space:nowrap;', style: 'text-align:center;white-space:nowrap;' },
 				{ label: 'Rune Order', key: 'runesUsed', render: item => formatRunes(item['*RunesUsed']), sortDefault: '—', headstyle: 'width:1px;user-select:none;cursor:pointer;text-align:center;white-space:nowrap;', style: 'text-align:center;white-space:nowrap;' },
 				{ label: 'Sockets', key: 'sockets', render: item => item.sockets, sortDefault: 0, headstyle: 'width:1px;user-select:none;cursor:pointer;text-align:center;white-space:nowrap;', style: 'text-align:center;' },
 				{ label: 'Allowed Types', key: 'allowedTypes', render: item => item.allowedTypes, headstyle: 'width:1px;user-select:none;cursor:pointer;text-align:center;white-space:nowrap;', style: 'text-align:center;white-space:nowrap;' },
-				{ label: 'Properties', key: 'parsedProps', render: item => item.parsedProps, headstyle: 'width:auto;user-select:none;cursor:pointer;text-align:center;', style: 'text-align:center;font-size:0.85em;white-space:pre-wrap;' },
+				{ label: 'Properties', key: 'parsedProperties', render: item => item.parsedProperties, headstyle: 'width:auto;user-select:none;cursor:pointer;text-align:center;', style: 'text-align:center;font-size:0.85em;white-space:pre-wrap;' },
 			],
 		},
 		methods: {
@@ -112,16 +109,19 @@
 			first,
 		},
 		created: async function () {
-			let [runesRes, propsRes, itemTypesRes] = await Promise.all([runesPromise, propsPromise, itemTypesPromise]);
-			let runesData = await runesRes.json();
-			let properties = await propsRes.json();
-			let itemTypes = await itemTypesRes.json();
-			this.items = Object.values(runesData)
+			let [runewordResponse, propertiesResponse, itemTypesResponse] = await Promise.all([
+				runewords, properties, itemTypes
+			]);
+			let runewordJson = await runewordResponse.json();
+			let propertyJson = await propertiesResponse.json();
+			let itemTypeJson = await itemTypesResponse.json();
+
+			this.items = Object.values(runewordJson)
 				.filter(i => i.complete === 1)
 				.map(i => {
 					i.runeName = i['*Rune Name'];
-					i.allowedTypes = parseAllowedTypes(i, itemTypes);
-					i.parsedProps = parseRunewordProps(i, properties);
+					i.allowedTypes = parseAllowedTypes(i, itemTypeJson);
+					i.parsedProperties = parseRunewordProperties(i, propertyJson);
 					// count sockets = number of Rune{n} keys present
 					let s = 0;
 					for (let n = 1; n <= 6; n++) { if (i['Rune' + n]) s++; }
@@ -130,7 +130,7 @@
 					for (let n = 1; n <= 6; n++) {
 						let code = i['itype' + n];
 						if (code) {
-							let friendly = (itemTypes[code] && itemTypes[code]['ItemType']) || code;
+							let friendly = (itemTypeJson[code] && itemTypeJson[code]['ItemType']) || code;
 							this.itemtypes[friendly] = friendly;
 						}
 					}

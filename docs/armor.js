@@ -9,10 +9,10 @@
 	}
 
 	new Vue({
-		el: '#armorapp',
+		el: '#armortab',
 		data: {
 			visible: false,
-			pageTitle: 'Diablo 2 Armor Base Browser',
+			pageTitle: 'Diablo II: Resurrected Data Browser | Armor Bases',
 			items: [],
 			sortColumn: undefined,
 			contains: '',
@@ -35,11 +35,11 @@
 			},
 			columns: [
 				{ label: '', value: '', headstyle: 'width:auto;user-select:none;cursor:pointer;' },
-				{ label: 'Item Name', key: 'name', render: item => item.name, headstyle: 'width:1px;user-select:none;cursor:pointer;text-align:center;white-space:nowrap;', style: 'text-align:center;white-space:nowrap;', tooltip: 'The item name (and internal item code).' },
+				{ label: 'Name', key: 'name', render: item => item.name, headstyle: 'width:1px;user-select:none;cursor:pointer;text-align:center;white-space:nowrap;', style: 'text-align:center;white-space:nowrap;', tooltip: 'The item name (and internal item code).' },
 				{ label: 'Type', key: 'type', render: item => item.typeName || '??', sortDefault: '??', tooltip: 'The category this item belongs to.' },
 				{ label: 'Required Level', key: 'levelreq', render: item => item.levelreq || 0, sortDefault: 0, tooltip: 'The minimum level required to equip this item.' },
 				{ label: 'Tier', key: 'tier', render: item => item.tierName, sortDefault: 0, defaultSortOrder: -1, tooltip: 'Each item has Normal, Exceptional, and Elite variants. Elite is the best.' },
-				{ label: 'Sock', key: 'gemsockets', render: item => item.gemsockets || 0, sortDefault: 0, tooltip: 'The maximum number of sockets an item can possibly have.' },
+				{ label: 'Maximum Sockets', key: 'gemsockets', render: item => item.gemsockets || 0, sortDefault: 0, tooltip: 'The maximum number of sockets an item can possibly have.' },
 				{ label: 'Max AC', key: 'maxac', render: item => item.maxac || 0, sortDefault: 0, tooltip: 'The maximum amount of armor class an item can possibly have.' },
 				{ label: 'Weight', key: 'speed', render: item => item.weightClass, sortDefault: 0, tooltip: 'The weight of the armor. Medium has a run speed penalty, and Heavy has even more.' },
 				{ label: 'Required Strength', key: 'reqstr', render: item => item.reqstr || 0, sortDefault: 0, tooltip: 'The minimum amount of strength required to equip this item (before modifiers).' },
