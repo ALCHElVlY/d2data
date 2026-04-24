@@ -1,17 +1,24 @@
 'use strict'; /* global Vue */
 
 (function () {
-	let data = fetch('https://raw.githubusercontent.com/ALCHElVlY/d2data/master/json/weapons.json');
+	let baseWeapons = fetch('https://raw.githubusercontent.com/ALCHElVlY/d2data/master/json/weapons.json');
+	let itemTypes = fetch('https://raw.githubusercontent.com/ALCHElVlY/d2data/master/json/itemtypes.json');
 
 	function first (...values) {
 		return values.filter(v => v !== undefined).shift();
 	}
 
+	const CLASS_NAMES = {
+		ama: 'Amazon', sor: 'Sorceress', nec: 'Necromancer',
+		pal: 'Paladin', bar: 'Barbarian', dru: 'Druid', ass: 'Assassin',
+		war: 'Warlock',
+	};
+
 	new Vue({
 		el: '#weaponapp',
 		data: {
 			visible: false,
-			pageTitle: 'Diablo 2 Weapon Browser',
+			pageTitle: 'Diablo 2 Weapon Base Browser',
 			items: [],
 			sortColumn: undefined,
 			contains: '',
@@ -27,6 +34,10 @@
 			itemtypes: {
 				All: 'All',
 			},
+			classfilter: 'All',
+			classfilters: {
+				All: 'All',
+			},
 			defaults: {
 				value: '??',
 				headstyle: 'width:1px;user-select:none;cursor:pointer;text-align:center;',
@@ -34,19 +45,20 @@
 			},
 			columns: [
 				{ label: '', value: '', headstyle: 'width:auto;user-select:none;cursor:pointer;' },
-				{ label: 'Item Name (code)', key: 'name', render: item => item.name + ' (' + item.code + ')', headstyle: 'width:1px;user-select:none;cursor:pointer;text-align:center;white-space:nowrap;', style: 'text-align:center;white-space:nowrap;', tooltip: 'The item name (and internal item code).' },
-				{ label: 'Type', key: 'type', render: item => item.type || '??', sortDefault: '??', tooltip: 'The category this item belongs to.' },
+				{ label: 'Item Name', key: 'name', render: item => item.name, headstyle: 'width:1px;user-select:none;cursor:pointer;text-align:center;white-space:nowrap;', style: 'text-align:center;white-space:nowrap;', tooltip: 'The item name (and internal item code).' },
+				{ label: 'Class', key: 'className', render: item => item.className || '—', sortDefault: '', tooltip: 'The class this item is restricted to, if any.' },
+				{ label: 'Type', key: 'type', render: item => item.typeName || '??', sortDefault: '??', tooltip: 'The category this item belongs to.' },
 				{ label: 'Speed', key: 'speed', render: item => item.speed || 0, sortDefault: 0, tooltip: 'Higher values mean slower weapons.' },
-				{ label: 'Req Level', key: 'levelreq', render: item => item.levelreq || 0, sortDefault: 0, tooltip: 'The minimum level required to equip this item.' },
+				{ label: 'Required Level', key: 'levelreq', render: item => item.levelreq || 0, sortDefault: 0, tooltip: 'The minimum level required to equip this item.' },
 				{ label: 'Tier', key: 'tier', render: item => item.tierName, sortDefault: 0, defaultSortOrder: -1, tooltip: 'Each item has Normal, Exceptional, and Elite variants. Elite is the best.' },
-				{ label: 'Sock', key: 'gemsockets', render: item => item.gemsockets || 0, sortDefault: 0, tooltip: 'The maximum number of sockets an item can possibly have.' },
-				{ label: 'Req Str', key: 'reqstr', render: item => item.reqstr || 0, sortDefault: 0, tooltip: 'The minimum amount of strength required to equip this item (before modifiers).' },
-				{ label: 'Req Dex', key: 'reqdex', render: item => item.reqdex || 0, sortDefault: 0, tooltip: 'The minimum amount of dexterity required to equip this item (before modifiers).' },
+				{ label: 'Maximum Sockets', key: 'gemsockets', render: item => item.gemsockets || 0, sortDefault: 0, tooltip: 'The maximum number of sockets an item can possibly have.' },
+				{ label: 'Required Strength', key: 'reqstr', render: item => item.reqstr || 0, sortDefault: 0, tooltip: 'The minimum amount of strength required to equip this item (before modifiers).' },
+				{ label: 'Required Dexterity', key: 'reqdex', render: item => item.reqdex || 0, sortDefault: 0, tooltip: 'The minimum amount of dexterity required to equip this item (before modifiers).' },
 				{ label: 'Str Use', key: 'StrBonus', render: item => (item.StrBonus || 0) + '%', sortDefault: 0, tooltip: 'The amount that strength contributes to damage. A 75% modifier means every 100 strength is +75% damage bonus.' },
 				{ label: 'Dex Use', key: 'DexBonus', render: item => (item.DexBonus || 0) + '%', sortDefault: 0, tooltip: 'The amount that dexterity contributes to damage. A 75% modifier means every 100 dexterity is +75% damage bonus.' },
 				{ label: '1h Damage', key: 'dps', render: item => item.dps || '??', sortDefault: 0, defaultSortOrder: -1, tooltip: 'Damage is averaged and adjusted for speed. This is not a proper dps.' },
 				{ label: '2h Damage', key: '2handdps', render: item => item['2handdps'] || '??', sortDefault: 0, defaultSortOrder: -1, tooltip: 'Damage is averaged and adjusted for speed. This is not a proper dps.' },
-				{ label: 'Rng Damage', key: 'misdps', render: item => item.misdps || '??', sortDefault: 0, defaultSortOrder: -1, tooltip: 'Damage is averaged and adjusted for speed. This is not a proper dps.' },
+				{ label: 'Range Damage', key: 'misdps', render: item => item.misdps || '??', sortDefault: 0, defaultSortOrder: -1, tooltip: 'Damage is averaged and adjusted for speed. This is not a proper dps.' },
 				{ label: '', value: '', headstyle: 'width:auto;user-select:none;cursor:pointer;' },
 			]
 		},
@@ -80,6 +92,7 @@
 				this.sockets = 0;
 				this.tier = 0;
 				this.itemtype = 'All';
+				this.classfilter = 'All';
 				this.requireonehand = false;
 				this.requiretwohand = false;
 				this.requiremissile = false;
@@ -101,7 +114,11 @@
 					return false;
 				}
 
-				if (this.itemtype !== 'All' && this.itemtype !== item.type) {
+				if (this.itemtype !== 'All' && this.itemtype !== item.typeName) {
+					return false;
+				}
+
+				if (this.classfilter !== 'All' && this.classfilter !== (item.className || '—')) {
 					return false;
 				}
 
@@ -126,9 +143,11 @@
 			first,
 		},
 		created: async function () {
-			data = await data;
-			data = await data.json();
-			this.items = Object.values(data).map(v => {
+			let [dataRes, itemTypesRes] = await Promise.all([baseWeapons, itemTypes]);
+			let json = await dataRes.json();
+			let itemTypesJson = await itemTypesRes.json();
+
+			this.items = Object.values(json).map(v => {
 				v.speed = v.speed || 0;
 				v.avgdam = (v.mindam + v.maxdam) / 2 || 0;
 				v.dps = v.avgdam * (100 - v.speed) / 100 || 0;
@@ -138,11 +157,16 @@
 				v.misdps = v.avgmisdam * (100 - v.speed) / 100 || 0;
 				v.levelreq = v.levelreq || 0;
 				v.tier = v.code === v.ultracode ? 3 : v.code === v.ubercode ? 2 : 1;
-				v.tierName = ['None', 'Norm', 'Excep', 'Elite'][v.tier];
-				this.itemtypes[v.type || 'none'] = v.type || 'none';
+				v.tierName = ['None', 'Normal', 'Exceptional', 'Elite'][v.tier];
+				v.typeName = (itemTypesJson[v.type] && itemTypesJson[v.type].ItemType) || v.type || '??';
+				v.className = (itemTypesJson[v.type] && itemTypesJson[v.type].Class && CLASS_NAMES[itemTypesJson[v.type].Class]) || '';
+				
+				if (v.className) this.classfilters[v.className] = v.className;
 
+				this.itemtypes[v.typeName] = v.typeName;
 				return v;
 			}).filter(i => i.spawnable);
+
 			this.visible = true;
 		},
 	});

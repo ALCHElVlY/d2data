@@ -1,1 +1,0 @@
-{\n  "version": "2026-04-23",\n  "datasets": [\n    {\n      "name": "dataset1",\n      "path": "json/dataset1.json"\n    },\n    {\n      "name": "dataset2",\n      "path": "json/dataset2.json"\n    }\n    // Add more datasets here\n  ]\n}

@@ -1,7 +1,8 @@
 'use strict'; /* global Vue */
 
 (function () {
-	let data = fetch('https://raw.githubusercontent.com/ALCHElVlY/d2data/master/json/armor.json');
+	let baseArmors = fetch('https://raw.githubusercontent.com/ALCHElVlY/d2data/master/json/armor.json');
+	let itemTypes = fetch('https://raw.githubusercontent.com/ALCHElVlY/d2data/master/json/itemtypes.json');
 
 	function first (...values) {
 		return values.filter(v => v !== undefined).shift();
@@ -11,7 +12,7 @@
 		el: '#armorapp',
 		data: {
 			visible: false,
-			pageTitle: 'Diablo 2 Armor Browser',
+			pageTitle: 'Diablo 2 Armor Base Browser',
 			items: [],
 			sortColumn: undefined,
 			contains: '',
@@ -34,14 +35,14 @@
 			},
 			columns: [
 				{ label: '', value: '', headstyle: 'width:auto;user-select:none;cursor:pointer;' },
-				{ label: 'Item Name (code)', key: 'name', render: item => item.name + ' (' + item.code + ')', headstyle: 'width:1px;user-select:none;cursor:pointer;text-align:center;white-space:nowrap;', style: 'text-align:center;white-space:nowrap;', tooltip: 'The item name (and internal item code).' },
-				{ label: 'Type', key: 'type', render: item => item.type || '??', sortDefault: '??', tooltip: 'The category this item belongs to.' },
-				{ label: 'Req Level', key: 'levelreq', render: item => item.levelreq || 0, sortDefault: 0, tooltip: 'The minimum level required to equip this item.' },
+				{ label: 'Item Name', key: 'name', render: item => item.name, headstyle: 'width:1px;user-select:none;cursor:pointer;text-align:center;white-space:nowrap;', style: 'text-align:center;white-space:nowrap;', tooltip: 'The item name (and internal item code).' },
+				{ label: 'Type', key: 'type', render: item => item.typeName || '??', sortDefault: '??', tooltip: 'The category this item belongs to.' },
+				{ label: 'Required Level', key: 'levelreq', render: item => item.levelreq || 0, sortDefault: 0, tooltip: 'The minimum level required to equip this item.' },
 				{ label: 'Tier', key: 'tier', render: item => item.tierName, sortDefault: 0, defaultSortOrder: -1, tooltip: 'Each item has Normal, Exceptional, and Elite variants. Elite is the best.' },
 				{ label: 'Sock', key: 'gemsockets', render: item => item.gemsockets || 0, sortDefault: 0, tooltip: 'The maximum number of sockets an item can possibly have.' },
 				{ label: 'Max AC', key: 'maxac', render: item => item.maxac || 0, sortDefault: 0, tooltip: 'The maximum amount of armor class an item can possibly have.' },
 				{ label: 'Weight', key: 'speed', render: item => item.weightClass, sortDefault: 0, tooltip: 'The weight of the armor. Medium has a run speed penalty, and Heavy has even more.' },
-				{ label: 'Req Str', key: 'reqstr', render: item => item.reqstr || 0, sortDefault: 0, tooltip: 'The minimum amount of strength required to equip this item (before modifiers).' },
+				{ label: 'Required Strength', key: 'reqstr', render: item => item.reqstr || 0, sortDefault: 0, tooltip: 'The minimum amount of strength required to equip this item (before modifiers).' },
 				{ label: '', value: '', headstyle: 'width:auto;user-select:none;cursor:pointer;' },
 			]
 		},
@@ -116,13 +117,16 @@
 			first,
 		},
 		created: async function () {
-			data = await data;
-			data = await data.json();
-			this.items = Object.values(data).map(v => {
+			let [dataRes, itemTypesRes] = await Promise.all([baseArmors, itemTypes]);
+			let json = await dataRes.json();
+			let itemTypesJson = await itemTypesRes.json();
+
+			this.items = Object.values(json).map(v => {
 				v.levelreq = v.levelreq || 0;
 				v.weightClass = v.speed === 10 ? 'Heavy' : v.speed === 5 ? 'Medium' : 'Light';
 				v.tier = v.code === v.ultracode ? 3 : v.code === v.ubercode ? 2 : 1;
-				v.tierName = ['None', 'Norm', 'Excep', 'Elite'][v.tier];
+				v.tierName = ['None', 'Normal', 'Exceptional', 'Elite'][v.tier];
+				v.typeName = (itemTypesJson[v.type] && itemTypesJson[v.type].ItemType) || v.type || '??';
 				this.maxstrreq = this.maxstrreqmax = Math.max(this.maxstrreqmax, v.reqstr || 0);
 				this.itemtypes[v.type || 'none'] = v.type || 'none';
 

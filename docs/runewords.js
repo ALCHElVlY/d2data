@@ -62,7 +62,7 @@
 		el: '#runewordsapp',
 		data: {
 			visible: false,
-			pageTitle: 'Diablo 2 Runewords',
+			pageTitle: 'Diablo 2 Runeword Browser',
 			items: [],
 			sortColumn: undefined,
 			contains: '',
@@ -76,7 +76,7 @@
 			},
 			columns: [
 				{ label: 'Runeword', key: 'runeName', render: item => item.runeName, headstyle: 'width:1px;user-select:none;cursor:pointer;text-align:center;white-space:nowrap;', style: 'text-align:center;white-space:nowrap;' },
-				{ label: 'Runes', key: 'runesUsed', render: item => formatRunes(item['*RunesUsed']), sortDefault: '—', headstyle: 'width:1px;user-select:none;cursor:pointer;text-align:center;white-space:nowrap;', style: 'text-align:center;white-space:nowrap;' },
+				{ label: 'Rune Order', key: 'runesUsed', render: item => formatRunes(item['*RunesUsed']), sortDefault: '—', headstyle: 'width:1px;user-select:none;cursor:pointer;text-align:center;white-space:nowrap;', style: 'text-align:center;white-space:nowrap;' },
 				{ label: 'Sockets', key: 'sockets', render: item => item.sockets, sortDefault: 0, headstyle: 'width:1px;user-select:none;cursor:pointer;text-align:center;white-space:nowrap;', style: 'text-align:center;' },
 				{ label: 'Allowed Types', key: 'allowedTypes', render: item => item.allowedTypes, headstyle: 'width:1px;user-select:none;cursor:pointer;text-align:center;white-space:nowrap;', style: 'text-align:center;white-space:nowrap;' },
 				{ label: 'Properties', key: 'parsedProps', render: item => item.parsedProps, headstyle: 'width:auto;user-select:none;cursor:pointer;text-align:center;', style: 'text-align:center;font-size:0.85em;white-space:pre-wrap;' },
