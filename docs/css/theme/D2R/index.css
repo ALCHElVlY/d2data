@@ -7,6 +7,7 @@
     --d2r-text-rare: #f1c40f;   /* rare gold */
     --d2r-text-set: #27ae60;    /* set green */
     --d2r-text-unique: #ffb347; /* unique orange-gold */
+    --d2r-text-crafted: #e67e22; /* crafted orange */
 
     /* Accents */
     --d2r-accent-gold: #c9a45b;
@@ -23,6 +24,7 @@
     --d2r-glow-gold: 0 0 8px rgba(201, 164, 91, 0.7);
     --d2r-glow-red: 0 0 10px rgba(139, 26, 26, 0.8);
     --d2r-glow-blue: 0 0 10px rgba(63, 167, 255, 0.7);
+    --d2r-glow-green: 0 0 10px rgba(39, 174, 96, 0.7);
 
     /* Controls */
     --d2r-btn-bg: #252932;
