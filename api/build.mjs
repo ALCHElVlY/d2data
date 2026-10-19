@@ -1,13 +1,3 @@
-/**
- * Builds the static JSON data API from the compiled json/ tables.
- *
- * Output goes to api/dist/ and is deployed to GitHub Pages by
- * .github/workflows/publish-api.yml. Nothing here is committed; the
- * upstream-owned json/ folder stays the single source of truth.
- *
- * Usage: node api/build.mjs
- */
-
 import { execSync } from 'node:child_process';
 import { createHash } from 'node:crypto';
 import { copyFile, mkdir, readdir, readFile, rm, stat, writeFile } from 'node:fs/promises';
