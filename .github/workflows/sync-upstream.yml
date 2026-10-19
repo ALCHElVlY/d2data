@@ -15,31 +15,23 @@ jobs:
       changed: ${{ steps.merge.outputs.changed }}
       head: ${{ steps.merge.outputs.head }}
     steps:
-      - uses: actions/checkout@v5
-        with:
-          fetch-depth: 0
-          filter: blob:none
-
+      # Uses GitHub's "Sync fork" API, so the repository is never checked out.
+      # The fork only adds new files, so the merge should never conflict.
       - id: merge
+        env:
+          GH_TOKEN: ${{ github.token }}
         run: |
-          git config user.name 'github-actions[bot]'
-          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-          git remote add upstream https://github.com/blizzhackers/d2data.git
-          git fetch upstream master
+          # Scheduled runs carry no repository payload, so ask the API.
+          branch="$(gh api "repos/$GITHUB_REPOSITORY" --jq .default_branch)"
+          merge_type="$(gh api -X POST "repos/$GITHUB_REPOSITORY/merge-upstream" -f branch="$branch" --jq .merge_type)"
+          echo "Merge type: $merge_type"
 
-          before="$(git rev-parse HEAD)"
-          # The fork only adds new files, so a merge should never conflict.
-          git merge --ff-only upstream/master || git merge --no-edit upstream/master
-          after="$(git rev-parse HEAD)"
-
-          if [ "$before" = "$after" ]; then
-            echo 'Already up to date with upstream.'
+          if [ "$merge_type" = 'none' ]; then
             echo 'changed=false' >> "$GITHUB_OUTPUT"
           else
-            git push origin HEAD:master
             echo 'changed=true' >> "$GITHUB_OUTPUT"
           fi
-          echo "head=$after" >> "$GITHUB_OUTPUT"
+          echo "head=$(gh api "repos/$GITHUB_REPOSITORY/commits/$branch" --jq .sha)" >> "$GITHUB_OUTPUT"
 
   # Pushes made with GITHUB_TOKEN don't trigger other workflows, so publish
   # the API from here when upstream brought in new data.
