@@ -97,8 +97,7 @@ bytes served.
 `apiVersion` only changes when the API's shape breaks, and a new version is served under a new
 path (`/api/v2/`). Data updates change `dataVersion` and `sourceCommit`, never `apiVersion`.
 
-GitHub Pages serves the files gzip-compressed. Most HTTP clients, including Go's `net/http`,
-decompress them automatically.
+GitHub Pages serves the files gzip-compressed.
 
 ## Precalculated drop tables
 
