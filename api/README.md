@@ -23,6 +23,29 @@ Tables are minified but otherwise identical to the files in `json/`. They are ob
 each table's index column (see `indexes` in [`compile.js`](../compile.js)), or by row number.
 Every record has a `lineNumber` field.
 
+### Common tables
+
+`manifest.json` is the full, always-current list of tables. These are the ones most item-focused
+clients need, all under `current/` (and `base/`):
+
+| Table | Keyed by | Contents |
+|---|---|---|
+| `uniqueitems` | `*ID` (row number) | Unique items: `index` (name), base `code`, `lvl req`, properties `prop1..10` with `par`/`min`/`max` |
+| `setitems` | `index` (item name) | Set items: owning `set`, base `item` code, properties, partial-set bonuses `aprop*` |
+| `sets` | `index` (set name) | Set bonuses: partial `PCode*` and full-set `FCode*` with min/max |
+| `runes` | `*Rune Name` | Runewords: `complete` (1 = enabled), runes `Rune1..6`, allowed `itype*`, properties `T1Code*` |
+| `items` | `code` | Every base item (armor, weapons and misc merged) |
+| `armor` | `code` | Armor bases: defense, requirements, sockets, `normcode`/`ubercode`/`ultracode` tiers |
+| `weapons` | `code` | Weapon bases: damage, speed, requirements, sockets, tiers |
+| `misc` | `code` | Misc items: runes (`r01`..), gems, charms, jewels, potions, keys |
+| `gems` | `code` | Socket bonuses of gems and runes for weapons, helms/armor and shields |
+| `itemtypes` | `Code` | Item type hierarchy (`Equiv1`/`Equiv2`) used by `itype*` and set/unique bases |
+| `properties` | `code` | Property codes (`prop*`, `T1Code*`) → the stats they set (`stat1..7`) |
+| `itemstatcost` | `Stat` | Stat definitions, used to decode and order properties |
+| `magicprefix`, `magicsuffix` | row number | Magic and rare affixes |
+| `cubemain` | row number | Horadric Cube recipes |
+| `allstrings-eng` | string key | English display names (see [English names](#english-names)) |
+
 ### `latest.json`
 
 ```json
