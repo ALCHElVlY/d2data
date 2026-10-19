@@ -1,0 +1,64 @@
+name: Publish data API
+
+on:
+  push:
+    branches: [master]
+    paths:
+      - 'json/**'
+      - 'package.json'
+      - 'api/**'
+      - '.github/workflows/publish-api.yml'
+  workflow_dispatch:
+  workflow_call:
+    inputs:
+      ref:
+        description: Commit to build; defaults to the triggering commit.
+        type: string
+        required: false
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      # The precalctc drop tables (~1.1 GB) and the docs site are not part of
+      # the Pages artifact, so skip them and fetch blobs on demand.
+      - uses: actions/checkout@v5
+        with:
+          ref: ${{ inputs.ref || github.sha }}
+          filter: blob:none
+          sparse-checkout-cone-mode: false
+          sparse-checkout: |
+            /*
+            !/docs/
+            !/json/precalctc/*
+            /json/precalctc/_index.json
+            !/json/base/precalctc/*
+            /json/base/precalctc/_index.json
+
+      - uses: actions/setup-node@v5
+        with:
+          node-version: 24
+
+      - run: node api/build.mjs
+
+      - uses: actions/upload-pages-artifact@v4
+        with:
+          path: api/dist
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    concurrency:
+      group: pages
+      cancel-in-progress: false
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4

@@ -1,0 +1,55 @@
+name: Sync upstream
+
+on:
+  schedule:
+    - cron: '17 */6 * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    outputs:
+      changed: ${{ steps.merge.outputs.changed }}
+      head: ${{ steps.merge.outputs.head }}
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          fetch-depth: 0
+          filter: blob:none
+
+      - id: merge
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git remote add upstream https://github.com/blizzhackers/d2data.git
+          git fetch upstream master
+
+          before="$(git rev-parse HEAD)"
+          # The fork only adds new files, so a merge should never conflict.
+          git merge --ff-only upstream/master || git merge --no-edit upstream/master
+          after="$(git rev-parse HEAD)"
+
+          if [ "$before" = "$after" ]; then
+            echo 'Already up to date with upstream.'
+            echo 'changed=false' >> "$GITHUB_OUTPUT"
+          else
+            git push origin HEAD:master
+            echo 'changed=true' >> "$GITHUB_OUTPUT"
+          fi
+          echo "head=$after" >> "$GITHUB_OUTPUT"
+
+  # Pushes made with GITHUB_TOKEN don't trigger other workflows, so publish
+  # the API from here when upstream brought in new data.
+  publish:
+    needs: sync
+    if: needs.sync.outputs.changed == 'true'
+    permissions:
+      contents: read
+      pages: write
+      id-token: write
+    uses: ./.github/workflows/publish-api.yml
+    with:
+      ref: ${{ needs.sync.outputs.head }}
