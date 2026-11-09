@@ -1,11 +1,6 @@
-# d2data static API
+# DiabloII Static Data API
 
-A read-only JSON API over the compiled Diablo II: Resurrected data in this repository, published
-to GitHub Pages by [`publish-api.yml`](../.github/workflows/publish-api.yml).
-
-The fork mirrors [blizzhackers/d2data](https://github.com/blizzhackers/d2data) through
-[`sync-upstream.yml`](../.github/workflows/sync-upstream.yml). Every 6 hours that workflow merges
-upstream and, if anything changed, rebuilds and redeploys the API.
+A read-only JSON API over the compiled Diablo II: Resurrected data in this repository.
 
 **Base URL:** `https://alchelvly.github.io/d2data/api/v1/`
 
@@ -139,10 +134,3 @@ node api/build.mjs
 ```
 
 This writes the site to `api/dist/`, which is gitignored. It needs only Node and git.
-
-## Notes
-
-- The workflows add new files only, so merging upstream never conflicts. Don't edit upstream-owned
-  files such as `json/`, `package.json` or `.gitignore` in this fork.
-- `GITHUB_TOKEN` cannot push commits that change `.github/workflows/`. If upstream ever adds a
-  workflow, the sync push will fail and you'll need to merge that update by hand.
